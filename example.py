@@ -14,7 +14,7 @@ df = ff.Feynman12_data()
 
 #pairplot to see distribution
 g = sns.pairplot(df)
-plt.savefig('example_pairplot.png')
+plt.savefig('fig/pairplot.png')
 
 plt.clf()
 
@@ -23,7 +23,7 @@ df = df.sort_values(by=['q2', 'Ef',])
 x = range(0,len(df))
 for col in list(df.columns):
   sns.lineplot(data = df, x=x, y=col, label = col, alpha=0.7 )
-plt.savefig('example_lineplot1.png')
+plt.savefig('fig/lineplot1.png')
 
 plt.clf()
 
@@ -32,7 +32,7 @@ df = df.sort_values(by=[ 'Ef', 'q2',])
 x = range(0,len(df))
 for col in list(df.columns):
   sns.lineplot(data = df, x=x, y=col, label = col, alpha=0.7 )
-plt.savefig('example_lineplot2.png')
+plt.savefig('fig/lineplot2.png')
 
 plt.clf
 
@@ -43,7 +43,7 @@ df = ff.Feynman12_data(noise_level=0.3)
 
 #pairplot to see distribution
 g = sns.pairplot(df)
-plt.savefig('example_pairplot_noisy.png')
+plt.savefig('fig/pairplot_noisy.png')
 
 plt.clf()
 
@@ -52,7 +52,7 @@ df = df.sort_values(by=['q2', 'Ef',])
 x = range(0,len(df))
 for col in list(df.columns):
   sns.lineplot(data = df, x=x, y=col, label = col, alpha=0.7 )
-plt.savefig('example_lineplot1_noisy.png')
+plt.savefig('fig/lineplot1_noisy.png')
 
 plt.clf()
 
@@ -61,4 +61,4 @@ df = df.sort_values(by=[ 'Ef', 'q2',])
 x = range(0,len(df))
 for col in list(df.columns):
   sns.lineplot(data = df, x=x, y=col, label = col, alpha=0.7 )
-plt.savefig('example_lineplot2_noisy.png')
+plt.savefig('fig/lineplot2_noisy.png')

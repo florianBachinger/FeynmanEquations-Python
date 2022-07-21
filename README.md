@@ -26,9 +26,12 @@ df = ff.Feynman12_data(size = inputSize, noise_level=0.3))
 
 |without noise|with noise|
 |:---:|:---:|
-|<img src="example_pairplot.png" width="400" alt="pairplot without noise"/>|<img src="example_pairplot_noisy.png" width="400" alt="pairplot with noise"/>|
-|<img src="example_lineplot1.png" width="400" alt="linechart without noise, sorted by [ 'Ef','q2', ]"/>|<img src="example_lineplot1_noisy.png" width="400" alt="linechart with noise, sorted by [ 'Ef','q2', ]"/>|
-|<img src="example_lineplot2.png" width="400" alt="linechart without noise, sorted by [ 'q2','Ef', ]"/>|<img src="example_lineplot2_noisy.png" width="400" alt="linechart with noise, sorted by [ 'q2','Ef', ]"/>|
+|pairplot without noise|pairplot with noise|
+|<img src="fig/pairplot.png" width="400" alt="pairplot without noise"/>|<img src="fig/pairplot_noisy.png" width="400" alt="pairplot with noise"/>|
+|linechart without noise, sorted by [ 'Ef','q2', ]|linechart with noise, sorted by [ 'Ef','q2', ]|
+|<img src="fig/lineplot1.png" width="400" alt="linechart without noise, sorted by [ 'Ef','q2', ]"/>|<img src="fig/lineplot1_noisy.png" width="400" alt="linechart with noise, sorted by [ 'Ef','q2', ]"/>|
+|linechart without noise, sorted by [ 'q2','Ef', ]|linechart with noise, sorted by [ 'q2','Ef', ]|
+|<img src="fig/lineplot2.png" width="400" alt="linechart without noise, sorted by [ 'q2','Ef', ]"/>|<img src="fig/lineplot2_noisy.png" width="400" alt="linechart with noise, sorted by [ 'q2','Ef', ]"/>|
 
 ## Equation Sources
 FeynmanEquations `src/FeynmanEquations.csv` and `src/BonusEquations.csv` were retrieved on
