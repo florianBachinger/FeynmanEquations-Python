@@ -3,24 +3,23 @@
 Provides a convenient way to use the Feynman Equations in python code. 
 
 ```python
-import Feynman.Functions as ff
+from Feynman.Functions import Feynman12 
 
 inputSize = 10000
-#use the functions to calculate equations
+# (1) use the functions to calculate equations directly
 q2 = np.random.uniform(1.0,5.0, inputSize)
 Ef = np.random.uniform(1.0,5.0, inputSize)
-
 # f: q2*Ef
-f = ff.Feynman12(q2,Ef)
+f = Feynman12.calculate(q2,Ef)
 
-# generate data without noise
-df = ff.Feynman12_data()
+# (2) generate pandas datasets without noise
+df = Feynman12.generate_df()
 
-# specify size of the uniform input range
-df = ff.Feynman12_data(size = inputSize)
+# (3) specify size of the uniform input range
+df = Feynman12.generate_df(size = inputSize)
 
-# add normal noise to data
-df = ff.Feynman12_data(size = inputSize, noise_level=0.3))
+# (4) generate pandas datasets withto data
+df = Feynman12.generate_df(size = inputSize, noise_level=0.3))
 
 ```
 

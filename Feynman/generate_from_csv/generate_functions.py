@@ -1,4 +1,5 @@
 import pandas as pd
+import inspect
 
 lines = []
 dict = []
@@ -7,14 +8,14 @@ dict = []
 feynmanEquations = pd.read_csv('Feynman/src/FeynmanEquations.csv')
 # filter to exclude the empty lines in FeynmanEquations.csv
 feynmanEquations = feynmanEquations[feynmanEquations['Number']>=1]
-feynmanEquations['FunctionName'] = [f'Feynman{int(number)}' for number in feynmanEquations['Number']]
+feynmanEquations['EquationName'] = [f'Feynman{int(number)}' for number in feynmanEquations['Number']]
 feynmanEquations['DescriptiveName'] = [f'Feynman{int(number)}, Lecture {filename}' for number,filename in zip(feynmanEquations['Number'],feynmanEquations['Filename'])]
 
 # read and prepare bonus equations 
 bonusEquasions = pd.read_csv('Feynman/src/BonusEquations.csv')
 # filter to exclude the empty lines in FeynmanEquations.csv
 bonusEquasions = bonusEquasions[bonusEquasions['Number']>=1]
-bonusEquasions['FunctionName'] = [f'Bonus{int(number)}' for number in bonusEquasions['Number']]
+bonusEquasions['EquationName'] = [f'Bonus{int(number)}' for number in bonusEquasions['Number']]
 bonusEquasions['DescriptiveName'] = [f'Bonus{number}, {name}' for name,number in zip(bonusEquasions['Name'], bonusEquasions['Number'])]
 
 #merge both into one dataframe
@@ -44,10 +45,10 @@ for index, row in equations.iterrows():
   output = row['Output']
   formula = row['Formula']
 
-  functionName = row['FunctionName']
+  equationName = row['EquationName']
   descriptiveName = row['DescriptiveName']
   
-  print(f'{functionName}, {descriptiveName}')
+  print(f'{equationName}, {descriptiveName}')
 
   #format csv formulas to be numpy compatible
   formula_formatted = formula
@@ -84,78 +85,119 @@ for index, row in equations.iterrows():
 
   arguments = []
   names_string_commaSeparated = []
+  variable_names = []
   variable_names_commaSeparated = []
   uniform_ranges = []
   variables_and_ranges = []
 
   for (name, low, high) in variables:
     #used for the function docstring
-    arguments.append(f'        {name}: float or array-like, default range ({low},{high})')
+    arguments.append(f'          {name}: float or array-like, default range ({low},{high})')
     #used to generate the data for the Feynman functions
-    uniform_ranges.append(f'    {name} = {numpyShort}.random.uniform({low},{high}, size)')
+    uniform_ranges.append(f'      {name} = {numpyShort}.random.uniform({low},{high}, size)')
     #all variables and functions are also added to a dictionary to improve generic programmability
     variables_and_ranges.append({"name":name, "low":low , "high":high})
     #used for the dataframe definitions
     names_string_commaSeparated.append(f"'{name}'")
     #used for e.g. function parameters
-    variable_names_commaSeparated.append(name)
+    variable_names.append(name)
 
   #add the resulting output variable name 
   names_string_commaSeparated.append(f"'{output}'")
+  names_string_commaSeparated.append(f"'{output}_without_noise'")
 
-  asDictionary = {'FunctionName':functionName,
-                  'DescriptiveName':descriptiveName,
-                  'Formula_Str':formula,
-                  'Formula':formula_formatted,
-                  'Variables':variables_and_ranges}
-  dict.append( str(asDictionary))
+  
+
 
   arguments = "\n".join(arguments)
   uniform_ranges = "\n".join(uniform_ranges)
+  variable_index_access = [f"{v} = X[{idx}]" for v, idx  in zip(variable_names, range(0,len(variable_names)))]
+  variable_index_access =  "\n      ".join(variable_index_access)
   names_string_commaSeparated = ",".join(names_string_commaSeparated)
-  variable_names_commaSeparated = ",".join(variable_names_commaSeparated)
+  variable_names_commaSeparated = ",".join(variable_names)
 
+  formula_lambda_stump = f"lambda args : (lambda {variable_names_commaSeparated}: {{0}} )(*args)"
+  formula_lambda = formula_lambda_stump.format(formula_formatted)
+  asDictionary = {'EquationName':equationName,
+                  'DescriptiveName':descriptiveName,
+                  'Formula_Str':formula,
+                  'Formula':formula_formatted,
+                  'Formula_Lambda': formula_lambda,
+                  'Formula_Lambda_Stump': formula_lambda_stump,
+                  'Variables':variables_and_ranges}
+  dict.append( str(asDictionary))
   # multiline code-template used to generate the actual python code
   # first function only includes the formula itself and is resused by the 
   # data generation function returning a dataframe with inputs and target
   lines.append(f'''
-def {functionName}_data(size = {size}, noise_level = 0):
-    """
-    {descriptiveName}
+class {equationName}:
+  equation_lambda = {formula_lambda}
 
-    Arguments:
-        size: length of the inputs,
-              sampled from the uniformly distributed standard ranges
-        noise_level: normal distributed noise added as target's 
-              standard deviation times sqrt(noise_level/(1-noise_level))
-    Returns:
-        pandas DataFrame [{names_string_commaSeparated}]
-    """
+  @staticmethod
+  def generate_df(size = {size}, noise_level = 0):
+      """
+      {descriptiveName}
+
+      Arguments:
+          size: length of the inputs,
+                sampled from the uniformly distributed standard ranges
+          noise_level: normal distributed noise added as target's 
+                standard deviation times sqrt(noise_level/(1-noise_level))
+      Returns:
+          pandas DataFrame [{names_string_commaSeparated}]
+      """
 {uniform_ranges}
-    return {functionName}({variable_names_commaSeparated},noise_level)
+      return {equationName}.calculate_df({variable_names_commaSeparated},noise_level)
 
-def {functionName}({variable_names_commaSeparated}, noise_level = 0):
-    """
-    {descriptiveName}
+  @staticmethod
+  def calculate_df({variable_names_commaSeparated}, noise_level = 0):
+      """
+      {descriptiveName}
 
-    Arguments:
+      Arguments:
 {arguments}
-        noise_level: normal distributed noise added as target's 
-              standard deviation times sqrt(noise_level/(1-noise_level))
-    Returns:
-        f: {formula}
-    """
-    target = {formula_formatted}
-    return pd.DataFrame(
-      list(
-        zip(
-          {variable_names_commaSeparated}
-          ,Noise(target,noise_level)
+          noise_level: normal distributed noise added as target's 
+                standard deviation times sqrt(noise_level/(1-noise_level))
+      Returns:
+          pandas DataFrame [{names_string_commaSeparated}]
+      """
+      target = {equationName}.calculate({variable_names_commaSeparated})
+      return pd.DataFrame(
+        list(
+          zip(
+            {variable_names_commaSeparated}
+            ,Noise(target,noise_level)
+            ,target
+          )
         )
+        ,columns=[{names_string_commaSeparated}]
       )
-      ,columns=[{names_string_commaSeparated}]
-    )
-  '''.format(functionName,
+
+  @staticmethod
+  def calculate_batch(X):
+      """
+      {descriptiveName}
+
+      Arguments:
+{arguments}
+      Returns:
+          f: {formula}
+      """
+      {variable_index_access}
+      return {equationName}.calculate({variable_names_commaSeparated})
+
+  @staticmethod
+  def calculate({variable_names_commaSeparated}):
+      """
+      {descriptiveName}
+
+      Arguments:
+{arguments}
+      Returns:
+          f: {formula}
+      """
+      return {formula_formatted}
+  '''.format(equationName,
             size,
             descriptiveName,
             names_string_commaSeparated,
@@ -170,7 +212,7 @@ def {functionName}({variable_names_commaSeparated}, noise_level = 0):
 
 #add descriptive dictionary
 dict = ',\n'.join(dict)
-dict = f'Functions = [\n{dict} \n ]'
+dict = f'FunctionsJson = [\n{dict} \n ]'
 lines.append(dict)
 
 #write to file

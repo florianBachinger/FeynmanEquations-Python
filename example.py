@@ -3,12 +3,12 @@ import pandas as pd
 import seaborn as sns
 import matplotlib.pyplot as plt
 
-import Feynman.Functions as ff
+from Feynman.Functions import Feynman12 
 
 # f: q2*Ef
 
 ########## without noise ##########
-df = ff.Feynman12_data()
+df = Feynman12.generate_df()
 
 ###### plotting ######
 
@@ -37,7 +37,7 @@ plt.savefig('fig/lineplot2.png')
 plt.clf
 
 ##########   with noise   ##########
-df = ff.Feynman12_data(noise_level=0.3)
+df = Feynman12.generate_df(noise_level=0.3)
 
 ###### plotting ######
 
