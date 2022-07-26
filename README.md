@@ -1,25 +1,46 @@
-# Feynman Equations - Python
+# Feynman equations - python
+Provides a convenient way to use the Feynman equations in python code. 
 
-Provides a convenient way to use the Feynman Equations in python code. 
-
+## Generate datasets and utilize equations
 ```python
 from Feynman.Functions import Feynman12 
 
 inputSize = 10000
-# (1) use the functions to calculate equations directly
-q2 = np.random.uniform(1.0,5.0, inputSize)
-Ef = np.random.uniform(1.0,5.0, inputSize)
-# f: q2*Ef
-f = Feynman12.calculate(q2,Ef)
 
-# (2) generate pandas datasets without noise
+# (1) generate pandas datasets without noise
+
 df = Feynman12.generate_df()
 
-# (3) specify size of the uniform input range
+# (2) specify size of the uniform input range
+
 df = Feynman12.generate_df(size = inputSize)
 
-# (4) generate pandas datasets withto data
+# (3) generate pandas datasets with noise
+
 df = Feynman12.generate_df(size = inputSize, noise_level=0.3))
+
+# (4) use the functions to calculate equations directly
+
+inputSize = 10000
+X = np.random.uniform([1.0,1.0], [5.0,5.0], (inputSize,2))
+q2 = X[:,0] 
+Ef = X[:,1] 
+# f: q2*Ef
+f1 = Feynman12.calculate(q2,Ef)
+
+# (5) use the JSON representation
+#     e.g. you want to iterate over all functions in code
+
+# index one specific function
+jsonArr = np.array(FunctionsJson)
+json = jsonArr[[row['EquationName']== 'Feynman12' for row in FunctionsJson]][0]
+
+# get executable python code
+eq = eval(json['Formula_Lambda'])
+f2 = [eq(row) for row in X]
+
+# both produce same result
+(f1==f2).all() #-> true
 
 ```
 
@@ -32,11 +53,28 @@ df = Feynman12.generate_df(size = inputSize, noise_level=0.3))
 |linechart without noise, sorted by [ 'q2','Ef', ]|linechart with noise, sorted by [ 'q2','Ef', ]|
 |<img src="fig/lineplot2.png" width="400" alt="linechart without noise, sorted by [ 'q2','Ef', ]"/>|<img src="fig/lineplot2_noisy.png" width="400" alt="linechart with noise, sorted by [ 'q2','Ef', ]"/>|
 
+## Information about function shapes in standard input space
+Additional information about the function shape is provided by analyzing the value ranges of partial derivates of each Feynman function (whereever the partial derivatives can be symbolically calculated):
+
+|Problem|Variable|Input Space|
+|:---:|:---:|:---:|
+|Feynman 12|q2| [1.0,5.0]|
+|Feynman 12|Ef| [1.0,5.0]|
+
+|Problem|Derived by|Order|Derivative|Monotonicity|
+|:---:|:---:|:---:|:---:|:---:|
+|Feynman 12|q2|1|Ef|increasing|
+|Feynman 12|q2|2|0|constant|
+|Feynman 12|Ef|1|q2|increasing|
+|Feynman 12|Ef|2|0|constant|
+
+Calculation of these shape properties is done in `create_files/sample_constraints.py`.
+
 ## Equation Sources
-FeynmanEquations `src/FeynmanEquations.csv` and `src/BonusEquations.csv` were retrieved on
+FeynmanEquations `Feynman/src/FeynmanEquations.csv` and `Feynman/src/BonusEquations.csv` were retrieved on
 01.04.2022 from https://space.mit.edu/home/tegmark/aifeynman.html. The code in
-generate_functions.py parses `src/FeynmanEquations.csv` and `src/BonusEquations.csv` and
-generates the python code of `FeynmanFunctions.py`. 
+generate_functions.py parses `src/FeynmanEquations.csv` and `Feynman/src/BonusEquations.csv` and
+generates the python code of `Feynman/Functions.py`. 
 
 ## Changes from the original:
 The following entries had mismatches between the specified number of variables and the

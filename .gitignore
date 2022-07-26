@@ -137,3 +137,5 @@ lib/
 Scripts/
 share/
 Lib/
+pyvenv.cfg
+.vscode

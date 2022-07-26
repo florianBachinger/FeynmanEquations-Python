@@ -15,15 +15,13 @@ def dict2obj(dict1):
     # method and custom object hook as arguments
     return json.loads(json.dumps(dict1), object_hook=obj)
 
-#65 - Equation Feynman66 - Feynman66, Lecture II.13.17
-
 dict = []
 
 i = 0
 with open("Feynman/Constraints.py", "a") as text_file:
-
+  text_file.write('constraints = [')
   #iterate over all equations
-  for functionDictionary in ff.FunctionsJson[66:]:
+  for functionDictionary in ff.FunctionsJson:
     fObj = dict2obj(functionDictionary)
 
     dim = len(fObj.Variables)
@@ -81,17 +79,15 @@ with open("Feynman/Constraints.py", "a") as text_file:
         constraints.append({'name':var,
               'order_derivative':order,
               'monotonicity':descriptor,
-              'derivative': symb_deriv,
+              'derivative': str(symb_deriv),
               'derivative_lambda': diff_eq_lambda_str})
 
-    # dict.append(str( {'EquationName':fObj.EquationName,
-    #       'DescriptiveName':fObj.DescriptiveName,
-    #       'Constriants': constraints,
-    #       'Variables': functionDictionary['Variables']
-    #         }))
     text_file.write(str( {'EquationName':fObj.EquationName,
           'DescriptiveName':fObj.DescriptiveName,
           'Constriants': constraints,
           'Variables': functionDictionary['Variables']
             }))
+    text_file.write(',')
+
+  text_file.write(']')
 
