@@ -5,14 +5,14 @@ lines = []
 dict = []
 
 # read and prepare standard equations 
-feynmanEquations = pd.read_csv('Feynman/src/FeynmanEquations.csv')
+feynmanEquations = pd.read_csv('generate/src/FeynmanEquations.csv')
 # filter to exclude the empty lines in FeynmanEquations.csv
 feynmanEquations = feynmanEquations[feynmanEquations['Number']>=1]
 feynmanEquations['EquationName'] = [f'Feynman{int(number)}' for number in feynmanEquations['Number']]
 feynmanEquations['DescriptiveName'] = [f'Feynman{int(number)}, Lecture {filename}' for number,filename in zip(feynmanEquations['Number'],feynmanEquations['Filename'])]
 
 # read and prepare bonus equations 
-bonusEquasions = pd.read_csv('Feynman/src/BonusEquations.csv')
+bonusEquasions = pd.read_csv('generate/src/BonusEquations.csv')
 # filter to exclude the empty lines in FeynmanEquations.csv
 bonusEquasions = bonusEquasions[bonusEquasions['Number']>=1]
 bonusEquasions['EquationName'] = [f'Bonus{int(number)}' for number in bonusEquasions['Number']]
@@ -104,10 +104,6 @@ for index, row in equations.iterrows():
 
   #add the resulting output variable name 
   names_string_commaSeparated.append(f"'{output}'")
-  names_string_commaSeparated.append(f"'{output}_without_noise'")
-
-  
-
 
   arguments = "\n".join(arguments)
   uniform_ranges = "\n".join(uniform_ranges)
@@ -134,7 +130,7 @@ class {equationName}:
   equation_lambda = {formula_lambda}
 
   @staticmethod
-  def generate_df(size = {size}, noise_level = 0):
+  def generate_df(size = {size}, noise_level = 0, include_original_target = False):
       """
       {descriptiveName}
 
@@ -147,10 +143,10 @@ class {equationName}:
           pandas DataFrame [{names_string_commaSeparated}]
       """
 {uniform_ranges}
-      return {equationName}.calculate_df({variable_names_commaSeparated},noise_level)
+      return {equationName}.calculate_df({variable_names_commaSeparated},noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df({variable_names_commaSeparated}, noise_level = 0):
+  def calculate_df({variable_names_commaSeparated}, noise_level = 0, include_original_target = False):
       """
       {descriptiveName}
 
@@ -162,16 +158,14 @@ class {equationName}:
           pandas DataFrame [{names_string_commaSeparated}]
       """
       target = {equationName}.calculate({variable_names_commaSeparated})
-      return pd.DataFrame(
-        list(
-          zip(
-            {variable_names_commaSeparated}
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=[{names_string_commaSeparated}]
-      )
+      data = [{variable_names_commaSeparated}]
+      data.append(Noise(target,noise_level))
+      columns = [{names_string_commaSeparated}]
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('{output}_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):

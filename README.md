@@ -16,10 +16,16 @@ df = Feynman12.generate_df()
 df = Feynman12.generate_df(size = inputSize)
 
 # (3) generate pandas datasets with noise
+# pandas DataFrame ['q2','Ef','F']
 
-df = Feynman12.generate_df(size = inputSize, noise_level=0.3))
+df = Feynman12.generate_df(size = inputSize, noise_level=0.3)
 
-# (4) use the functions to calculate equations directly
+# (4) generate datasets with noise and original target without noise
+# pandas DataFrame ['q2','Ef','F','F_without_noise']
+
+df = Feynman12.generate_df(size = inputSize, noise_level=0.3, include_original_target=True)
+
+# (5) use the functions to calculate equations directly
 
 inputSize = 10000
 X = np.random.uniform([1.0,1.0], [5.0,5.0], (inputSize,2))
@@ -28,7 +34,7 @@ Ef = X[:,1]
 # f: q2*Ef
 f1 = Feynman12.calculate(q2,Ef)
 
-# (5) use the JSON representation
+# (6) use the JSON representation
 #     e.g. you want to iterate over all functions in code
 
 # index one specific function
@@ -47,11 +53,11 @@ f2 = [eq(row) for row in X]
 |without noise|with noise|
 |:---:|:---:|
 |pairplot without noise|pairplot with noise|
-|<img src="fig/pairplot.png" width="400" alt="pairplot without noise"/>|<img src="fig/pairplot_noisy.png" width="400" alt="pairplot with noise"/>|
+|<img src="docs/fig/pairplot.png" width="400" alt="pairplot without noise"/>|<img src="docs/fig/pairplot_noisy.png" width="400" alt="pairplot with noise"/>|
 |linechart without noise, sorted by [ 'Ef','q2', ]|linechart with noise, sorted by [ 'Ef','q2', ]|
-|<img src="fig/lineplot1.png" width="400" alt="linechart without noise, sorted by [ 'Ef','q2', ]"/>|<img src="fig/lineplot1_noisy.png" width="400" alt="linechart with noise, sorted by [ 'Ef','q2', ]"/>|
+|<img src="docs/fig/lineplot1.png" width="400" alt="linechart without noise, sorted by [ 'Ef','q2', ]"/>|<img src="docs/fig/lineplot1_noisy.png" width="400" alt="linechart with noise, sorted by [ 'Ef','q2', ]"/>|
 |linechart without noise, sorted by [ 'q2','Ef', ]|linechart with noise, sorted by [ 'q2','Ef', ]|
-|<img src="fig/lineplot2.png" width="400" alt="linechart without noise, sorted by [ 'q2','Ef', ]"/>|<img src="fig/lineplot2_noisy.png" width="400" alt="linechart with noise, sorted by [ 'q2','Ef', ]"/>|
+|<img src="docs/fig/lineplot2.png" width="400" alt="linechart without noise, sorted by [ 'q2','Ef', ]"/>|<img src="docs/fig/lineplot2_noisy.png" width="400" alt="linechart with noise, sorted by [ 'q2','Ef', ]"/>|
 
 ## Information about function shapes in standard input space
 Additional information about the function shape is provided by analyzing the value ranges of partial derivates of each Feynman function (whereever the partial derivatives can be symbolically calculated):
@@ -68,13 +74,14 @@ Additional information about the function shape is provided by analyzing the val
 |Feynman 12|Ef|1|q2|increasing|
 |Feynman 12|Ef|2|0|constant|
 
-Calculation of these shape properties is done in `create_files/sample_constraints.py`.
+The results of this analysis are provided in the file `Feynman/Constraints.py`.
+Calculation of the shape properties is implemented in `create_files/sample_constraints.py`.
 
 ## Equation Sources
-FeynmanEquations `Feynman/src/FeynmanEquations.csv` and `Feynman/src/BonusEquations.csv` were retrieved on
-01.04.2022 from https://space.mit.edu/home/tegmark/aifeynman.html. The code in
-generate_functions.py parses `src/FeynmanEquations.csv` and `Feynman/src/BonusEquations.csv` and
-generates the python code of `Feynman/Functions.py`. 
+FeynmanEquations `generate/src/FeynmanEquations.csv` and `generate/src/BonusEquations.csv`
+were retrieved on 01.04.2022 from https://space.mit.edu/home/tegmark/aifeynman.html. The
+code in generate_functions.py parses these two files and generates the python code of
+`Feynman/Functions.py`. 
 
 ## Changes from the original:
 The following entries had mismatches between the specified number of variables and the

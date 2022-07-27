@@ -2461,8 +2461,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus2', 'DescriptiveName': 'Bonus2.0,
-    3.55 Goldstein', 'Constriants': [
+  {'EquationName': 'Bonus2', 'DescriptiveName': 'Bonus2.0, 3.55 Goldstein', 'Constriants': [
       {'name': 'm', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': '-E_n*cos(theta1 - theta2)/(k_G*m*sqrt(2*E_n*L**2/(k_G**2*m) + 1)) + k_G*(sqrt(2*E_n*L**2/(k_G**2*m) + 1)*cos(theta1 - theta2) + 1)/L**2', 'derivative_lambda': 'lambda args : (lambda m,k_G,L,E_n,theta1,theta2: -E_n*cos(theta1 - theta2)/(k_G*m*sqrt(2*E_n*L**2/(k_G**2*m) + 1)) + k_G*(sqrt(2*E_n*L**2/(k_G**2*m) + 1)*cos(theta1 - theta2) + 1)/L**2 )(*args)'
       },
       {'name': 'm', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': '-E_n**2*L**2*cos(theta1 - theta2)/(k_G**3*m**3*(2*E_n*L**2/(k_G**2*m) + 1)**(3/2))', 'derivative_lambda': 'lambda args : (lambda m,k_G,L,E_n,theta1,theta2: -E_n**2*L**2*cos(theta1 - theta2)/(k_G**3*m**3*(2*E_n*L**2/(k_G**2*m) + 1)**(3/2)) )(*args)'
@@ -2502,8 +2501,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus3', 'DescriptiveName': 'Bonus3.0,
-    3.64 Goldstein', 'Constriants': [
+  {'EquationName': 'Bonus3', 'DescriptiveName': 'Bonus3.0, 3.64 Goldstein', 'Constriants': [
       {'name': 'd', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': '(1 - alpha**2)/(alpha*cos(theta1 - theta2) + 1)', 'derivative_lambda': 'lambda args : (lambda d,alpha,theta1,theta2: (1 - alpha**2)/(alpha*cos(theta1 - theta2) + 1) )(*args)'
       },
       {'name': 'd', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda d,alpha,theta1,theta2: 0 )(*args)'
@@ -2531,8 +2529,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus4', 'DescriptiveName': 'Bonus4.0,
-    3.16 Goldstein', 'Constriants': [
+  {'EquationName': 'Bonus4', 'DescriptiveName': 'Bonus4.0, 3.16 Goldstein', 'Constriants': [
       {'name': 'm', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': 'sqrt(2)*m*sqrt((E_n - L**2/(2*m*r**2) - U)/m)*(L**2/(4*m**3*r**2) - (E_n - L**2/(2*m*r**2) - U)/(2*m**2))/(E_n - L**2/(2*m*r**2) - U)', 'derivative_lambda': 'lambda args : (lambda m,E_n,U,L,r: sqrt(2)*m*sqrt((E_n - L**2/(2*m*r**2) - U)/m)*(L**2/(4*m**3*r**2) - (E_n - L**2/(2*m*r**2) - U)/(2*m**2))/(E_n - L**2/(2*m*r**2) - U) )(*args)'
       },
       {'name': 'm', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': 'sqrt(2)*sqrt(-(-E_n + L**2/(2*m*r**2) + U)/m)*(-E_n + 2*L**2/(m*r**2) - L**2*(-E_n + L**2/(m*r**2) + U)/(m*r**2*(-2*E_n + L**2/(m*r**2) + 2*U)) + U + (-E_n + L**2/(m*r**2) + U)**2/(-2*E_n + L**2/(m*r**2) + 2*U))/(m**2*(-2*E_n + L**2/(m*r**2) + 2*U))', 'derivative_lambda': 'lambda args : (lambda m,E_n,U,L,r: sqrt(2)*sqrt(-(-E_n + L**2/(2*m*r**2) + U)/m)*(-E_n + 2*L**2/(m*r**2) - L**2*(-E_n + L**2/(m*r**2) + U)/(m*r**2*(-2*E_n + L**2/(m*r**2) + 2*U)) + U + (-E_n + L**2/(m*r**2) + U)**2/(-2*E_n + L**2/(m*r**2) + 2*U))/(m**2*(-2*E_n + L**2/(m*r**2) + 2*U)) )(*args)'
@@ -2566,8 +2563,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus5', 'DescriptiveName': 'Bonus5.0,
-    3.74 Goldstein', 'Constriants': [
+  {'EquationName': 'Bonus5', 'DescriptiveName': 'Bonus5.0 3.74 Goldstein', 'Constriants': [
       {'name': 'd', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '3*pi*sqrt(d)/sqrt(G*(m1 + m2))', 'derivative_lambda': 'lambda args : (lambda d,G,m1,m2: 3*pi*sqrt(d)/sqrt(G*(m1 + m2)) )(*args)'
       },
       {'name': 'd', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': '3*pi/(2*sqrt(d)*sqrt(G*(m1 + m2)))', 'derivative_lambda': 'lambda args : (lambda d,G,m1,m2: 3*pi/(2*sqrt(d)*sqrt(G*(m1 + m2))) )(*args)'
@@ -2595,8 +2591,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus6', 'DescriptiveName': 'Bonus6.0,
-    3.99 Goldstein', 'Constriants': [
+  {'EquationName': 'Bonus6', 'DescriptiveName': 'Bonus6.0,  3.99 Goldstein', 'Constriants': [
       {'name': 'epsilon', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '2*E_n*L**2*epsilon/(Z_1**2*Z_2**2*m*q**4*sqrt(2*E_n*L**2*epsilon**2/(Z_1**2*Z_2**2*m*q**4) + 1))', 'derivative_lambda': 'lambda args : (lambda epsilon,L,m,Z_1,Z_2,q,E_n: 2*E_n*L**2*epsilon/(Z_1**2*Z_2**2*m*q**4*sqrt(2*E_n*L**2*epsilon**2/(Z_1**2*Z_2**2*m*q**4) + 1)) )(*args)'
       },
       {'name': 'epsilon', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': '2*E_n*L**2*(-2*E_n*L**2*epsilon**2/(Z_1**2*Z_2**2*m*q**4*(2*E_n*L**2*epsilon**2/(Z_1**2*Z_2**2*m*q**4) + 1)) + 1)/(Z_1**2*Z_2**2*m*q**4*sqrt(2*E_n*L**2*epsilon**2/(Z_1**2*Z_2**2*m*q**4) + 1))', 'derivative_lambda': 'lambda args : (lambda epsilon,L,m,Z_1,Z_2,q,E_n: 2*E_n*L**2*(-2*E_n*L**2*epsilon**2/(Z_1**2*Z_2**2*m*q**4*(2*E_n*L**2*epsilon**2/(Z_1**2*Z_2**2*m*q**4) + 1)) + 1)/(Z_1**2*Z_2**2*m*q**4*sqrt(2*E_n*L**2*epsilon**2/(Z_1**2*Z_2**2*m*q**4) + 1)) )(*args)'
@@ -2788,8 +2783,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus12', 'DescriptiveName': 'Bonus12.0,
-    2.11 Jackson', 'Constriants': [
+  {'EquationName': 'Bonus12', 'DescriptiveName': 'Bonus12.0, 2.11 Jackson', 'Constriants': [
       {'name': 'q', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '-d*q*y/(4*pi*epsilon*(-d**2 + y**2)**2) + (4*pi*Volt*d*epsilon - d*q*y**3/(-d**2 + y**2)**2)/(4*pi*epsilon*y**2)', 'derivative_lambda': 'lambda args : (lambda q,y,Volt,d,epsilon: -d*q*y/(4*pi*epsilon*(-d**2 + y**2)**2) + (4*pi*Volt*d*epsilon - d*q*y**3/(-d**2 + y**2)**2)/(4*pi*epsilon*y**2) )(*args)'
       },
       {'name': 'q', 'order_derivative': 2, 'monotonicity': 'decreasing', 'derivative': '-d*y/(2*pi*epsilon*(d**2 - y**2)**2)', 'derivative_lambda': 'lambda args : (lambda q,y,Volt,d,epsilon: -d*y/(2*pi*epsilon*(d**2 - y**2)**2) )(*args)'
@@ -2823,8 +2817,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus13', 'DescriptiveName': 'Bonus13.0,
-    3.45 Jackson', 'Constriants': [
+  {'EquationName': 'Bonus13', 'DescriptiveName': 'Bonus13.0, 3.45 Jackson', 'Constriants': [
       {'name': 'q', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '1/(4*pi*epsilon*sqrt(d**2 - 2*d*r*cos(alpha) + r**2))', 'derivative_lambda': 'lambda args : (lambda q,r,d,alpha,epsilon: 1/(4*pi*epsilon*sqrt(d**2 - 2*d*r*cos(alpha) + r**2)) )(*args)'
       },
       {'name': 'q', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda q,r,d,alpha,epsilon: 0 )(*args)'
@@ -2892,8 +2885,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus15', 'DescriptiveName': 'Bonus15.0,
-    11.38 Jackson', 'Constriants': [
+  {'EquationName': 'Bonus15', 'DescriptiveName': 'Bonus15.0, 11.38 Jackson', 'Constriants': [
       {'name': 'c', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'omega*v*sqrt(1 - v**2/c**2)*cos(theta)/(c**2*(1 + v*cos(theta)/c)**2) + omega*v**2/(c**3*sqrt(1 - v**2/c**2)*(1 + v*cos(theta)/c))', 'derivative_lambda': 'lambda args : (lambda c,v,omega,theta: omega*v*sqrt(1 - v**2/c**2)*cos(theta)/(c**2*(1 + v*cos(theta)/c)**2) + omega*v**2/(c**3*sqrt(1 - v**2/c**2)*(1 + v*cos(theta)/c)) )(*args)'
       },
       {'name': 'c', 'order_derivative': 2, 'monotonicity': 'decreasing', 'derivative': 'omega*v*(-2*sqrt(1 - v**2/c**2)*(1 - v*cos(theta)/(c*(1 + v*cos(theta)/c)))*cos(theta)/(1 + v*cos(theta)/c) - v*(3 + v**2/(c**2*(1 - v**2/c**2)))/(c*sqrt(1 - v**2/c**2)) + 2*v**2*cos(theta)/(c**2*sqrt(1 - v**2/c**2)*(1 + v*cos(theta)/c)))/(c**3*(1 + v*cos(theta)/c))', 'derivative_lambda': 'lambda args : (lambda c,v,omega,theta: omega*v*(-2*sqrt(1 - v**2/c**2)*(1 - v*cos(theta)/(c*(1 + v*cos(theta)/c)))*cos(theta)/(1 + v*cos(theta)/c) - v*(3 + v**2/(c**2*(1 - v**2/c**2)))/(c*sqrt(1 - v**2/c**2)) + 2*v**2*cos(theta)/(c**2*sqrt(1 - v**2/c**2)*(1 + v*cos(theta)/c)))/(c**3*(1 + v*cos(theta)/c)) )(*args)'
@@ -2921,8 +2913,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus16', 'DescriptiveName': 'Bonus16.0,
-    8.56 Goldstein', 'Constriants': [
+  {'EquationName': 'Bonus16', 'DescriptiveName': 'Bonus16.0, 8.56 Goldstein', 'Constriants': [
       {'name': 'm', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'c**4*m/sqrt(c**4*m**2 + c**2*(-A_vec*q + p)**2)', 'derivative_lambda': 'lambda args : (lambda m,c,p,q,A_vec,Volt: c**4*m/sqrt(c**4*m**2 + c**2*(-A_vec*q + p)**2) )(*args)'
       },
       {'name': 'm', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': 'c**4*(-c**2*m**2/(c**2*m**2 + (A_vec*q - p)**2) + 1)/sqrt(c**2*(c**2*m**2 + (A_vec*q - p)**2))', 'derivative_lambda': 'lambda args : (lambda m,c,p,q,A_vec,Volt: c**4*(-c**2*m**2/(c**2*m**2 + (A_vec*q - p)**2) + 1)/sqrt(c**2*(c**2*m**2 + (A_vec*q - p)**2)) )(*args)'
@@ -3002,8 +2993,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus18', 'DescriptiveName': 'Bonus18.0,
-    15.2.1 Weinberg', 'Constriants': [
+  {'EquationName': 'Bonus18', 'DescriptiveName': "Bonus18.0, 15.2.1 Weinberg", 'Constriants': [
       {'name': 'G', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': '-3*(H_G**2 + c**2*k_f/r**2)/(8*pi*G**2)', 'derivative_lambda': 'lambda args : (lambda G,k_f,r,H_G,c: -3*(H_G**2 + c**2*k_f/r**2)/(8*pi*G**2) )(*args)'
       },
       {'name': 'G', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': '3*(H_G**2 + c**2*k_f/r**2)/(4*pi*G**3)', 'derivative_lambda': 'lambda args : (lambda G,k_f,r,H_G,c: 3*(H_G**2 + c**2*k_f/r**2)/(4*pi*G**3) )(*args)'
@@ -3037,8 +3027,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus19', 'DescriptiveName': 'Bonus19.0,
-    15.2.2 Weinberg', 'Constriants': [
+  {'EquationName': 'Bonus19', 'DescriptiveName': 'Bonus19.0, 15.2.2 Weinberg', 'Constriants': [
       {'name': 'G', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': '(H_G**2*c**2*(1 - 2*alpha) + c**4*k_f/r**2)/(8*pi*G**2)', 'derivative_lambda': 'lambda args : (lambda G,k_f,r,H_G,alpha,c: (H_G**2*c**2*(1 - 2*alpha) + c**4*k_f/r**2)/(8*pi*G**2) )(*args)'
       },
       {'name': 'G', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': 'c**2*(H_G**2*(2*alpha - 1) - c**2*k_f/r**2)/(4*pi*G**3)', 'derivative_lambda': 'lambda args : (lambda G,k_f,r,H_G,alpha,c: c**2*(H_G**2*(2*alpha - 1) - c**2*k_f/r**2)/(4*pi*G**3) )(*args)'
@@ -3124,4 +3113,4 @@ constraints = [
       }
     ]
   }
-]constraints = [
+]

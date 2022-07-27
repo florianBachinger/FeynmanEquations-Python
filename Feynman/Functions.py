@@ -15,7 +15,7 @@ class Feynman1:
   equation_lambda = lambda args : (lambda theta: np.exp(-theta**2/2)/np.sqrt(2*np.pi) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman1, Lecture I.6.2a
 
@@ -25,13 +25,13 @@ class Feynman1:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['theta','f','f_without_noise']
+          pandas DataFrame ['theta','f']
       """
       theta = np.random.uniform(1.0,3.0, size)
-      return Feynman1.calculate_df(theta,noise_level)
+      return Feynman1.calculate_df(theta,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(theta, noise_level = 0):
+  def calculate_df(theta, noise_level = 0, include_original_target = False):
       """
       Feynman1, Lecture I.6.2a
 
@@ -40,19 +40,17 @@ class Feynman1:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['theta','f','f_without_noise']
+          pandas DataFrame ['theta','f']
       """
       target = Feynman1.calculate(theta)
-      return pd.DataFrame(
-        list(
-          zip(
-            theta
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['theta','f','f_without_noise']
-      )
+      data = [theta]
+      data.append(Noise(target,noise_level))
+      columns = ['theta','f']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('f_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -84,7 +82,7 @@ class Feynman2:
   equation_lambda = lambda args : (lambda sigma,theta: np.exp(-(theta/sigma)**2/2)/(np.sqrt(2*np.pi)*sigma) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman2, Lecture I.6.2
 
@@ -94,14 +92,14 @@ class Feynman2:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['sigma','theta','f','f_without_noise']
+          pandas DataFrame ['sigma','theta','f']
       """
       sigma = np.random.uniform(1.0,3.0, size)
       theta = np.random.uniform(1.0,3.0, size)
-      return Feynman2.calculate_df(sigma,theta,noise_level)
+      return Feynman2.calculate_df(sigma,theta,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(sigma,theta, noise_level = 0):
+  def calculate_df(sigma,theta, noise_level = 0, include_original_target = False):
       """
       Feynman2, Lecture I.6.2
 
@@ -111,19 +109,17 @@ class Feynman2:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['sigma','theta','f','f_without_noise']
+          pandas DataFrame ['sigma','theta','f']
       """
       target = Feynman2.calculate(sigma,theta)
-      return pd.DataFrame(
-        list(
-          zip(
-            sigma,theta
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['sigma','theta','f','f_without_noise']
-      )
+      data = [sigma,theta]
+      data.append(Noise(target,noise_level))
+      columns = ['sigma','theta','f']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('f_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -158,7 +154,7 @@ class Feynman3:
   equation_lambda = lambda args : (lambda sigma,theta,theta1: np.exp(-((theta-theta1)/sigma)**2/2)/(np.sqrt(2*np.pi)*sigma) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman3, Lecture I.6.2b
 
@@ -168,15 +164,15 @@ class Feynman3:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['sigma','theta','theta1','f','f_without_noise']
+          pandas DataFrame ['sigma','theta','theta1','f']
       """
       sigma = np.random.uniform(1.0,3.0, size)
       theta = np.random.uniform(1.0,3.0, size)
       theta1 = np.random.uniform(1.0,3.0, size)
-      return Feynman3.calculate_df(sigma,theta,theta1,noise_level)
+      return Feynman3.calculate_df(sigma,theta,theta1,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(sigma,theta,theta1, noise_level = 0):
+  def calculate_df(sigma,theta,theta1, noise_level = 0, include_original_target = False):
       """
       Feynman3, Lecture I.6.2b
 
@@ -187,19 +183,17 @@ class Feynman3:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['sigma','theta','theta1','f','f_without_noise']
+          pandas DataFrame ['sigma','theta','theta1','f']
       """
       target = Feynman3.calculate(sigma,theta,theta1)
-      return pd.DataFrame(
-        list(
-          zip(
-            sigma,theta,theta1
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['sigma','theta','theta1','f','f_without_noise']
-      )
+      data = [sigma,theta,theta1]
+      data.append(Noise(target,noise_level))
+      columns = ['sigma','theta','theta1','f']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('f_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -237,7 +231,7 @@ class Feynman4:
   equation_lambda = lambda args : (lambda x1,x2,y1,y2: np.sqrt((x2-x1)**2+(y2-y1)**2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman4, Lecture I.8.14
 
@@ -247,16 +241,16 @@ class Feynman4:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['x1','x2','y1','y2','d','d_without_noise']
+          pandas DataFrame ['x1','x2','y1','y2','d']
       """
       x1 = np.random.uniform(1.0,5.0, size)
       x2 = np.random.uniform(1.0,5.0, size)
       y1 = np.random.uniform(1.0,5.0, size)
       y2 = np.random.uniform(1.0,5.0, size)
-      return Feynman4.calculate_df(x1,x2,y1,y2,noise_level)
+      return Feynman4.calculate_df(x1,x2,y1,y2,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(x1,x2,y1,y2, noise_level = 0):
+  def calculate_df(x1,x2,y1,y2, noise_level = 0, include_original_target = False):
       """
       Feynman4, Lecture I.8.14
 
@@ -268,19 +262,17 @@ class Feynman4:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['x1','x2','y1','y2','d','d_without_noise']
+          pandas DataFrame ['x1','x2','y1','y2','d']
       """
       target = Feynman4.calculate(x1,x2,y1,y2)
-      return pd.DataFrame(
-        list(
-          zip(
-            x1,x2,y1,y2
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['x1','x2','y1','y2','d','d_without_noise']
-      )
+      data = [x1,x2,y1,y2]
+      data.append(Noise(target,noise_level))
+      columns = ['x1','x2','y1','y2','d']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('d_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -321,7 +313,7 @@ class Feynman5:
   equation_lambda = lambda args : (lambda m1,m2,G,x1,x2,y1,y2,z1,z2: G*m1*m2/((x2-x1)**2+(y2-y1)**2+(z2-z1)**2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman5, Lecture I.9.18
 
@@ -331,7 +323,7 @@ class Feynman5:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m1','m2','G','x1','x2','y1','y2','z1','z2','F','F_without_noise']
+          pandas DataFrame ['m1','m2','G','x1','x2','y1','y2','z1','z2','F']
       """
       m1 = np.random.uniform(1.0,2.0, size)
       m2 = np.random.uniform(1.0,2.0, size)
@@ -342,10 +334,10 @@ class Feynman5:
       y2 = np.random.uniform(1.0,2.0, size)
       z1 = np.random.uniform(3.0,4.0, size)
       z2 = np.random.uniform(1.0,2.0, size)
-      return Feynman5.calculate_df(m1,m2,G,x1,x2,y1,y2,z1,z2,noise_level)
+      return Feynman5.calculate_df(m1,m2,G,x1,x2,y1,y2,z1,z2,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(m1,m2,G,x1,x2,y1,y2,z1,z2, noise_level = 0):
+  def calculate_df(m1,m2,G,x1,x2,y1,y2,z1,z2, noise_level = 0, include_original_target = False):
       """
       Feynman5, Lecture I.9.18
 
@@ -362,19 +354,17 @@ class Feynman5:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m1','m2','G','x1','x2','y1','y2','z1','z2','F','F_without_noise']
+          pandas DataFrame ['m1','m2','G','x1','x2','y1','y2','z1','z2','F']
       """
       target = Feynman5.calculate(m1,m2,G,x1,x2,y1,y2,z1,z2)
-      return pd.DataFrame(
-        list(
-          zip(
-            m1,m2,G,x1,x2,y1,y2,z1,z2
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['m1','m2','G','x1','x2','y1','y2','z1','z2','F','F_without_noise']
-      )
+      data = [m1,m2,G,x1,x2,y1,y2,z1,z2]
+      data.append(Noise(target,noise_level))
+      columns = ['m1','m2','G','x1','x2','y1','y2','z1','z2','F']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('F_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -430,7 +420,7 @@ class Feynman6:
   equation_lambda = lambda args : (lambda m_0,v,c: m_0/np.sqrt(1-v**2/c**2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman6, Lecture I.10.7
 
@@ -440,15 +430,15 @@ class Feynman6:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m_0','v','c','m','m_without_noise']
+          pandas DataFrame ['m_0','v','c','m']
       """
       m_0 = np.random.uniform(1.0,5.0, size)
       v = np.random.uniform(1.0,2.0, size)
       c = np.random.uniform(3.0,10.0, size)
-      return Feynman6.calculate_df(m_0,v,c,noise_level)
+      return Feynman6.calculate_df(m_0,v,c,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(m_0,v,c, noise_level = 0):
+  def calculate_df(m_0,v,c, noise_level = 0, include_original_target = False):
       """
       Feynman6, Lecture I.10.7
 
@@ -459,19 +449,17 @@ class Feynman6:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m_0','v','c','m','m_without_noise']
+          pandas DataFrame ['m_0','v','c','m']
       """
       target = Feynman6.calculate(m_0,v,c)
-      return pd.DataFrame(
-        list(
-          zip(
-            m_0,v,c
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['m_0','v','c','m','m_without_noise']
-      )
+      data = [m_0,v,c]
+      data.append(Noise(target,noise_level))
+      columns = ['m_0','v','c','m']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('m_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -509,7 +497,7 @@ class Feynman7:
   equation_lambda = lambda args : (lambda x1,x2,x3,y1,y2,y3: x1*y1+x2*y2+x3*y3 )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman7, Lecture I.11.19
 
@@ -519,7 +507,7 @@ class Feynman7:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['x1','x2','x3','y1','y2','y3','A','A_without_noise']
+          pandas DataFrame ['x1','x2','x3','y1','y2','y3','A']
       """
       x1 = np.random.uniform(1.0,5.0, size)
       x2 = np.random.uniform(1.0,5.0, size)
@@ -527,10 +515,10 @@ class Feynman7:
       y1 = np.random.uniform(1.0,5.0, size)
       y2 = np.random.uniform(1.0,5.0, size)
       y3 = np.random.uniform(1.0,5.0, size)
-      return Feynman7.calculate_df(x1,x2,x3,y1,y2,y3,noise_level)
+      return Feynman7.calculate_df(x1,x2,x3,y1,y2,y3,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(x1,x2,x3,y1,y2,y3, noise_level = 0):
+  def calculate_df(x1,x2,x3,y1,y2,y3, noise_level = 0, include_original_target = False):
       """
       Feynman7, Lecture I.11.19
 
@@ -544,19 +532,17 @@ class Feynman7:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['x1','x2','x3','y1','y2','y3','A','A_without_noise']
+          pandas DataFrame ['x1','x2','x3','y1','y2','y3','A']
       """
       target = Feynman7.calculate(x1,x2,x3,y1,y2,y3)
-      return pd.DataFrame(
-        list(
-          zip(
-            x1,x2,x3,y1,y2,y3
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['x1','x2','x3','y1','y2','y3','A','A_without_noise']
-      )
+      data = [x1,x2,x3,y1,y2,y3]
+      data.append(Noise(target,noise_level))
+      columns = ['x1','x2','x3','y1','y2','y3','A']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('A_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -603,7 +589,7 @@ class Feynman8:
   equation_lambda = lambda args : (lambda mu,Nn: mu*Nn )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman8, Lecture I.12.1
 
@@ -613,14 +599,14 @@ class Feynman8:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['mu','Nn','F','F_without_noise']
+          pandas DataFrame ['mu','Nn','F']
       """
       mu = np.random.uniform(1.0,5.0, size)
       Nn = np.random.uniform(1.0,5.0, size)
-      return Feynman8.calculate_df(mu,Nn,noise_level)
+      return Feynman8.calculate_df(mu,Nn,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(mu,Nn, noise_level = 0):
+  def calculate_df(mu,Nn, noise_level = 0, include_original_target = False):
       """
       Feynman8, Lecture I.12.1
 
@@ -630,19 +616,17 @@ class Feynman8:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['mu','Nn','F','F_without_noise']
+          pandas DataFrame ['mu','Nn','F']
       """
       target = Feynman8.calculate(mu,Nn)
-      return pd.DataFrame(
-        list(
-          zip(
-            mu,Nn
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['mu','Nn','F','F_without_noise']
-      )
+      data = [mu,Nn]
+      data.append(Noise(target,noise_level))
+      columns = ['mu','Nn','F']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('F_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -677,7 +661,7 @@ class Feynman10:
   equation_lambda = lambda args : (lambda q1,q2,epsilon,r: q1*q2*r/(4*np.pi*epsilon*r**3) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman10, Lecture I.12.2
 
@@ -687,16 +671,16 @@ class Feynman10:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q1','q2','epsilon','r','F','F_without_noise']
+          pandas DataFrame ['q1','q2','epsilon','r','F']
       """
       q1 = np.random.uniform(1.0,5.0, size)
       q2 = np.random.uniform(1.0,5.0, size)
       epsilon = np.random.uniform(1.0,5.0, size)
       r = np.random.uniform(1.0,5.0, size)
-      return Feynman10.calculate_df(q1,q2,epsilon,r,noise_level)
+      return Feynman10.calculate_df(q1,q2,epsilon,r,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(q1,q2,epsilon,r, noise_level = 0):
+  def calculate_df(q1,q2,epsilon,r, noise_level = 0, include_original_target = False):
       """
       Feynman10, Lecture I.12.2
 
@@ -708,19 +692,17 @@ class Feynman10:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q1','q2','epsilon','r','F','F_without_noise']
+          pandas DataFrame ['q1','q2','epsilon','r','F']
       """
       target = Feynman10.calculate(q1,q2,epsilon,r)
-      return pd.DataFrame(
-        list(
-          zip(
-            q1,q2,epsilon,r
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['q1','q2','epsilon','r','F','F_without_noise']
-      )
+      data = [q1,q2,epsilon,r]
+      data.append(Noise(target,noise_level))
+      columns = ['q1','q2','epsilon','r','F']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('F_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -761,7 +743,7 @@ class Feynman11:
   equation_lambda = lambda args : (lambda q1,epsilon,r: q1*r/(4*np.pi*epsilon*r**3) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman11, Lecture I.12.4
 
@@ -771,15 +753,15 @@ class Feynman11:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q1','epsilon','r','Ef','Ef_without_noise']
+          pandas DataFrame ['q1','epsilon','r','Ef']
       """
       q1 = np.random.uniform(1.0,5.0, size)
       epsilon = np.random.uniform(1.0,5.0, size)
       r = np.random.uniform(1.0,5.0, size)
-      return Feynman11.calculate_df(q1,epsilon,r,noise_level)
+      return Feynman11.calculate_df(q1,epsilon,r,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(q1,epsilon,r, noise_level = 0):
+  def calculate_df(q1,epsilon,r, noise_level = 0, include_original_target = False):
       """
       Feynman11, Lecture I.12.4
 
@@ -790,19 +772,17 @@ class Feynman11:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q1','epsilon','r','Ef','Ef_without_noise']
+          pandas DataFrame ['q1','epsilon','r','Ef']
       """
       target = Feynman11.calculate(q1,epsilon,r)
-      return pd.DataFrame(
-        list(
-          zip(
-            q1,epsilon,r
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['q1','epsilon','r','Ef','Ef_without_noise']
-      )
+      data = [q1,epsilon,r]
+      data.append(Noise(target,noise_level))
+      columns = ['q1','epsilon','r','Ef']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('Ef_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -840,7 +820,7 @@ class Feynman12:
   equation_lambda = lambda args : (lambda q2,Ef: q2*Ef )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman12, Lecture I.12.5
 
@@ -850,14 +830,14 @@ class Feynman12:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q2','Ef','F','F_without_noise']
+          pandas DataFrame ['q2','Ef','F']
       """
       q2 = np.random.uniform(1.0,5.0, size)
       Ef = np.random.uniform(1.0,5.0, size)
-      return Feynman12.calculate_df(q2,Ef,noise_level)
+      return Feynman12.calculate_df(q2,Ef,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(q2,Ef, noise_level = 0):
+  def calculate_df(q2,Ef, noise_level = 0, include_original_target = False):
       """
       Feynman12, Lecture I.12.5
 
@@ -867,19 +847,17 @@ class Feynman12:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q2','Ef','F','F_without_noise']
+          pandas DataFrame ['q2','Ef','F']
       """
       target = Feynman12.calculate(q2,Ef)
-      return pd.DataFrame(
-        list(
-          zip(
-            q2,Ef
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['q2','Ef','F','F_without_noise']
-      )
+      data = [q2,Ef]
+      data.append(Noise(target,noise_level))
+      columns = ['q2','Ef','F']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('F_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -914,7 +892,7 @@ class Feynman13:
   equation_lambda = lambda args : (lambda q,Ef,B,v,theta: q*(Ef+B*v*np.sin(theta)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman13, Lecture I.12.11
 
@@ -924,17 +902,17 @@ class Feynman13:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','Ef','B','v','theta','F','F_without_noise']
+          pandas DataFrame ['q','Ef','B','v','theta','F']
       """
       q = np.random.uniform(1.0,5.0, size)
       Ef = np.random.uniform(1.0,5.0, size)
       B = np.random.uniform(1.0,5.0, size)
       v = np.random.uniform(1.0,5.0, size)
       theta = np.random.uniform(1.0,5.0, size)
-      return Feynman13.calculate_df(q,Ef,B,v,theta,noise_level)
+      return Feynman13.calculate_df(q,Ef,B,v,theta,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(q,Ef,B,v,theta, noise_level = 0):
+  def calculate_df(q,Ef,B,v,theta, noise_level = 0, include_original_target = False):
       """
       Feynman13, Lecture I.12.11
 
@@ -947,19 +925,17 @@ class Feynman13:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','Ef','B','v','theta','F','F_without_noise']
+          pandas DataFrame ['q','Ef','B','v','theta','F']
       """
       target = Feynman13.calculate(q,Ef,B,v,theta)
-      return pd.DataFrame(
-        list(
-          zip(
-            q,Ef,B,v,theta
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['q','Ef','B','v','theta','F','F_without_noise']
-      )
+      data = [q,Ef,B,v,theta]
+      data.append(Noise(target,noise_level))
+      columns = ['q','Ef','B','v','theta','F']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('F_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -1003,7 +979,7 @@ class Feynman9:
   equation_lambda = lambda args : (lambda m,v,u,w: 1/2*m*(v**2+u**2+w**2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman9, Lecture I.13.4
 
@@ -1013,16 +989,16 @@ class Feynman9:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m','v','u','w','K','K_without_noise']
+          pandas DataFrame ['m','v','u','w','K']
       """
       m = np.random.uniform(1.0,5.0, size)
       v = np.random.uniform(1.0,5.0, size)
       u = np.random.uniform(1.0,5.0, size)
       w = np.random.uniform(1.0,5.0, size)
-      return Feynman9.calculate_df(m,v,u,w,noise_level)
+      return Feynman9.calculate_df(m,v,u,w,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(m,v,u,w, noise_level = 0):
+  def calculate_df(m,v,u,w, noise_level = 0, include_original_target = False):
       """
       Feynman9, Lecture I.13.4
 
@@ -1034,19 +1010,17 @@ class Feynman9:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m','v','u','w','K','K_without_noise']
+          pandas DataFrame ['m','v','u','w','K']
       """
       target = Feynman9.calculate(m,v,u,w)
-      return pd.DataFrame(
-        list(
-          zip(
-            m,v,u,w
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['m','v','u','w','K','K_without_noise']
-      )
+      data = [m,v,u,w]
+      data.append(Noise(target,noise_level))
+      columns = ['m','v','u','w','K']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('K_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -1087,7 +1061,7 @@ class Feynman14:
   equation_lambda = lambda args : (lambda m1,m2,r1,r2,G: G*m1*m2*(1/r2-1/r1) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman14, Lecture I.13.12
 
@@ -1097,17 +1071,17 @@ class Feynman14:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m1','m2','r1','r2','G','U','U_without_noise']
+          pandas DataFrame ['m1','m2','r1','r2','G','U']
       """
       m1 = np.random.uniform(1.0,5.0, size)
       m2 = np.random.uniform(1.0,5.0, size)
       r1 = np.random.uniform(1.0,5.0, size)
       r2 = np.random.uniform(1.0,5.0, size)
       G = np.random.uniform(1.0,5.0, size)
-      return Feynman14.calculate_df(m1,m2,r1,r2,G,noise_level)
+      return Feynman14.calculate_df(m1,m2,r1,r2,G,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(m1,m2,r1,r2,G, noise_level = 0):
+  def calculate_df(m1,m2,r1,r2,G, noise_level = 0, include_original_target = False):
       """
       Feynman14, Lecture I.13.12
 
@@ -1120,19 +1094,17 @@ class Feynman14:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m1','m2','r1','r2','G','U','U_without_noise']
+          pandas DataFrame ['m1','m2','r1','r2','G','U']
       """
       target = Feynman14.calculate(m1,m2,r1,r2,G)
-      return pd.DataFrame(
-        list(
-          zip(
-            m1,m2,r1,r2,G
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['m1','m2','r1','r2','G','U','U_without_noise']
-      )
+      data = [m1,m2,r1,r2,G]
+      data.append(Noise(target,noise_level))
+      columns = ['m1','m2','r1','r2','G','U']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('U_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -1176,7 +1148,7 @@ class Feynman15:
   equation_lambda = lambda args : (lambda m,g,z: m*g*z )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman15, Lecture I.14.3
 
@@ -1186,15 +1158,15 @@ class Feynman15:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m','g','z','U','U_without_noise']
+          pandas DataFrame ['m','g','z','U']
       """
       m = np.random.uniform(1.0,5.0, size)
       g = np.random.uniform(1.0,5.0, size)
       z = np.random.uniform(1.0,5.0, size)
-      return Feynman15.calculate_df(m,g,z,noise_level)
+      return Feynman15.calculate_df(m,g,z,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(m,g,z, noise_level = 0):
+  def calculate_df(m,g,z, noise_level = 0, include_original_target = False):
       """
       Feynman15, Lecture I.14.3
 
@@ -1205,19 +1177,17 @@ class Feynman15:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m','g','z','U','U_without_noise']
+          pandas DataFrame ['m','g','z','U']
       """
       target = Feynman15.calculate(m,g,z)
-      return pd.DataFrame(
-        list(
-          zip(
-            m,g,z
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['m','g','z','U','U_without_noise']
-      )
+      data = [m,g,z]
+      data.append(Noise(target,noise_level))
+      columns = ['m','g','z','U']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('U_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -1255,7 +1225,7 @@ class Feynman16:
   equation_lambda = lambda args : (lambda k_spring,x: 1/2*k_spring*x**2 )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman16, Lecture I.14.4
 
@@ -1265,14 +1235,14 @@ class Feynman16:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['k_spring','x','U','U_without_noise']
+          pandas DataFrame ['k_spring','x','U']
       """
       k_spring = np.random.uniform(1.0,5.0, size)
       x = np.random.uniform(1.0,5.0, size)
-      return Feynman16.calculate_df(k_spring,x,noise_level)
+      return Feynman16.calculate_df(k_spring,x,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(k_spring,x, noise_level = 0):
+  def calculate_df(k_spring,x, noise_level = 0, include_original_target = False):
       """
       Feynman16, Lecture I.14.4
 
@@ -1282,19 +1252,17 @@ class Feynman16:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['k_spring','x','U','U_without_noise']
+          pandas DataFrame ['k_spring','x','U']
       """
       target = Feynman16.calculate(k_spring,x)
-      return pd.DataFrame(
-        list(
-          zip(
-            k_spring,x
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['k_spring','x','U','U_without_noise']
-      )
+      data = [k_spring,x]
+      data.append(Noise(target,noise_level))
+      columns = ['k_spring','x','U']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('U_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -1329,7 +1297,7 @@ class Feynman17:
   equation_lambda = lambda args : (lambda x,u,c,t: (x-u*t)/np.sqrt(1-u**2/c**2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman17, Lecture I.15.3x
 
@@ -1339,16 +1307,16 @@ class Feynman17:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['x','u','c','t','x1','x1_without_noise']
+          pandas DataFrame ['x','u','c','t','x1']
       """
       x = np.random.uniform(5.0,10.0, size)
       u = np.random.uniform(1.0,2.0, size)
       c = np.random.uniform(3.0,20.0, size)
       t = np.random.uniform(1.0,2.0, size)
-      return Feynman17.calculate_df(x,u,c,t,noise_level)
+      return Feynman17.calculate_df(x,u,c,t,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(x,u,c,t, noise_level = 0):
+  def calculate_df(x,u,c,t, noise_level = 0, include_original_target = False):
       """
       Feynman17, Lecture I.15.3x
 
@@ -1360,19 +1328,17 @@ class Feynman17:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['x','u','c','t','x1','x1_without_noise']
+          pandas DataFrame ['x','u','c','t','x1']
       """
       target = Feynman17.calculate(x,u,c,t)
-      return pd.DataFrame(
-        list(
-          zip(
-            x,u,c,t
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['x','u','c','t','x1','x1_without_noise']
-      )
+      data = [x,u,c,t]
+      data.append(Noise(target,noise_level))
+      columns = ['x','u','c','t','x1']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('x1_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -1413,7 +1379,7 @@ class Feynman18:
   equation_lambda = lambda args : (lambda x,c,u,t: (t-u*x/c**2)/np.sqrt(1-u**2/c**2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman18, Lecture I.15.3t
 
@@ -1423,16 +1389,16 @@ class Feynman18:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['x','c','u','t','t1','t1_without_noise']
+          pandas DataFrame ['x','c','u','t','t1']
       """
       x = np.random.uniform(1.0,5.0, size)
       c = np.random.uniform(3.0,10.0, size)
       u = np.random.uniform(1.0,2.0, size)
       t = np.random.uniform(1.0,5.0, size)
-      return Feynman18.calculate_df(x,c,u,t,noise_level)
+      return Feynman18.calculate_df(x,c,u,t,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(x,c,u,t, noise_level = 0):
+  def calculate_df(x,c,u,t, noise_level = 0, include_original_target = False):
       """
       Feynman18, Lecture I.15.3t
 
@@ -1444,19 +1410,17 @@ class Feynman18:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['x','c','u','t','t1','t1_without_noise']
+          pandas DataFrame ['x','c','u','t','t1']
       """
       target = Feynman18.calculate(x,c,u,t)
-      return pd.DataFrame(
-        list(
-          zip(
-            x,c,u,t
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['x','c','u','t','t1','t1_without_noise']
-      )
+      data = [x,c,u,t]
+      data.append(Noise(target,noise_level))
+      columns = ['x','c','u','t','t1']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('t1_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -1497,7 +1461,7 @@ class Feynman19:
   equation_lambda = lambda args : (lambda m_0,v,c: m_0*v/np.sqrt(1-v**2/c**2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman19, Lecture I.15.1
 
@@ -1507,15 +1471,15 @@ class Feynman19:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m_0','v','c','p','p_without_noise']
+          pandas DataFrame ['m_0','v','c','p']
       """
       m_0 = np.random.uniform(1.0,5.0, size)
       v = np.random.uniform(1.0,2.0, size)
       c = np.random.uniform(3.0,10.0, size)
-      return Feynman19.calculate_df(m_0,v,c,noise_level)
+      return Feynman19.calculate_df(m_0,v,c,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(m_0,v,c, noise_level = 0):
+  def calculate_df(m_0,v,c, noise_level = 0, include_original_target = False):
       """
       Feynman19, Lecture I.15.1
 
@@ -1526,19 +1490,17 @@ class Feynman19:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m_0','v','c','p','p_without_noise']
+          pandas DataFrame ['m_0','v','c','p']
       """
       target = Feynman19.calculate(m_0,v,c)
-      return pd.DataFrame(
-        list(
-          zip(
-            m_0,v,c
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['m_0','v','c','p','p_without_noise']
-      )
+      data = [m_0,v,c]
+      data.append(Noise(target,noise_level))
+      columns = ['m_0','v','c','p']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('p_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -1576,7 +1538,7 @@ class Feynman20:
   equation_lambda = lambda args : (lambda c,v,u: (u+v)/(1+u*v/c**2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman20, Lecture I.16.6
 
@@ -1586,15 +1548,15 @@ class Feynman20:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['c','v','u','v1','v1_without_noise']
+          pandas DataFrame ['c','v','u','v1']
       """
       c = np.random.uniform(1.0,5.0, size)
       v = np.random.uniform(1.0,5.0, size)
       u = np.random.uniform(1.0,5.0, size)
-      return Feynman20.calculate_df(c,v,u,noise_level)
+      return Feynman20.calculate_df(c,v,u,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(c,v,u, noise_level = 0):
+  def calculate_df(c,v,u, noise_level = 0, include_original_target = False):
       """
       Feynman20, Lecture I.16.6
 
@@ -1605,19 +1567,17 @@ class Feynman20:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['c','v','u','v1','v1_without_noise']
+          pandas DataFrame ['c','v','u','v1']
       """
       target = Feynman20.calculate(c,v,u)
-      return pd.DataFrame(
-        list(
-          zip(
-            c,v,u
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['c','v','u','v1','v1_without_noise']
-      )
+      data = [c,v,u]
+      data.append(Noise(target,noise_level))
+      columns = ['c','v','u','v1']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('v1_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -1655,7 +1615,7 @@ class Feynman21:
   equation_lambda = lambda args : (lambda m1,m2,r1,r2: (m1*r1+m2*r2)/(m1+m2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman21, Lecture I.18.4
 
@@ -1665,16 +1625,16 @@ class Feynman21:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m1','m2','r1','r2','r','r_without_noise']
+          pandas DataFrame ['m1','m2','r1','r2','r']
       """
       m1 = np.random.uniform(1.0,5.0, size)
       m2 = np.random.uniform(1.0,5.0, size)
       r1 = np.random.uniform(1.0,5.0, size)
       r2 = np.random.uniform(1.0,5.0, size)
-      return Feynman21.calculate_df(m1,m2,r1,r2,noise_level)
+      return Feynman21.calculate_df(m1,m2,r1,r2,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(m1,m2,r1,r2, noise_level = 0):
+  def calculate_df(m1,m2,r1,r2, noise_level = 0, include_original_target = False):
       """
       Feynman21, Lecture I.18.4
 
@@ -1686,19 +1646,17 @@ class Feynman21:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m1','m2','r1','r2','r','r_without_noise']
+          pandas DataFrame ['m1','m2','r1','r2','r']
       """
       target = Feynman21.calculate(m1,m2,r1,r2)
-      return pd.DataFrame(
-        list(
-          zip(
-            m1,m2,r1,r2
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['m1','m2','r1','r2','r','r_without_noise']
-      )
+      data = [m1,m2,r1,r2]
+      data.append(Noise(target,noise_level))
+      columns = ['m1','m2','r1','r2','r']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('r_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -1739,7 +1697,7 @@ class Feynman22:
   equation_lambda = lambda args : (lambda r,F,theta: r*F*np.sin(theta) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman22, Lecture I.18.12
 
@@ -1749,15 +1707,15 @@ class Feynman22:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['r','F','theta','tau','tau_without_noise']
+          pandas DataFrame ['r','F','theta','tau']
       """
       r = np.random.uniform(1.0,5.0, size)
       F = np.random.uniform(1.0,5.0, size)
       theta = np.random.uniform(0.0,5.0, size)
-      return Feynman22.calculate_df(r,F,theta,noise_level)
+      return Feynman22.calculate_df(r,F,theta,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(r,F,theta, noise_level = 0):
+  def calculate_df(r,F,theta, noise_level = 0, include_original_target = False):
       """
       Feynman22, Lecture I.18.12
 
@@ -1768,19 +1726,17 @@ class Feynman22:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['r','F','theta','tau','tau_without_noise']
+          pandas DataFrame ['r','F','theta','tau']
       """
       target = Feynman22.calculate(r,F,theta)
-      return pd.DataFrame(
-        list(
-          zip(
-            r,F,theta
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['r','F','theta','tau','tau_without_noise']
-      )
+      data = [r,F,theta]
+      data.append(Noise(target,noise_level))
+      columns = ['r','F','theta','tau']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('tau_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -1818,7 +1774,7 @@ class Feynman23:
   equation_lambda = lambda args : (lambda m,r,v,theta: m*r*v*np.sin(theta) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman23, Lecture I.18.14
 
@@ -1828,16 +1784,16 @@ class Feynman23:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m','r','v','theta','L','L_without_noise']
+          pandas DataFrame ['m','r','v','theta','L']
       """
       m = np.random.uniform(1.0,5.0, size)
       r = np.random.uniform(1.0,5.0, size)
       v = np.random.uniform(1.0,5.0, size)
       theta = np.random.uniform(1.0,5.0, size)
-      return Feynman23.calculate_df(m,r,v,theta,noise_level)
+      return Feynman23.calculate_df(m,r,v,theta,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(m,r,v,theta, noise_level = 0):
+  def calculate_df(m,r,v,theta, noise_level = 0, include_original_target = False):
       """
       Feynman23, Lecture I.18.14
 
@@ -1849,19 +1805,17 @@ class Feynman23:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m','r','v','theta','L','L_without_noise']
+          pandas DataFrame ['m','r','v','theta','L']
       """
       target = Feynman23.calculate(m,r,v,theta)
-      return pd.DataFrame(
-        list(
-          zip(
-            m,r,v,theta
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['m','r','v','theta','L','L_without_noise']
-      )
+      data = [m,r,v,theta]
+      data.append(Noise(target,noise_level))
+      columns = ['m','r','v','theta','L']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('L_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -1902,7 +1856,7 @@ class Feynman24:
   equation_lambda = lambda args : (lambda m,omega,omega_0,x: 1/2*m*(omega**2+omega_0**2)*1/2*x**2 )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman24, Lecture I.24.6
 
@@ -1912,16 +1866,16 @@ class Feynman24:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m','omega','omega_0','x','E_n','E_n_without_noise']
+          pandas DataFrame ['m','omega','omega_0','x','E_n']
       """
       m = np.random.uniform(1.0,3.0, size)
       omega = np.random.uniform(1.0,3.0, size)
       omega_0 = np.random.uniform(1.0,3.0, size)
       x = np.random.uniform(1.0,3.0, size)
-      return Feynman24.calculate_df(m,omega,omega_0,x,noise_level)
+      return Feynman24.calculate_df(m,omega,omega_0,x,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(m,omega,omega_0,x, noise_level = 0):
+  def calculate_df(m,omega,omega_0,x, noise_level = 0, include_original_target = False):
       """
       Feynman24, Lecture I.24.6
 
@@ -1933,19 +1887,17 @@ class Feynman24:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m','omega','omega_0','x','E_n','E_n_without_noise']
+          pandas DataFrame ['m','omega','omega_0','x','E_n']
       """
       target = Feynman24.calculate(m,omega,omega_0,x)
-      return pd.DataFrame(
-        list(
-          zip(
-            m,omega,omega_0,x
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['m','omega','omega_0','x','E_n','E_n_without_noise']
-      )
+      data = [m,omega,omega_0,x]
+      data.append(Noise(target,noise_level))
+      columns = ['m','omega','omega_0','x','E_n']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('E_n_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -1986,7 +1938,7 @@ class Feynman25:
   equation_lambda = lambda args : (lambda q,C: q/C )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman25, Lecture I.25.13
 
@@ -1996,14 +1948,14 @@ class Feynman25:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','C','Volt','Volt_without_noise']
+          pandas DataFrame ['q','C','Volt']
       """
       q = np.random.uniform(1.0,5.0, size)
       C = np.random.uniform(1.0,5.0, size)
-      return Feynman25.calculate_df(q,C,noise_level)
+      return Feynman25.calculate_df(q,C,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(q,C, noise_level = 0):
+  def calculate_df(q,C, noise_level = 0, include_original_target = False):
       """
       Feynman25, Lecture I.25.13
 
@@ -2013,19 +1965,17 @@ class Feynman25:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','C','Volt','Volt_without_noise']
+          pandas DataFrame ['q','C','Volt']
       """
       target = Feynman25.calculate(q,C)
-      return pd.DataFrame(
-        list(
-          zip(
-            q,C
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['q','C','Volt','Volt_without_noise']
-      )
+      data = [q,C]
+      data.append(Noise(target,noise_level))
+      columns = ['q','C','Volt']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('Volt_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -2060,7 +2010,7 @@ class Feynman26:
   equation_lambda = lambda args : (lambda n,theta2: np.arcsin(n*np.sin(theta2)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman26, Lecture I.26.2
 
@@ -2070,14 +2020,14 @@ class Feynman26:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['n','theta2','theta1','theta1_without_noise']
+          pandas DataFrame ['n','theta2','theta1']
       """
       n = np.random.uniform(0.0,1.0, size)
       theta2 = np.random.uniform(1.0,5.0, size)
-      return Feynman26.calculate_df(n,theta2,noise_level)
+      return Feynman26.calculate_df(n,theta2,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(n,theta2, noise_level = 0):
+  def calculate_df(n,theta2, noise_level = 0, include_original_target = False):
       """
       Feynman26, Lecture I.26.2
 
@@ -2087,19 +2037,17 @@ class Feynman26:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['n','theta2','theta1','theta1_without_noise']
+          pandas DataFrame ['n','theta2','theta1']
       """
       target = Feynman26.calculate(n,theta2)
-      return pd.DataFrame(
-        list(
-          zip(
-            n,theta2
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['n','theta2','theta1','theta1_without_noise']
-      )
+      data = [n,theta2]
+      data.append(Noise(target,noise_level))
+      columns = ['n','theta2','theta1']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('theta1_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -2134,7 +2082,7 @@ class Feynman27:
   equation_lambda = lambda args : (lambda d1,d2,n: 1/(1/d1+n/d2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman27, Lecture I.27.6
 
@@ -2144,15 +2092,15 @@ class Feynman27:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['d1','d2','n','foc','foc_without_noise']
+          pandas DataFrame ['d1','d2','n','foc']
       """
       d1 = np.random.uniform(1.0,5.0, size)
       d2 = np.random.uniform(1.0,5.0, size)
       n = np.random.uniform(1.0,5.0, size)
-      return Feynman27.calculate_df(d1,d2,n,noise_level)
+      return Feynman27.calculate_df(d1,d2,n,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(d1,d2,n, noise_level = 0):
+  def calculate_df(d1,d2,n, noise_level = 0, include_original_target = False):
       """
       Feynman27, Lecture I.27.6
 
@@ -2163,19 +2111,17 @@ class Feynman27:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['d1','d2','n','foc','foc_without_noise']
+          pandas DataFrame ['d1','d2','n','foc']
       """
       target = Feynman27.calculate(d1,d2,n)
-      return pd.DataFrame(
-        list(
-          zip(
-            d1,d2,n
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['d1','d2','n','foc','foc_without_noise']
-      )
+      data = [d1,d2,n]
+      data.append(Noise(target,noise_level))
+      columns = ['d1','d2','n','foc']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('foc_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -2213,7 +2159,7 @@ class Feynman28:
   equation_lambda = lambda args : (lambda omega,c: omega/c )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman28, Lecture I.29.4
 
@@ -2223,14 +2169,14 @@ class Feynman28:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['omega','c','k','k_without_noise']
+          pandas DataFrame ['omega','c','k']
       """
       omega = np.random.uniform(1.0,10.0, size)
       c = np.random.uniform(1.0,10.0, size)
-      return Feynman28.calculate_df(omega,c,noise_level)
+      return Feynman28.calculate_df(omega,c,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(omega,c, noise_level = 0):
+  def calculate_df(omega,c, noise_level = 0, include_original_target = False):
       """
       Feynman28, Lecture I.29.4
 
@@ -2240,19 +2186,17 @@ class Feynman28:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['omega','c','k','k_without_noise']
+          pandas DataFrame ['omega','c','k']
       """
       target = Feynman28.calculate(omega,c)
-      return pd.DataFrame(
-        list(
-          zip(
-            omega,c
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['omega','c','k','k_without_noise']
-      )
+      data = [omega,c]
+      data.append(Noise(target,noise_level))
+      columns = ['omega','c','k']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('k_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -2287,7 +2231,7 @@ class Feynman29:
   equation_lambda = lambda args : (lambda x1,x2,theta1,theta2: np.sqrt(x1**2+x2**2-2*x1*x2*np.cos(theta1-theta2)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman29, Lecture I.29.16
 
@@ -2297,16 +2241,16 @@ class Feynman29:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['x1','x2','theta1','theta2','x','x_without_noise']
+          pandas DataFrame ['x1','x2','theta1','theta2','x']
       """
       x1 = np.random.uniform(1.0,5.0, size)
       x2 = np.random.uniform(1.0,5.0, size)
       theta1 = np.random.uniform(1.0,5.0, size)
       theta2 = np.random.uniform(1.0,5.0, size)
-      return Feynman29.calculate_df(x1,x2,theta1,theta2,noise_level)
+      return Feynman29.calculate_df(x1,x2,theta1,theta2,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(x1,x2,theta1,theta2, noise_level = 0):
+  def calculate_df(x1,x2,theta1,theta2, noise_level = 0, include_original_target = False):
       """
       Feynman29, Lecture I.29.16
 
@@ -2318,19 +2262,17 @@ class Feynman29:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['x1','x2','theta1','theta2','x','x_without_noise']
+          pandas DataFrame ['x1','x2','theta1','theta2','x']
       """
       target = Feynman29.calculate(x1,x2,theta1,theta2)
-      return pd.DataFrame(
-        list(
-          zip(
-            x1,x2,theta1,theta2
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['x1','x2','theta1','theta2','x','x_without_noise']
-      )
+      data = [x1,x2,theta1,theta2]
+      data.append(Noise(target,noise_level))
+      columns = ['x1','x2','theta1','theta2','x']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('x_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -2371,7 +2313,7 @@ class Feynman30:
   equation_lambda = lambda args : (lambda Int_0,theta,n: Int_0*np.sin(n*theta/2)**2/np.sin(theta/2)**2 )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman30, Lecture I.30.3
 
@@ -2381,15 +2323,15 @@ class Feynman30:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['Int_0','theta','n','Int','Int_without_noise']
+          pandas DataFrame ['Int_0','theta','n','Int']
       """
       Int_0 = np.random.uniform(1.0,5.0, size)
       theta = np.random.uniform(1.0,5.0, size)
       n = np.random.uniform(1.0,5.0, size)
-      return Feynman30.calculate_df(Int_0,theta,n,noise_level)
+      return Feynman30.calculate_df(Int_0,theta,n,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(Int_0,theta,n, noise_level = 0):
+  def calculate_df(Int_0,theta,n, noise_level = 0, include_original_target = False):
       """
       Feynman30, Lecture I.30.3
 
@@ -2400,19 +2342,17 @@ class Feynman30:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['Int_0','theta','n','Int','Int_without_noise']
+          pandas DataFrame ['Int_0','theta','n','Int']
       """
       target = Feynman30.calculate(Int_0,theta,n)
-      return pd.DataFrame(
-        list(
-          zip(
-            Int_0,theta,n
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['Int_0','theta','n','Int','Int_without_noise']
-      )
+      data = [Int_0,theta,n]
+      data.append(Noise(target,noise_level))
+      columns = ['Int_0','theta','n','Int']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('Int_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -2450,7 +2390,7 @@ class Feynman31:
   equation_lambda = lambda args : (lambda lambd,d,n: np.arcsin(lambd/(n*d)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman31, Lecture I.30.5
 
@@ -2460,15 +2400,15 @@ class Feynman31:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['lambd','d','n','theta','theta_without_noise']
+          pandas DataFrame ['lambd','d','n','theta']
       """
       lambd = np.random.uniform(1.0,2.0, size)
       d = np.random.uniform(2.0,5.0, size)
       n = np.random.uniform(1.0,5.0, size)
-      return Feynman31.calculate_df(lambd,d,n,noise_level)
+      return Feynman31.calculate_df(lambd,d,n,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(lambd,d,n, noise_level = 0):
+  def calculate_df(lambd,d,n, noise_level = 0, include_original_target = False):
       """
       Feynman31, Lecture I.30.5
 
@@ -2479,19 +2419,17 @@ class Feynman31:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['lambd','d','n','theta','theta_without_noise']
+          pandas DataFrame ['lambd','d','n','theta']
       """
       target = Feynman31.calculate(lambd,d,n)
-      return pd.DataFrame(
-        list(
-          zip(
-            lambd,d,n
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['lambd','d','n','theta','theta_without_noise']
-      )
+      data = [lambd,d,n]
+      data.append(Noise(target,noise_level))
+      columns = ['lambd','d','n','theta']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('theta_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -2529,7 +2467,7 @@ class Feynman32:
   equation_lambda = lambda args : (lambda q,a,epsilon,c: q**2*a**2/(6*np.pi*epsilon*c**3) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman32, Lecture I.32.5
 
@@ -2539,16 +2477,16 @@ class Feynman32:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','a','epsilon','c','Pwr','Pwr_without_noise']
+          pandas DataFrame ['q','a','epsilon','c','Pwr']
       """
       q = np.random.uniform(1.0,5.0, size)
       a = np.random.uniform(1.0,5.0, size)
       epsilon = np.random.uniform(1.0,5.0, size)
       c = np.random.uniform(1.0,5.0, size)
-      return Feynman32.calculate_df(q,a,epsilon,c,noise_level)
+      return Feynman32.calculate_df(q,a,epsilon,c,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(q,a,epsilon,c, noise_level = 0):
+  def calculate_df(q,a,epsilon,c, noise_level = 0, include_original_target = False):
       """
       Feynman32, Lecture I.32.5
 
@@ -2560,19 +2498,17 @@ class Feynman32:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','a','epsilon','c','Pwr','Pwr_without_noise']
+          pandas DataFrame ['q','a','epsilon','c','Pwr']
       """
       target = Feynman32.calculate(q,a,epsilon,c)
-      return pd.DataFrame(
-        list(
-          zip(
-            q,a,epsilon,c
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['q','a','epsilon','c','Pwr','Pwr_without_noise']
-      )
+      data = [q,a,epsilon,c]
+      data.append(Noise(target,noise_level))
+      columns = ['q','a','epsilon','c','Pwr']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('Pwr_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -2613,7 +2549,7 @@ class Feynman33:
   equation_lambda = lambda args : (lambda epsilon,c,Ef,r,omega,omega_0: (1/2*epsilon*c*Ef**2)*(8*np.pi*r**2/3)*(omega**4/(omega**2-omega_0**2)**2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman33, Lecture I.32.17
 
@@ -2623,7 +2559,7 @@ class Feynman33:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['epsilon','c','Ef','r','omega','omega_0','Pwr','Pwr_without_noise']
+          pandas DataFrame ['epsilon','c','Ef','r','omega','omega_0','Pwr']
       """
       epsilon = np.random.uniform(1.0,2.0, size)
       c = np.random.uniform(1.0,2.0, size)
@@ -2631,10 +2567,10 @@ class Feynman33:
       r = np.random.uniform(1.0,2.0, size)
       omega = np.random.uniform(1.0,2.0, size)
       omega_0 = np.random.uniform(3.0,5.0, size)
-      return Feynman33.calculate_df(epsilon,c,Ef,r,omega,omega_0,noise_level)
+      return Feynman33.calculate_df(epsilon,c,Ef,r,omega,omega_0,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(epsilon,c,Ef,r,omega,omega_0, noise_level = 0):
+  def calculate_df(epsilon,c,Ef,r,omega,omega_0, noise_level = 0, include_original_target = False):
       """
       Feynman33, Lecture I.32.17
 
@@ -2648,19 +2584,17 @@ class Feynman33:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['epsilon','c','Ef','r','omega','omega_0','Pwr','Pwr_without_noise']
+          pandas DataFrame ['epsilon','c','Ef','r','omega','omega_0','Pwr']
       """
       target = Feynman33.calculate(epsilon,c,Ef,r,omega,omega_0)
-      return pd.DataFrame(
-        list(
-          zip(
-            epsilon,c,Ef,r,omega,omega_0
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['epsilon','c','Ef','r','omega','omega_0','Pwr','Pwr_without_noise']
-      )
+      data = [epsilon,c,Ef,r,omega,omega_0]
+      data.append(Noise(target,noise_level))
+      columns = ['epsilon','c','Ef','r','omega','omega_0','Pwr']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('Pwr_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -2707,7 +2641,7 @@ class Feynman34:
   equation_lambda = lambda args : (lambda q,v,B,p: q*v*B/p )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman34, Lecture I.34.8
 
@@ -2717,16 +2651,16 @@ class Feynman34:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','v','B','p','omega','omega_without_noise']
+          pandas DataFrame ['q','v','B','p','omega']
       """
       q = np.random.uniform(1.0,5.0, size)
       v = np.random.uniform(1.0,5.0, size)
       B = np.random.uniform(1.0,5.0, size)
       p = np.random.uniform(1.0,5.0, size)
-      return Feynman34.calculate_df(q,v,B,p,noise_level)
+      return Feynman34.calculate_df(q,v,B,p,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(q,v,B,p, noise_level = 0):
+  def calculate_df(q,v,B,p, noise_level = 0, include_original_target = False):
       """
       Feynman34, Lecture I.34.8
 
@@ -2738,19 +2672,17 @@ class Feynman34:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','v','B','p','omega','omega_without_noise']
+          pandas DataFrame ['q','v','B','p','omega']
       """
       target = Feynman34.calculate(q,v,B,p)
-      return pd.DataFrame(
-        list(
-          zip(
-            q,v,B,p
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['q','v','B','p','omega','omega_without_noise']
-      )
+      data = [q,v,B,p]
+      data.append(Noise(target,noise_level))
+      columns = ['q','v','B','p','omega']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('omega_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -2791,7 +2723,7 @@ class Feynman35:
   equation_lambda = lambda args : (lambda c,v,omega_0: omega_0/(1-v/c) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman35, Lecture I.34.1
 
@@ -2801,15 +2733,15 @@ class Feynman35:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['c','v','omega_0','omega','omega_without_noise']
+          pandas DataFrame ['c','v','omega_0','omega']
       """
       c = np.random.uniform(3.0,10.0, size)
       v = np.random.uniform(1.0,2.0, size)
       omega_0 = np.random.uniform(1.0,5.0, size)
-      return Feynman35.calculate_df(c,v,omega_0,noise_level)
+      return Feynman35.calculate_df(c,v,omega_0,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(c,v,omega_0, noise_level = 0):
+  def calculate_df(c,v,omega_0, noise_level = 0, include_original_target = False):
       """
       Feynman35, Lecture I.34.1
 
@@ -2820,19 +2752,17 @@ class Feynman35:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['c','v','omega_0','omega','omega_without_noise']
+          pandas DataFrame ['c','v','omega_0','omega']
       """
       target = Feynman35.calculate(c,v,omega_0)
-      return pd.DataFrame(
-        list(
-          zip(
-            c,v,omega_0
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['c','v','omega_0','omega','omega_without_noise']
-      )
+      data = [c,v,omega_0]
+      data.append(Noise(target,noise_level))
+      columns = ['c','v','omega_0','omega']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('omega_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -2870,7 +2800,7 @@ class Feynman36:
   equation_lambda = lambda args : (lambda c,v,omega_0: (1+v/c)/np.sqrt(1-v**2/c**2)*omega_0 )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman36, Lecture I.34.14
 
@@ -2880,15 +2810,15 @@ class Feynman36:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['c','v','omega_0','omega','omega_without_noise']
+          pandas DataFrame ['c','v','omega_0','omega']
       """
       c = np.random.uniform(3.0,10.0, size)
       v = np.random.uniform(1.0,2.0, size)
       omega_0 = np.random.uniform(1.0,5.0, size)
-      return Feynman36.calculate_df(c,v,omega_0,noise_level)
+      return Feynman36.calculate_df(c,v,omega_0,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(c,v,omega_0, noise_level = 0):
+  def calculate_df(c,v,omega_0, noise_level = 0, include_original_target = False):
       """
       Feynman36, Lecture I.34.14
 
@@ -2899,19 +2829,17 @@ class Feynman36:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['c','v','omega_0','omega','omega_without_noise']
+          pandas DataFrame ['c','v','omega_0','omega']
       """
       target = Feynman36.calculate(c,v,omega_0)
-      return pd.DataFrame(
-        list(
-          zip(
-            c,v,omega_0
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['c','v','omega_0','omega','omega_without_noise']
-      )
+      data = [c,v,omega_0]
+      data.append(Noise(target,noise_level))
+      columns = ['c','v','omega_0','omega']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('omega_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -2949,7 +2877,7 @@ class Feynman37:
   equation_lambda = lambda args : (lambda omega,h: (h/(2*np.pi))*omega )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman37, Lecture I.34.27
 
@@ -2959,14 +2887,14 @@ class Feynman37:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['omega','h','E_n','E_n_without_noise']
+          pandas DataFrame ['omega','h','E_n']
       """
       omega = np.random.uniform(1.0,5.0, size)
       h = np.random.uniform(1.0,5.0, size)
-      return Feynman37.calculate_df(omega,h,noise_level)
+      return Feynman37.calculate_df(omega,h,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(omega,h, noise_level = 0):
+  def calculate_df(omega,h, noise_level = 0, include_original_target = False):
       """
       Feynman37, Lecture I.34.27
 
@@ -2976,19 +2904,17 @@ class Feynman37:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['omega','h','E_n','E_n_without_noise']
+          pandas DataFrame ['omega','h','E_n']
       """
       target = Feynman37.calculate(omega,h)
-      return pd.DataFrame(
-        list(
-          zip(
-            omega,h
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['omega','h','E_n','E_n_without_noise']
-      )
+      data = [omega,h]
+      data.append(Noise(target,noise_level))
+      columns = ['omega','h','E_n']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('E_n_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -3023,7 +2949,7 @@ class Feynman38:
   equation_lambda = lambda args : (lambda I1,I2,delta: I1+I2+2*np.sqrt(I1*I2)*np.cos(delta) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman38, Lecture I.37.4
 
@@ -3033,15 +2959,15 @@ class Feynman38:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['I1','I2','delta','Int','Int_without_noise']
+          pandas DataFrame ['I1','I2','delta','Int']
       """
       I1 = np.random.uniform(1.0,5.0, size)
       I2 = np.random.uniform(1.0,5.0, size)
       delta = np.random.uniform(1.0,5.0, size)
-      return Feynman38.calculate_df(I1,I2,delta,noise_level)
+      return Feynman38.calculate_df(I1,I2,delta,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(I1,I2,delta, noise_level = 0):
+  def calculate_df(I1,I2,delta, noise_level = 0, include_original_target = False):
       """
       Feynman38, Lecture I.37.4
 
@@ -3052,19 +2978,17 @@ class Feynman38:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['I1','I2','delta','Int','Int_without_noise']
+          pandas DataFrame ['I1','I2','delta','Int']
       """
       target = Feynman38.calculate(I1,I2,delta)
-      return pd.DataFrame(
-        list(
-          zip(
-            I1,I2,delta
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['I1','I2','delta','Int','Int_without_noise']
-      )
+      data = [I1,I2,delta]
+      data.append(Noise(target,noise_level))
+      columns = ['I1','I2','delta','Int']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('Int_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -3102,7 +3026,7 @@ class Feynman39:
   equation_lambda = lambda args : (lambda m,q,h,epsilon: 4*np.pi*epsilon*(h/(2*np.pi))**2/(m*q**2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman39, Lecture I.38.12
 
@@ -3112,16 +3036,16 @@ class Feynman39:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m','q','h','epsilon','r','r_without_noise']
+          pandas DataFrame ['m','q','h','epsilon','r']
       """
       m = np.random.uniform(1.0,5.0, size)
       q = np.random.uniform(1.0,5.0, size)
       h = np.random.uniform(1.0,5.0, size)
       epsilon = np.random.uniform(1.0,5.0, size)
-      return Feynman39.calculate_df(m,q,h,epsilon,noise_level)
+      return Feynman39.calculate_df(m,q,h,epsilon,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(m,q,h,epsilon, noise_level = 0):
+  def calculate_df(m,q,h,epsilon, noise_level = 0, include_original_target = False):
       """
       Feynman39, Lecture I.38.12
 
@@ -3133,19 +3057,17 @@ class Feynman39:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m','q','h','epsilon','r','r_without_noise']
+          pandas DataFrame ['m','q','h','epsilon','r']
       """
       target = Feynman39.calculate(m,q,h,epsilon)
-      return pd.DataFrame(
-        list(
-          zip(
-            m,q,h,epsilon
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['m','q','h','epsilon','r','r_without_noise']
-      )
+      data = [m,q,h,epsilon]
+      data.append(Noise(target,noise_level))
+      columns = ['m','q','h','epsilon','r']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('r_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -3186,7 +3108,7 @@ class Feynman40:
   equation_lambda = lambda args : (lambda pr,V: 3/2*pr*V )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman40, Lecture I.39.1
 
@@ -3196,14 +3118,14 @@ class Feynman40:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['pr','V','E_n','E_n_without_noise']
+          pandas DataFrame ['pr','V','E_n']
       """
       pr = np.random.uniform(1.0,5.0, size)
       V = np.random.uniform(1.0,5.0, size)
-      return Feynman40.calculate_df(pr,V,noise_level)
+      return Feynman40.calculate_df(pr,V,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(pr,V, noise_level = 0):
+  def calculate_df(pr,V, noise_level = 0, include_original_target = False):
       """
       Feynman40, Lecture I.39.1
 
@@ -3213,19 +3135,17 @@ class Feynman40:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['pr','V','E_n','E_n_without_noise']
+          pandas DataFrame ['pr','V','E_n']
       """
       target = Feynman40.calculate(pr,V)
-      return pd.DataFrame(
-        list(
-          zip(
-            pr,V
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['pr','V','E_n','E_n_without_noise']
-      )
+      data = [pr,V]
+      data.append(Noise(target,noise_level))
+      columns = ['pr','V','E_n']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('E_n_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -3260,7 +3180,7 @@ class Feynman41:
   equation_lambda = lambda args : (lambda gamma,pr,V: 1/(gamma-1)*pr*V )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman41, Lecture I.39.11
 
@@ -3270,15 +3190,15 @@ class Feynman41:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['gamma','pr','V','E_n','E_n_without_noise']
+          pandas DataFrame ['gamma','pr','V','E_n']
       """
       gamma = np.random.uniform(2.0,5.0, size)
       pr = np.random.uniform(1.0,5.0, size)
       V = np.random.uniform(1.0,5.0, size)
-      return Feynman41.calculate_df(gamma,pr,V,noise_level)
+      return Feynman41.calculate_df(gamma,pr,V,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(gamma,pr,V, noise_level = 0):
+  def calculate_df(gamma,pr,V, noise_level = 0, include_original_target = False):
       """
       Feynman41, Lecture I.39.11
 
@@ -3289,19 +3209,17 @@ class Feynman41:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['gamma','pr','V','E_n','E_n_without_noise']
+          pandas DataFrame ['gamma','pr','V','E_n']
       """
       target = Feynman41.calculate(gamma,pr,V)
-      return pd.DataFrame(
-        list(
-          zip(
-            gamma,pr,V
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['gamma','pr','V','E_n','E_n_without_noise']
-      )
+      data = [gamma,pr,V]
+      data.append(Noise(target,noise_level))
+      columns = ['gamma','pr','V','E_n']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('E_n_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -3339,7 +3257,7 @@ class Feynman42:
   equation_lambda = lambda args : (lambda n,T,V,kb: n*kb*T/V )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman42, Lecture I.39.22
 
@@ -3349,16 +3267,16 @@ class Feynman42:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['n','T','V','kb','pr','pr_without_noise']
+          pandas DataFrame ['n','T','V','kb','pr']
       """
       n = np.random.uniform(1.0,5.0, size)
       T = np.random.uniform(1.0,5.0, size)
       V = np.random.uniform(1.0,5.0, size)
       kb = np.random.uniform(1.0,5.0, size)
-      return Feynman42.calculate_df(n,T,V,kb,noise_level)
+      return Feynman42.calculate_df(n,T,V,kb,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(n,T,V,kb, noise_level = 0):
+  def calculate_df(n,T,V,kb, noise_level = 0, include_original_target = False):
       """
       Feynman42, Lecture I.39.22
 
@@ -3370,19 +3288,17 @@ class Feynman42:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['n','T','V','kb','pr','pr_without_noise']
+          pandas DataFrame ['n','T','V','kb','pr']
       """
       target = Feynman42.calculate(n,T,V,kb)
-      return pd.DataFrame(
-        list(
-          zip(
-            n,T,V,kb
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['n','T','V','kb','pr','pr_without_noise']
-      )
+      data = [n,T,V,kb]
+      data.append(Noise(target,noise_level))
+      columns = ['n','T','V','kb','pr']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('pr_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -3423,7 +3339,7 @@ class Feynman43:
   equation_lambda = lambda args : (lambda n_0,m,x,T,g,kb: n_0*np.exp(-m*g*x/(kb*T)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman43, Lecture I.40.1
 
@@ -3433,7 +3349,7 @@ class Feynman43:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['n_0','m','x','T','g','kb','n','n_without_noise']
+          pandas DataFrame ['n_0','m','x','T','g','kb','n']
       """
       n_0 = np.random.uniform(1.0,5.0, size)
       m = np.random.uniform(1.0,5.0, size)
@@ -3441,10 +3357,10 @@ class Feynman43:
       T = np.random.uniform(1.0,5.0, size)
       g = np.random.uniform(1.0,5.0, size)
       kb = np.random.uniform(1.0,5.0, size)
-      return Feynman43.calculate_df(n_0,m,x,T,g,kb,noise_level)
+      return Feynman43.calculate_df(n_0,m,x,T,g,kb,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(n_0,m,x,T,g,kb, noise_level = 0):
+  def calculate_df(n_0,m,x,T,g,kb, noise_level = 0, include_original_target = False):
       """
       Feynman43, Lecture I.40.1
 
@@ -3458,19 +3374,17 @@ class Feynman43:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['n_0','m','x','T','g','kb','n','n_without_noise']
+          pandas DataFrame ['n_0','m','x','T','g','kb','n']
       """
       target = Feynman43.calculate(n_0,m,x,T,g,kb)
-      return pd.DataFrame(
-        list(
-          zip(
-            n_0,m,x,T,g,kb
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['n_0','m','x','T','g','kb','n','n_without_noise']
-      )
+      data = [n_0,m,x,T,g,kb]
+      data.append(Noise(target,noise_level))
+      columns = ['n_0','m','x','T','g','kb','n']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('n_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -3517,7 +3431,7 @@ class Feynman44:
   equation_lambda = lambda args : (lambda omega,T,h,kb,c: h/(2*np.pi)*omega**3/(np.pi**2*c**2*(np.exp((h/(2*np.pi))*omega/(kb*T))-1)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman44, Lecture I.41.16
 
@@ -3527,17 +3441,17 @@ class Feynman44:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['omega','T','h','kb','c','L_rad','L_rad_without_noise']
+          pandas DataFrame ['omega','T','h','kb','c','L_rad']
       """
       omega = np.random.uniform(1.0,5.0, size)
       T = np.random.uniform(1.0,5.0, size)
       h = np.random.uniform(1.0,5.0, size)
       kb = np.random.uniform(1.0,5.0, size)
       c = np.random.uniform(1.0,5.0, size)
-      return Feynman44.calculate_df(omega,T,h,kb,c,noise_level)
+      return Feynman44.calculate_df(omega,T,h,kb,c,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(omega,T,h,kb,c, noise_level = 0):
+  def calculate_df(omega,T,h,kb,c, noise_level = 0, include_original_target = False):
       """
       Feynman44, Lecture I.41.16
 
@@ -3550,19 +3464,17 @@ class Feynman44:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['omega','T','h','kb','c','L_rad','L_rad_without_noise']
+          pandas DataFrame ['omega','T','h','kb','c','L_rad']
       """
       target = Feynman44.calculate(omega,T,h,kb,c)
-      return pd.DataFrame(
-        list(
-          zip(
-            omega,T,h,kb,c
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['omega','T','h','kb','c','L_rad','L_rad_without_noise']
-      )
+      data = [omega,T,h,kb,c]
+      data.append(Noise(target,noise_level))
+      columns = ['omega','T','h','kb','c','L_rad']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('L_rad_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -3606,7 +3518,7 @@ class Feynman45:
   equation_lambda = lambda args : (lambda mu_drift,q,Volt,d: mu_drift*q*Volt/d )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman45, Lecture I.43.16
 
@@ -3616,16 +3528,16 @@ class Feynman45:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['mu_drift','q','Volt','d','v','v_without_noise']
+          pandas DataFrame ['mu_drift','q','Volt','d','v']
       """
       mu_drift = np.random.uniform(1.0,5.0, size)
       q = np.random.uniform(1.0,5.0, size)
       Volt = np.random.uniform(1.0,5.0, size)
       d = np.random.uniform(1.0,5.0, size)
-      return Feynman45.calculate_df(mu_drift,q,Volt,d,noise_level)
+      return Feynman45.calculate_df(mu_drift,q,Volt,d,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(mu_drift,q,Volt,d, noise_level = 0):
+  def calculate_df(mu_drift,q,Volt,d, noise_level = 0, include_original_target = False):
       """
       Feynman45, Lecture I.43.16
 
@@ -3637,19 +3549,17 @@ class Feynman45:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['mu_drift','q','Volt','d','v','v_without_noise']
+          pandas DataFrame ['mu_drift','q','Volt','d','v']
       """
       target = Feynman45.calculate(mu_drift,q,Volt,d)
-      return pd.DataFrame(
-        list(
-          zip(
-            mu_drift,q,Volt,d
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['mu_drift','q','Volt','d','v','v_without_noise']
-      )
+      data = [mu_drift,q,Volt,d]
+      data.append(Noise(target,noise_level))
+      columns = ['mu_drift','q','Volt','d','v']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('v_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -3690,7 +3600,7 @@ class Feynman46:
   equation_lambda = lambda args : (lambda mob,T,kb: mob*kb*T )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman46, Lecture I.43.31
 
@@ -3700,15 +3610,15 @@ class Feynman46:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['mob','T','kb','D','D_without_noise']
+          pandas DataFrame ['mob','T','kb','D']
       """
       mob = np.random.uniform(1.0,5.0, size)
       T = np.random.uniform(1.0,5.0, size)
       kb = np.random.uniform(1.0,5.0, size)
-      return Feynman46.calculate_df(mob,T,kb,noise_level)
+      return Feynman46.calculate_df(mob,T,kb,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(mob,T,kb, noise_level = 0):
+  def calculate_df(mob,T,kb, noise_level = 0, include_original_target = False):
       """
       Feynman46, Lecture I.43.31
 
@@ -3719,19 +3629,17 @@ class Feynman46:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['mob','T','kb','D','D_without_noise']
+          pandas DataFrame ['mob','T','kb','D']
       """
       target = Feynman46.calculate(mob,T,kb)
-      return pd.DataFrame(
-        list(
-          zip(
-            mob,T,kb
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['mob','T','kb','D','D_without_noise']
-      )
+      data = [mob,T,kb]
+      data.append(Noise(target,noise_level))
+      columns = ['mob','T','kb','D']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('D_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -3769,7 +3677,7 @@ class Feynman47:
   equation_lambda = lambda args : (lambda gamma,kb,A,v: 1/(gamma-1)*kb*v/A )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman47, Lecture I.43.43
 
@@ -3779,16 +3687,16 @@ class Feynman47:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['gamma','kb','A','v','kappa','kappa_without_noise']
+          pandas DataFrame ['gamma','kb','A','v','kappa']
       """
       gamma = np.random.uniform(2.0,5.0, size)
       kb = np.random.uniform(1.0,5.0, size)
       A = np.random.uniform(1.0,5.0, size)
       v = np.random.uniform(1.0,5.0, size)
-      return Feynman47.calculate_df(gamma,kb,A,v,noise_level)
+      return Feynman47.calculate_df(gamma,kb,A,v,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(gamma,kb,A,v, noise_level = 0):
+  def calculate_df(gamma,kb,A,v, noise_level = 0, include_original_target = False):
       """
       Feynman47, Lecture I.43.43
 
@@ -3800,19 +3708,17 @@ class Feynman47:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['gamma','kb','A','v','kappa','kappa_without_noise']
+          pandas DataFrame ['gamma','kb','A','v','kappa']
       """
       target = Feynman47.calculate(gamma,kb,A,v)
-      return pd.DataFrame(
-        list(
-          zip(
-            gamma,kb,A,v
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['gamma','kb','A','v','kappa','kappa_without_noise']
-      )
+      data = [gamma,kb,A,v]
+      data.append(Noise(target,noise_level))
+      columns = ['gamma','kb','A','v','kappa']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('kappa_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -3853,7 +3759,7 @@ class Feynman48:
   equation_lambda = lambda args : (lambda n,kb,T,V1,V2: n*kb*T*np.ln(V2/V1) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman48, Lecture I.44.4
 
@@ -3863,17 +3769,17 @@ class Feynman48:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['n','kb','T','V1','V2','E_n','E_n_without_noise']
+          pandas DataFrame ['n','kb','T','V1','V2','E_n']
       """
       n = np.random.uniform(1.0,5.0, size)
       kb = np.random.uniform(1.0,5.0, size)
       T = np.random.uniform(1.0,5.0, size)
       V1 = np.random.uniform(1.0,5.0, size)
       V2 = np.random.uniform(1.0,5.0, size)
-      return Feynman48.calculate_df(n,kb,T,V1,V2,noise_level)
+      return Feynman48.calculate_df(n,kb,T,V1,V2,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(n,kb,T,V1,V2, noise_level = 0):
+  def calculate_df(n,kb,T,V1,V2, noise_level = 0, include_original_target = False):
       """
       Feynman48, Lecture I.44.4
 
@@ -3886,19 +3792,17 @@ class Feynman48:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['n','kb','T','V1','V2','E_n','E_n_without_noise']
+          pandas DataFrame ['n','kb','T','V1','V2','E_n']
       """
       target = Feynman48.calculate(n,kb,T,V1,V2)
-      return pd.DataFrame(
-        list(
-          zip(
-            n,kb,T,V1,V2
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['n','kb','T','V1','V2','E_n','E_n_without_noise']
-      )
+      data = [n,kb,T,V1,V2]
+      data.append(Noise(target,noise_level))
+      columns = ['n','kb','T','V1','V2','E_n']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('E_n_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -3942,7 +3846,7 @@ class Feynman49:
   equation_lambda = lambda args : (lambda gamma,pr,rho: np.sqrt(gamma*pr/rho) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman49, Lecture I.47.23
 
@@ -3952,15 +3856,15 @@ class Feynman49:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['gamma','pr','rho','c','c_without_noise']
+          pandas DataFrame ['gamma','pr','rho','c']
       """
       gamma = np.random.uniform(1.0,5.0, size)
       pr = np.random.uniform(1.0,5.0, size)
       rho = np.random.uniform(1.0,5.0, size)
-      return Feynman49.calculate_df(gamma,pr,rho,noise_level)
+      return Feynman49.calculate_df(gamma,pr,rho,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(gamma,pr,rho, noise_level = 0):
+  def calculate_df(gamma,pr,rho, noise_level = 0, include_original_target = False):
       """
       Feynman49, Lecture I.47.23
 
@@ -3971,19 +3875,17 @@ class Feynman49:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['gamma','pr','rho','c','c_without_noise']
+          pandas DataFrame ['gamma','pr','rho','c']
       """
       target = Feynman49.calculate(gamma,pr,rho)
-      return pd.DataFrame(
-        list(
-          zip(
-            gamma,pr,rho
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['gamma','pr','rho','c','c_without_noise']
-      )
+      data = [gamma,pr,rho]
+      data.append(Noise(target,noise_level))
+      columns = ['gamma','pr','rho','c']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('c_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -4021,7 +3923,7 @@ class Feynman50:
   equation_lambda = lambda args : (lambda m,v,c: m*c**2/np.sqrt(1-v**2/c**2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman50, Lecture I.48.2
 
@@ -4031,15 +3933,15 @@ class Feynman50:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m','v','c','E_n','E_n_without_noise']
+          pandas DataFrame ['m','v','c','E_n']
       """
       m = np.random.uniform(1.0,5.0, size)
       v = np.random.uniform(1.0,2.0, size)
       c = np.random.uniform(3.0,10.0, size)
-      return Feynman50.calculate_df(m,v,c,noise_level)
+      return Feynman50.calculate_df(m,v,c,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(m,v,c, noise_level = 0):
+  def calculate_df(m,v,c, noise_level = 0, include_original_target = False):
       """
       Feynman50, Lecture I.48.2
 
@@ -4050,19 +3952,17 @@ class Feynman50:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m','v','c','E_n','E_n_without_noise']
+          pandas DataFrame ['m','v','c','E_n']
       """
       target = Feynman50.calculate(m,v,c)
-      return pd.DataFrame(
-        list(
-          zip(
-            m,v,c
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['m','v','c','E_n','E_n_without_noise']
-      )
+      data = [m,v,c]
+      data.append(Noise(target,noise_level))
+      columns = ['m','v','c','E_n']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('E_n_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -4100,7 +4000,7 @@ class Feynman51:
   equation_lambda = lambda args : (lambda x1,omega,t,alpha: x1*(np.cos(omega*t)+alpha*np.cos(omega*t)**2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman51, Lecture I.50.26
 
@@ -4110,16 +4010,16 @@ class Feynman51:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['x1','omega','t','alpha','x','x_without_noise']
+          pandas DataFrame ['x1','omega','t','alpha','x']
       """
       x1 = np.random.uniform(1.0,3.0, size)
       omega = np.random.uniform(1.0,3.0, size)
       t = np.random.uniform(1.0,3.0, size)
       alpha = np.random.uniform(1.0,3.0, size)
-      return Feynman51.calculate_df(x1,omega,t,alpha,noise_level)
+      return Feynman51.calculate_df(x1,omega,t,alpha,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(x1,omega,t,alpha, noise_level = 0):
+  def calculate_df(x1,omega,t,alpha, noise_level = 0, include_original_target = False):
       """
       Feynman51, Lecture I.50.26
 
@@ -4131,19 +4031,17 @@ class Feynman51:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['x1','omega','t','alpha','x','x_without_noise']
+          pandas DataFrame ['x1','omega','t','alpha','x']
       """
       target = Feynman51.calculate(x1,omega,t,alpha)
-      return pd.DataFrame(
-        list(
-          zip(
-            x1,omega,t,alpha
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['x1','omega','t','alpha','x','x_without_noise']
-      )
+      data = [x1,omega,t,alpha]
+      data.append(Noise(target,noise_level))
+      columns = ['x1','omega','t','alpha','x']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('x_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -4184,7 +4082,7 @@ class Feynman52:
   equation_lambda = lambda args : (lambda kappa,T1,T2,A,d: kappa*(T2-T1)*A/d )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman52, Lecture II.2.42
 
@@ -4194,17 +4092,17 @@ class Feynman52:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['kappa','T1','T2','A','d','Pwr','Pwr_without_noise']
+          pandas DataFrame ['kappa','T1','T2','A','d','Pwr']
       """
       kappa = np.random.uniform(1.0,5.0, size)
       T1 = np.random.uniform(1.0,5.0, size)
       T2 = np.random.uniform(1.0,5.0, size)
       A = np.random.uniform(1.0,5.0, size)
       d = np.random.uniform(1.0,5.0, size)
-      return Feynman52.calculate_df(kappa,T1,T2,A,d,noise_level)
+      return Feynman52.calculate_df(kappa,T1,T2,A,d,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(kappa,T1,T2,A,d, noise_level = 0):
+  def calculate_df(kappa,T1,T2,A,d, noise_level = 0, include_original_target = False):
       """
       Feynman52, Lecture II.2.42
 
@@ -4217,19 +4115,17 @@ class Feynman52:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['kappa','T1','T2','A','d','Pwr','Pwr_without_noise']
+          pandas DataFrame ['kappa','T1','T2','A','d','Pwr']
       """
       target = Feynman52.calculate(kappa,T1,T2,A,d)
-      return pd.DataFrame(
-        list(
-          zip(
-            kappa,T1,T2,A,d
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['kappa','T1','T2','A','d','Pwr','Pwr_without_noise']
-      )
+      data = [kappa,T1,T2,A,d]
+      data.append(Noise(target,noise_level))
+      columns = ['kappa','T1','T2','A','d','Pwr']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('Pwr_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -4273,7 +4169,7 @@ class Feynman53:
   equation_lambda = lambda args : (lambda Pwr,r: Pwr/(4*np.pi*r**2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman53, Lecture II.3.24
 
@@ -4283,14 +4179,14 @@ class Feynman53:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['Pwr','r','flux','flux_without_noise']
+          pandas DataFrame ['Pwr','r','flux']
       """
       Pwr = np.random.uniform(1.0,5.0, size)
       r = np.random.uniform(1.0,5.0, size)
-      return Feynman53.calculate_df(Pwr,r,noise_level)
+      return Feynman53.calculate_df(Pwr,r,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(Pwr,r, noise_level = 0):
+  def calculate_df(Pwr,r, noise_level = 0, include_original_target = False):
       """
       Feynman53, Lecture II.3.24
 
@@ -4300,19 +4196,17 @@ class Feynman53:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['Pwr','r','flux','flux_without_noise']
+          pandas DataFrame ['Pwr','r','flux']
       """
       target = Feynman53.calculate(Pwr,r)
-      return pd.DataFrame(
-        list(
-          zip(
-            Pwr,r
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['Pwr','r','flux','flux_without_noise']
-      )
+      data = [Pwr,r]
+      data.append(Noise(target,noise_level))
+      columns = ['Pwr','r','flux']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('flux_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -4347,7 +4241,7 @@ class Feynman54:
   equation_lambda = lambda args : (lambda q,epsilon,r: q/(4*np.pi*epsilon*r) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman54, Lecture II.4.23
 
@@ -4357,15 +4251,15 @@ class Feynman54:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','epsilon','r','Volt','Volt_without_noise']
+          pandas DataFrame ['q','epsilon','r','Volt']
       """
       q = np.random.uniform(1.0,5.0, size)
       epsilon = np.random.uniform(1.0,5.0, size)
       r = np.random.uniform(1.0,5.0, size)
-      return Feynman54.calculate_df(q,epsilon,r,noise_level)
+      return Feynman54.calculate_df(q,epsilon,r,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(q,epsilon,r, noise_level = 0):
+  def calculate_df(q,epsilon,r, noise_level = 0, include_original_target = False):
       """
       Feynman54, Lecture II.4.23
 
@@ -4376,19 +4270,17 @@ class Feynman54:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','epsilon','r','Volt','Volt_without_noise']
+          pandas DataFrame ['q','epsilon','r','Volt']
       """
       target = Feynman54.calculate(q,epsilon,r)
-      return pd.DataFrame(
-        list(
-          zip(
-            q,epsilon,r
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['q','epsilon','r','Volt','Volt_without_noise']
-      )
+      data = [q,epsilon,r]
+      data.append(Noise(target,noise_level))
+      columns = ['q','epsilon','r','Volt']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('Volt_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -4426,7 +4318,7 @@ class Feynman55:
   equation_lambda = lambda args : (lambda epsilon,p_d,theta,r: 1/(4*np.pi*epsilon)*p_d*np.cos(theta)/r**2 )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman55, Lecture II.6.11
 
@@ -4436,16 +4328,16 @@ class Feynman55:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['epsilon','p_d','theta','r','Volt','Volt_without_noise']
+          pandas DataFrame ['epsilon','p_d','theta','r','Volt']
       """
       epsilon = np.random.uniform(1.0,3.0, size)
       p_d = np.random.uniform(1.0,3.0, size)
       theta = np.random.uniform(1.0,3.0, size)
       r = np.random.uniform(1.0,3.0, size)
-      return Feynman55.calculate_df(epsilon,p_d,theta,r,noise_level)
+      return Feynman55.calculate_df(epsilon,p_d,theta,r,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(epsilon,p_d,theta,r, noise_level = 0):
+  def calculate_df(epsilon,p_d,theta,r, noise_level = 0, include_original_target = False):
       """
       Feynman55, Lecture II.6.11
 
@@ -4457,19 +4349,17 @@ class Feynman55:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['epsilon','p_d','theta','r','Volt','Volt_without_noise']
+          pandas DataFrame ['epsilon','p_d','theta','r','Volt']
       """
       target = Feynman55.calculate(epsilon,p_d,theta,r)
-      return pd.DataFrame(
-        list(
-          zip(
-            epsilon,p_d,theta,r
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['epsilon','p_d','theta','r','Volt','Volt_without_noise']
-      )
+      data = [epsilon,p_d,theta,r]
+      data.append(Noise(target,noise_level))
+      columns = ['epsilon','p_d','theta','r','Volt']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('Volt_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -4510,7 +4400,7 @@ class Feynman56:
   equation_lambda = lambda args : (lambda epsilon,p_d,r,x,y,z: p_d/(4*np.pi*epsilon)*3*z/r**5*np.sqrt(x**2+y**2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman56, Lecture II.6.15a
 
@@ -4520,7 +4410,7 @@ class Feynman56:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['epsilon','p_d','r','x','y','z','Ef','Ef_without_noise']
+          pandas DataFrame ['epsilon','p_d','r','x','y','z','Ef']
       """
       epsilon = np.random.uniform(1.0,3.0, size)
       p_d = np.random.uniform(1.0,3.0, size)
@@ -4528,10 +4418,10 @@ class Feynman56:
       x = np.random.uniform(1.0,3.0, size)
       y = np.random.uniform(1.0,3.0, size)
       z = np.random.uniform(1.0,3.0, size)
-      return Feynman56.calculate_df(epsilon,p_d,r,x,y,z,noise_level)
+      return Feynman56.calculate_df(epsilon,p_d,r,x,y,z,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(epsilon,p_d,r,x,y,z, noise_level = 0):
+  def calculate_df(epsilon,p_d,r,x,y,z, noise_level = 0, include_original_target = False):
       """
       Feynman56, Lecture II.6.15a
 
@@ -4545,19 +4435,17 @@ class Feynman56:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['epsilon','p_d','r','x','y','z','Ef','Ef_without_noise']
+          pandas DataFrame ['epsilon','p_d','r','x','y','z','Ef']
       """
       target = Feynman56.calculate(epsilon,p_d,r,x,y,z)
-      return pd.DataFrame(
-        list(
-          zip(
-            epsilon,p_d,r,x,y,z
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['epsilon','p_d','r','x','y','z','Ef','Ef_without_noise']
-      )
+      data = [epsilon,p_d,r,x,y,z]
+      data.append(Noise(target,noise_level))
+      columns = ['epsilon','p_d','r','x','y','z','Ef']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('Ef_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -4604,7 +4492,7 @@ class Feynman57:
   equation_lambda = lambda args : (lambda epsilon,p_d,theta,r: p_d/(4*np.pi*epsilon)*3*np.cos(theta)*np.sin(theta)/r**3 )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman57, Lecture II.6.15b
 
@@ -4614,16 +4502,16 @@ class Feynman57:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['epsilon','p_d','theta','r','Ef','Ef_without_noise']
+          pandas DataFrame ['epsilon','p_d','theta','r','Ef']
       """
       epsilon = np.random.uniform(1.0,3.0, size)
       p_d = np.random.uniform(1.0,3.0, size)
       theta = np.random.uniform(1.0,3.0, size)
       r = np.random.uniform(1.0,3.0, size)
-      return Feynman57.calculate_df(epsilon,p_d,theta,r,noise_level)
+      return Feynman57.calculate_df(epsilon,p_d,theta,r,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(epsilon,p_d,theta,r, noise_level = 0):
+  def calculate_df(epsilon,p_d,theta,r, noise_level = 0, include_original_target = False):
       """
       Feynman57, Lecture II.6.15b
 
@@ -4635,19 +4523,17 @@ class Feynman57:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['epsilon','p_d','theta','r','Ef','Ef_without_noise']
+          pandas DataFrame ['epsilon','p_d','theta','r','Ef']
       """
       target = Feynman57.calculate(epsilon,p_d,theta,r)
-      return pd.DataFrame(
-        list(
-          zip(
-            epsilon,p_d,theta,r
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['epsilon','p_d','theta','r','Ef','Ef_without_noise']
-      )
+      data = [epsilon,p_d,theta,r]
+      data.append(Noise(target,noise_level))
+      columns = ['epsilon','p_d','theta','r','Ef']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('Ef_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -4688,7 +4574,7 @@ class Feynman58:
   equation_lambda = lambda args : (lambda q,epsilon,d: 3/5*q**2/(4*np.pi*epsilon*d) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman58, Lecture II.8.7
 
@@ -4698,15 +4584,15 @@ class Feynman58:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','epsilon','d','E_n','E_n_without_noise']
+          pandas DataFrame ['q','epsilon','d','E_n']
       """
       q = np.random.uniform(1.0,5.0, size)
       epsilon = np.random.uniform(1.0,5.0, size)
       d = np.random.uniform(1.0,5.0, size)
-      return Feynman58.calculate_df(q,epsilon,d,noise_level)
+      return Feynman58.calculate_df(q,epsilon,d,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(q,epsilon,d, noise_level = 0):
+  def calculate_df(q,epsilon,d, noise_level = 0, include_original_target = False):
       """
       Feynman58, Lecture II.8.7
 
@@ -4717,19 +4603,17 @@ class Feynman58:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','epsilon','d','E_n','E_n_without_noise']
+          pandas DataFrame ['q','epsilon','d','E_n']
       """
       target = Feynman58.calculate(q,epsilon,d)
-      return pd.DataFrame(
-        list(
-          zip(
-            q,epsilon,d
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['q','epsilon','d','E_n','E_n_without_noise']
-      )
+      data = [q,epsilon,d]
+      data.append(Noise(target,noise_level))
+      columns = ['q','epsilon','d','E_n']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('E_n_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -4767,7 +4651,7 @@ class Feynman59:
   equation_lambda = lambda args : (lambda epsilon,Ef: epsilon*Ef**2/2 )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman59, Lecture II.8.31
 
@@ -4777,14 +4661,14 @@ class Feynman59:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['epsilon','Ef','E_den','E_den_without_noise']
+          pandas DataFrame ['epsilon','Ef','E_den']
       """
       epsilon = np.random.uniform(1.0,5.0, size)
       Ef = np.random.uniform(1.0,5.0, size)
-      return Feynman59.calculate_df(epsilon,Ef,noise_level)
+      return Feynman59.calculate_df(epsilon,Ef,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(epsilon,Ef, noise_level = 0):
+  def calculate_df(epsilon,Ef, noise_level = 0, include_original_target = False):
       """
       Feynman59, Lecture II.8.31
 
@@ -4794,19 +4678,17 @@ class Feynman59:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['epsilon','Ef','E_den','E_den_without_noise']
+          pandas DataFrame ['epsilon','Ef','E_den']
       """
       target = Feynman59.calculate(epsilon,Ef)
-      return pd.DataFrame(
-        list(
-          zip(
-            epsilon,Ef
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['epsilon','Ef','E_den','E_den_without_noise']
-      )
+      data = [epsilon,Ef]
+      data.append(Noise(target,noise_level))
+      columns = ['epsilon','Ef','E_den']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('E_den_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -4841,7 +4723,7 @@ class Feynman60:
   equation_lambda = lambda args : (lambda sigma_den,epsilon,chi: sigma_den/epsilon*1/(1+chi) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman60, Lecture II.10.9
 
@@ -4851,15 +4733,15 @@ class Feynman60:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['sigma_den','epsilon','chi','Ef','Ef_without_noise']
+          pandas DataFrame ['sigma_den','epsilon','chi','Ef']
       """
       sigma_den = np.random.uniform(1.0,5.0, size)
       epsilon = np.random.uniform(1.0,5.0, size)
       chi = np.random.uniform(1.0,5.0, size)
-      return Feynman60.calculate_df(sigma_den,epsilon,chi,noise_level)
+      return Feynman60.calculate_df(sigma_den,epsilon,chi,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(sigma_den,epsilon,chi, noise_level = 0):
+  def calculate_df(sigma_den,epsilon,chi, noise_level = 0, include_original_target = False):
       """
       Feynman60, Lecture II.10.9
 
@@ -4870,19 +4752,17 @@ class Feynman60:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['sigma_den','epsilon','chi','Ef','Ef_without_noise']
+          pandas DataFrame ['sigma_den','epsilon','chi','Ef']
       """
       target = Feynman60.calculate(sigma_den,epsilon,chi)
-      return pd.DataFrame(
-        list(
-          zip(
-            sigma_den,epsilon,chi
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['sigma_den','epsilon','chi','Ef','Ef_without_noise']
-      )
+      data = [sigma_den,epsilon,chi]
+      data.append(Noise(target,noise_level))
+      columns = ['sigma_den','epsilon','chi','Ef']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('Ef_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -4920,7 +4800,7 @@ class Feynman61:
   equation_lambda = lambda args : (lambda q,Ef,m,omega_0,omega: q*Ef/(m*(omega_0**2-omega**2)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman61, Lecture II.11.3
 
@@ -4930,17 +4810,17 @@ class Feynman61:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','Ef','m','omega_0','omega','x','x_without_noise']
+          pandas DataFrame ['q','Ef','m','omega_0','omega','x']
       """
       q = np.random.uniform(1.0,3.0, size)
       Ef = np.random.uniform(1.0,3.0, size)
       m = np.random.uniform(1.0,3.0, size)
       omega_0 = np.random.uniform(3.0,5.0, size)
       omega = np.random.uniform(1.0,2.0, size)
-      return Feynman61.calculate_df(q,Ef,m,omega_0,omega,noise_level)
+      return Feynman61.calculate_df(q,Ef,m,omega_0,omega,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(q,Ef,m,omega_0,omega, noise_level = 0):
+  def calculate_df(q,Ef,m,omega_0,omega, noise_level = 0, include_original_target = False):
       """
       Feynman61, Lecture II.11.3
 
@@ -4953,19 +4833,17 @@ class Feynman61:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','Ef','m','omega_0','omega','x','x_without_noise']
+          pandas DataFrame ['q','Ef','m','omega_0','omega','x']
       """
       target = Feynman61.calculate(q,Ef,m,omega_0,omega)
-      return pd.DataFrame(
-        list(
-          zip(
-            q,Ef,m,omega_0,omega
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['q','Ef','m','omega_0','omega','x','x_without_noise']
-      )
+      data = [q,Ef,m,omega_0,omega]
+      data.append(Noise(target,noise_level))
+      columns = ['q','Ef','m','omega_0','omega','x']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('x_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -5009,7 +4887,7 @@ class Feynman62:
   equation_lambda = lambda args : (lambda n_0,kb,T,theta,p_d,Ef: n_0*(1+p_d*Ef*np.cos(theta)/(kb*T)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman62, Lecture II.11.17
 
@@ -5019,7 +4897,7 @@ class Feynman62:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['n_0','kb','T','theta','p_d','Ef','n','n_without_noise']
+          pandas DataFrame ['n_0','kb','T','theta','p_d','Ef','n']
       """
       n_0 = np.random.uniform(1.0,3.0, size)
       kb = np.random.uniform(1.0,3.0, size)
@@ -5027,10 +4905,10 @@ class Feynman62:
       theta = np.random.uniform(1.0,3.0, size)
       p_d = np.random.uniform(1.0,3.0, size)
       Ef = np.random.uniform(1.0,3.0, size)
-      return Feynman62.calculate_df(n_0,kb,T,theta,p_d,Ef,noise_level)
+      return Feynman62.calculate_df(n_0,kb,T,theta,p_d,Ef,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(n_0,kb,T,theta,p_d,Ef, noise_level = 0):
+  def calculate_df(n_0,kb,T,theta,p_d,Ef, noise_level = 0, include_original_target = False):
       """
       Feynman62, Lecture II.11.17
 
@@ -5044,19 +4922,17 @@ class Feynman62:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['n_0','kb','T','theta','p_d','Ef','n','n_without_noise']
+          pandas DataFrame ['n_0','kb','T','theta','p_d','Ef','n']
       """
       target = Feynman62.calculate(n_0,kb,T,theta,p_d,Ef)
-      return pd.DataFrame(
-        list(
-          zip(
-            n_0,kb,T,theta,p_d,Ef
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['n_0','kb','T','theta','p_d','Ef','n','n_without_noise']
-      )
+      data = [n_0,kb,T,theta,p_d,Ef]
+      data.append(Noise(target,noise_level))
+      columns = ['n_0','kb','T','theta','p_d','Ef','n']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('n_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -5103,7 +4979,7 @@ class Feynman63:
   equation_lambda = lambda args : (lambda n_rho,p_d,Ef,kb,T: n_rho*p_d**2*Ef/(3*kb*T) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman63, Lecture II.11.20
 
@@ -5113,17 +4989,17 @@ class Feynman63:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['n_rho','p_d','Ef','kb','T','Pol','Pol_without_noise']
+          pandas DataFrame ['n_rho','p_d','Ef','kb','T','Pol']
       """
       n_rho = np.random.uniform(1.0,5.0, size)
       p_d = np.random.uniform(1.0,5.0, size)
       Ef = np.random.uniform(1.0,5.0, size)
       kb = np.random.uniform(1.0,5.0, size)
       T = np.random.uniform(1.0,5.0, size)
-      return Feynman63.calculate_df(n_rho,p_d,Ef,kb,T,noise_level)
+      return Feynman63.calculate_df(n_rho,p_d,Ef,kb,T,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(n_rho,p_d,Ef,kb,T, noise_level = 0):
+  def calculate_df(n_rho,p_d,Ef,kb,T, noise_level = 0, include_original_target = False):
       """
       Feynman63, Lecture II.11.20
 
@@ -5136,19 +5012,17 @@ class Feynman63:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['n_rho','p_d','Ef','kb','T','Pol','Pol_without_noise']
+          pandas DataFrame ['n_rho','p_d','Ef','kb','T','Pol']
       """
       target = Feynman63.calculate(n_rho,p_d,Ef,kb,T)
-      return pd.DataFrame(
-        list(
-          zip(
-            n_rho,p_d,Ef,kb,T
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['n_rho','p_d','Ef','kb','T','Pol','Pol_without_noise']
-      )
+      data = [n_rho,p_d,Ef,kb,T]
+      data.append(Noise(target,noise_level))
+      columns = ['n_rho','p_d','Ef','kb','T','Pol']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('Pol_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -5192,7 +5066,7 @@ class Feynman64:
   equation_lambda = lambda args : (lambda n,alpha,epsilon,Ef: n*alpha/(1-(n*alpha/3))*epsilon*Ef )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman64, Lecture II.11.27
 
@@ -5202,16 +5076,16 @@ class Feynman64:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['n','alpha','epsilon','Ef','Pol','Pol_without_noise']
+          pandas DataFrame ['n','alpha','epsilon','Ef','Pol']
       """
       n = np.random.uniform(0.0,1.0, size)
       alpha = np.random.uniform(0.0,1.0, size)
       epsilon = np.random.uniform(1.0,2.0, size)
       Ef = np.random.uniform(1.0,2.0, size)
-      return Feynman64.calculate_df(n,alpha,epsilon,Ef,noise_level)
+      return Feynman64.calculate_df(n,alpha,epsilon,Ef,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(n,alpha,epsilon,Ef, noise_level = 0):
+  def calculate_df(n,alpha,epsilon,Ef, noise_level = 0, include_original_target = False):
       """
       Feynman64, Lecture II.11.27
 
@@ -5223,19 +5097,17 @@ class Feynman64:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['n','alpha','epsilon','Ef','Pol','Pol_without_noise']
+          pandas DataFrame ['n','alpha','epsilon','Ef','Pol']
       """
       target = Feynman64.calculate(n,alpha,epsilon,Ef)
-      return pd.DataFrame(
-        list(
-          zip(
-            n,alpha,epsilon,Ef
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['n','alpha','epsilon','Ef','Pol','Pol_without_noise']
-      )
+      data = [n,alpha,epsilon,Ef]
+      data.append(Noise(target,noise_level))
+      columns = ['n','alpha','epsilon','Ef','Pol']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('Pol_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -5276,7 +5148,7 @@ class Feynman65:
   equation_lambda = lambda args : (lambda n,alpha: 1+n*alpha/(1-(n*alpha/3)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman65, Lecture II.11.28
 
@@ -5286,14 +5158,14 @@ class Feynman65:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['n','alpha','theta','theta_without_noise']
+          pandas DataFrame ['n','alpha','theta']
       """
       n = np.random.uniform(0.0,1.0, size)
       alpha = np.random.uniform(0.0,1.0, size)
-      return Feynman65.calculate_df(n,alpha,noise_level)
+      return Feynman65.calculate_df(n,alpha,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(n,alpha, noise_level = 0):
+  def calculate_df(n,alpha, noise_level = 0, include_original_target = False):
       """
       Feynman65, Lecture II.11.28
 
@@ -5303,19 +5175,17 @@ class Feynman65:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['n','alpha','theta','theta_without_noise']
+          pandas DataFrame ['n','alpha','theta']
       """
       target = Feynman65.calculate(n,alpha)
-      return pd.DataFrame(
-        list(
-          zip(
-            n,alpha
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['n','alpha','theta','theta_without_noise']
-      )
+      data = [n,alpha]
+      data.append(Noise(target,noise_level))
+      columns = ['n','alpha','theta']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('theta_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -5350,7 +5220,7 @@ class Feynman66:
   equation_lambda = lambda args : (lambda epsilon,c,I,r: 1/(4*np.pi*epsilon*c**2)*2*I/r )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman66, Lecture II.13.17
 
@@ -5360,16 +5230,16 @@ class Feynman66:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['epsilon','c','I','r','B','B_without_noise']
+          pandas DataFrame ['epsilon','c','I','r','B']
       """
       epsilon = np.random.uniform(1.0,5.0, size)
       c = np.random.uniform(1.0,5.0, size)
       I = np.random.uniform(1.0,5.0, size)
       r = np.random.uniform(1.0,5.0, size)
-      return Feynman66.calculate_df(epsilon,c,I,r,noise_level)
+      return Feynman66.calculate_df(epsilon,c,I,r,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(epsilon,c,I,r, noise_level = 0):
+  def calculate_df(epsilon,c,I,r, noise_level = 0, include_original_target = False):
       """
       Feynman66, Lecture II.13.17
 
@@ -5381,19 +5251,17 @@ class Feynman66:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['epsilon','c','I','r','B','B_without_noise']
+          pandas DataFrame ['epsilon','c','I','r','B']
       """
       target = Feynman66.calculate(epsilon,c,I,r)
-      return pd.DataFrame(
-        list(
-          zip(
-            epsilon,c,I,r
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['epsilon','c','I','r','B','B_without_noise']
-      )
+      data = [epsilon,c,I,r]
+      data.append(Noise(target,noise_level))
+      columns = ['epsilon','c','I','r','B']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('B_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -5434,7 +5302,7 @@ class Feynman67:
   equation_lambda = lambda args : (lambda rho_c_0,v,c: rho_c_0/np.sqrt(1-v**2/c**2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman67, Lecture II.13.23
 
@@ -5444,15 +5312,15 @@ class Feynman67:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['rho_c_0','v','c','rho_c','rho_c_without_noise']
+          pandas DataFrame ['rho_c_0','v','c','rho_c']
       """
       rho_c_0 = np.random.uniform(1.0,5.0, size)
       v = np.random.uniform(1.0,2.0, size)
       c = np.random.uniform(3.0,10.0, size)
-      return Feynman67.calculate_df(rho_c_0,v,c,noise_level)
+      return Feynman67.calculate_df(rho_c_0,v,c,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(rho_c_0,v,c, noise_level = 0):
+  def calculate_df(rho_c_0,v,c, noise_level = 0, include_original_target = False):
       """
       Feynman67, Lecture II.13.23
 
@@ -5463,19 +5331,17 @@ class Feynman67:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['rho_c_0','v','c','rho_c','rho_c_without_noise']
+          pandas DataFrame ['rho_c_0','v','c','rho_c']
       """
       target = Feynman67.calculate(rho_c_0,v,c)
-      return pd.DataFrame(
-        list(
-          zip(
-            rho_c_0,v,c
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['rho_c_0','v','c','rho_c','rho_c_without_noise']
-      )
+      data = [rho_c_0,v,c]
+      data.append(Noise(target,noise_level))
+      columns = ['rho_c_0','v','c','rho_c']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('rho_c_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -5513,7 +5379,7 @@ class Feynman68:
   equation_lambda = lambda args : (lambda rho_c_0,v,c: rho_c_0*v/np.sqrt(1-v**2/c**2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman68, Lecture II.13.34
 
@@ -5523,15 +5389,15 @@ class Feynman68:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['rho_c_0','v','c','j','j_without_noise']
+          pandas DataFrame ['rho_c_0','v','c','j']
       """
       rho_c_0 = np.random.uniform(1.0,5.0, size)
       v = np.random.uniform(1.0,2.0, size)
       c = np.random.uniform(3.0,10.0, size)
-      return Feynman68.calculate_df(rho_c_0,v,c,noise_level)
+      return Feynman68.calculate_df(rho_c_0,v,c,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(rho_c_0,v,c, noise_level = 0):
+  def calculate_df(rho_c_0,v,c, noise_level = 0, include_original_target = False):
       """
       Feynman68, Lecture II.13.34
 
@@ -5542,19 +5408,17 @@ class Feynman68:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['rho_c_0','v','c','j','j_without_noise']
+          pandas DataFrame ['rho_c_0','v','c','j']
       """
       target = Feynman68.calculate(rho_c_0,v,c)
-      return pd.DataFrame(
-        list(
-          zip(
-            rho_c_0,v,c
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['rho_c_0','v','c','j','j_without_noise']
-      )
+      data = [rho_c_0,v,c]
+      data.append(Noise(target,noise_level))
+      columns = ['rho_c_0','v','c','j']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('j_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -5592,7 +5456,7 @@ class Feynman69:
   equation_lambda = lambda args : (lambda mom,B,theta: -mom*B*np.cos(theta) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman69, Lecture II.15.4
 
@@ -5602,15 +5466,15 @@ class Feynman69:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['mom','B','theta','E_n','E_n_without_noise']
+          pandas DataFrame ['mom','B','theta','E_n']
       """
       mom = np.random.uniform(1.0,5.0, size)
       B = np.random.uniform(1.0,5.0, size)
       theta = np.random.uniform(1.0,5.0, size)
-      return Feynman69.calculate_df(mom,B,theta,noise_level)
+      return Feynman69.calculate_df(mom,B,theta,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(mom,B,theta, noise_level = 0):
+  def calculate_df(mom,B,theta, noise_level = 0, include_original_target = False):
       """
       Feynman69, Lecture II.15.4
 
@@ -5621,19 +5485,17 @@ class Feynman69:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['mom','B','theta','E_n','E_n_without_noise']
+          pandas DataFrame ['mom','B','theta','E_n']
       """
       target = Feynman69.calculate(mom,B,theta)
-      return pd.DataFrame(
-        list(
-          zip(
-            mom,B,theta
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['mom','B','theta','E_n','E_n_without_noise']
-      )
+      data = [mom,B,theta]
+      data.append(Noise(target,noise_level))
+      columns = ['mom','B','theta','E_n']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('E_n_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -5671,7 +5533,7 @@ class Feynman70:
   equation_lambda = lambda args : (lambda p_d,Ef,theta: -p_d*Ef*np.cos(theta) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman70, Lecture II.15.5
 
@@ -5681,15 +5543,15 @@ class Feynman70:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['p_d','Ef','theta','E_n','E_n_without_noise']
+          pandas DataFrame ['p_d','Ef','theta','E_n']
       """
       p_d = np.random.uniform(1.0,5.0, size)
       Ef = np.random.uniform(1.0,5.0, size)
       theta = np.random.uniform(1.0,5.0, size)
-      return Feynman70.calculate_df(p_d,Ef,theta,noise_level)
+      return Feynman70.calculate_df(p_d,Ef,theta,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(p_d,Ef,theta, noise_level = 0):
+  def calculate_df(p_d,Ef,theta, noise_level = 0, include_original_target = False):
       """
       Feynman70, Lecture II.15.5
 
@@ -5700,19 +5562,17 @@ class Feynman70:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['p_d','Ef','theta','E_n','E_n_without_noise']
+          pandas DataFrame ['p_d','Ef','theta','E_n']
       """
       target = Feynman70.calculate(p_d,Ef,theta)
-      return pd.DataFrame(
-        list(
-          zip(
-            p_d,Ef,theta
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['p_d','Ef','theta','E_n','E_n_without_noise']
-      )
+      data = [p_d,Ef,theta]
+      data.append(Noise(target,noise_level))
+      columns = ['p_d','Ef','theta','E_n']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('E_n_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -5750,7 +5610,7 @@ class Feynman71:
   equation_lambda = lambda args : (lambda q,epsilon,r,v,c: q/(4*np.pi*epsilon*r*(1-v/c)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman71, Lecture II.21.32
 
@@ -5760,17 +5620,17 @@ class Feynman71:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','epsilon','r','v','c','Volt','Volt_without_noise']
+          pandas DataFrame ['q','epsilon','r','v','c','Volt']
       """
       q = np.random.uniform(1.0,5.0, size)
       epsilon = np.random.uniform(1.0,5.0, size)
       r = np.random.uniform(1.0,5.0, size)
       v = np.random.uniform(1.0,2.0, size)
       c = np.random.uniform(3.0,10.0, size)
-      return Feynman71.calculate_df(q,epsilon,r,v,c,noise_level)
+      return Feynman71.calculate_df(q,epsilon,r,v,c,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(q,epsilon,r,v,c, noise_level = 0):
+  def calculate_df(q,epsilon,r,v,c, noise_level = 0, include_original_target = False):
       """
       Feynman71, Lecture II.21.32
 
@@ -5783,19 +5643,17 @@ class Feynman71:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','epsilon','r','v','c','Volt','Volt_without_noise']
+          pandas DataFrame ['q','epsilon','r','v','c','Volt']
       """
       target = Feynman71.calculate(q,epsilon,r,v,c)
-      return pd.DataFrame(
-        list(
-          zip(
-            q,epsilon,r,v,c
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['q','epsilon','r','v','c','Volt','Volt_without_noise']
-      )
+      data = [q,epsilon,r,v,c]
+      data.append(Noise(target,noise_level))
+      columns = ['q','epsilon','r','v','c','Volt']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('Volt_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -5839,7 +5697,7 @@ class Feynman72:
   equation_lambda = lambda args : (lambda omega,c,d: np.sqrt(omega**2/c**2-np.pi**2/d**2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman72, Lecture II.24.17
 
@@ -5849,15 +5707,15 @@ class Feynman72:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['omega','c','d','k','k_without_noise']
+          pandas DataFrame ['omega','c','d','k']
       """
       omega = np.random.uniform(4.0,6.0, size)
       c = np.random.uniform(1.0,2.0, size)
       d = np.random.uniform(2.0,4.0, size)
-      return Feynman72.calculate_df(omega,c,d,noise_level)
+      return Feynman72.calculate_df(omega,c,d,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(omega,c,d, noise_level = 0):
+  def calculate_df(omega,c,d, noise_level = 0, include_original_target = False):
       """
       Feynman72, Lecture II.24.17
 
@@ -5868,19 +5726,17 @@ class Feynman72:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['omega','c','d','k','k_without_noise']
+          pandas DataFrame ['omega','c','d','k']
       """
       target = Feynman72.calculate(omega,c,d)
-      return pd.DataFrame(
-        list(
-          zip(
-            omega,c,d
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['omega','c','d','k','k_without_noise']
-      )
+      data = [omega,c,d]
+      data.append(Noise(target,noise_level))
+      columns = ['omega','c','d','k']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('k_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -5918,7 +5774,7 @@ class Feynman73:
   equation_lambda = lambda args : (lambda epsilon,c,Ef: epsilon*c*Ef**2 )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman73, Lecture II.27.16
 
@@ -5928,15 +5784,15 @@ class Feynman73:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['epsilon','c','Ef','flux','flux_without_noise']
+          pandas DataFrame ['epsilon','c','Ef','flux']
       """
       epsilon = np.random.uniform(1.0,5.0, size)
       c = np.random.uniform(1.0,5.0, size)
       Ef = np.random.uniform(1.0,5.0, size)
-      return Feynman73.calculate_df(epsilon,c,Ef,noise_level)
+      return Feynman73.calculate_df(epsilon,c,Ef,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(epsilon,c,Ef, noise_level = 0):
+  def calculate_df(epsilon,c,Ef, noise_level = 0, include_original_target = False):
       """
       Feynman73, Lecture II.27.16
 
@@ -5947,19 +5803,17 @@ class Feynman73:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['epsilon','c','Ef','flux','flux_without_noise']
+          pandas DataFrame ['epsilon','c','Ef','flux']
       """
       target = Feynman73.calculate(epsilon,c,Ef)
-      return pd.DataFrame(
-        list(
-          zip(
-            epsilon,c,Ef
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['epsilon','c','Ef','flux','flux_without_noise']
-      )
+      data = [epsilon,c,Ef]
+      data.append(Noise(target,noise_level))
+      columns = ['epsilon','c','Ef','flux']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('flux_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -5997,7 +5851,7 @@ class Feynman74:
   equation_lambda = lambda args : (lambda epsilon,Ef: epsilon*Ef**2 )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman74, Lecture II.27.18
 
@@ -6007,14 +5861,14 @@ class Feynman74:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['epsilon','Ef','E_den','E_den_without_noise']
+          pandas DataFrame ['epsilon','Ef','E_den']
       """
       epsilon = np.random.uniform(1.0,5.0, size)
       Ef = np.random.uniform(1.0,5.0, size)
-      return Feynman74.calculate_df(epsilon,Ef,noise_level)
+      return Feynman74.calculate_df(epsilon,Ef,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(epsilon,Ef, noise_level = 0):
+  def calculate_df(epsilon,Ef, noise_level = 0, include_original_target = False):
       """
       Feynman74, Lecture II.27.18
 
@@ -6024,19 +5878,17 @@ class Feynman74:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['epsilon','Ef','E_den','E_den_without_noise']
+          pandas DataFrame ['epsilon','Ef','E_den']
       """
       target = Feynman74.calculate(epsilon,Ef)
-      return pd.DataFrame(
-        list(
-          zip(
-            epsilon,Ef
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['epsilon','Ef','E_den','E_den_without_noise']
-      )
+      data = [epsilon,Ef]
+      data.append(Noise(target,noise_level))
+      columns = ['epsilon','Ef','E_den']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('E_den_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -6071,7 +5923,7 @@ class Feynman75:
   equation_lambda = lambda args : (lambda q,v,r: q*v/(2*np.pi*r) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman75, Lecture II.34.2a
 
@@ -6081,15 +5933,15 @@ class Feynman75:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','v','r','I','I_without_noise']
+          pandas DataFrame ['q','v','r','I']
       """
       q = np.random.uniform(1.0,5.0, size)
       v = np.random.uniform(1.0,5.0, size)
       r = np.random.uniform(1.0,5.0, size)
-      return Feynman75.calculate_df(q,v,r,noise_level)
+      return Feynman75.calculate_df(q,v,r,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(q,v,r, noise_level = 0):
+  def calculate_df(q,v,r, noise_level = 0, include_original_target = False):
       """
       Feynman75, Lecture II.34.2a
 
@@ -6100,19 +5952,17 @@ class Feynman75:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','v','r','I','I_without_noise']
+          pandas DataFrame ['q','v','r','I']
       """
       target = Feynman75.calculate(q,v,r)
-      return pd.DataFrame(
-        list(
-          zip(
-            q,v,r
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['q','v','r','I','I_without_noise']
-      )
+      data = [q,v,r]
+      data.append(Noise(target,noise_level))
+      columns = ['q','v','r','I']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('I_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -6150,7 +6000,7 @@ class Feynman76:
   equation_lambda = lambda args : (lambda q,v,r: q*v*r/2 )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman76, Lecture II.34.2
 
@@ -6160,15 +6010,15 @@ class Feynman76:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','v','r','mom','mom_without_noise']
+          pandas DataFrame ['q','v','r','mom']
       """
       q = np.random.uniform(1.0,5.0, size)
       v = np.random.uniform(1.0,5.0, size)
       r = np.random.uniform(1.0,5.0, size)
-      return Feynman76.calculate_df(q,v,r,noise_level)
+      return Feynman76.calculate_df(q,v,r,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(q,v,r, noise_level = 0):
+  def calculate_df(q,v,r, noise_level = 0, include_original_target = False):
       """
       Feynman76, Lecture II.34.2
 
@@ -6179,19 +6029,17 @@ class Feynman76:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','v','r','mom','mom_without_noise']
+          pandas DataFrame ['q','v','r','mom']
       """
       target = Feynman76.calculate(q,v,r)
-      return pd.DataFrame(
-        list(
-          zip(
-            q,v,r
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['q','v','r','mom','mom_without_noise']
-      )
+      data = [q,v,r]
+      data.append(Noise(target,noise_level))
+      columns = ['q','v','r','mom']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('mom_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -6229,7 +6077,7 @@ class Feynman77:
   equation_lambda = lambda args : (lambda g_,q,B,m: g_*q*B/(2*m) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman77, Lecture II.34.11
 
@@ -6239,16 +6087,16 @@ class Feynman77:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['g_','q','B','m','omega','omega_without_noise']
+          pandas DataFrame ['g_','q','B','m','omega']
       """
       g_ = np.random.uniform(1.0,5.0, size)
       q = np.random.uniform(1.0,5.0, size)
       B = np.random.uniform(1.0,5.0, size)
       m = np.random.uniform(1.0,5.0, size)
-      return Feynman77.calculate_df(g_,q,B,m,noise_level)
+      return Feynman77.calculate_df(g_,q,B,m,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(g_,q,B,m, noise_level = 0):
+  def calculate_df(g_,q,B,m, noise_level = 0, include_original_target = False):
       """
       Feynman77, Lecture II.34.11
 
@@ -6260,19 +6108,17 @@ class Feynman77:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['g_','q','B','m','omega','omega_without_noise']
+          pandas DataFrame ['g_','q','B','m','omega']
       """
       target = Feynman77.calculate(g_,q,B,m)
-      return pd.DataFrame(
-        list(
-          zip(
-            g_,q,B,m
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['g_','q','B','m','omega','omega_without_noise']
-      )
+      data = [g_,q,B,m]
+      data.append(Noise(target,noise_level))
+      columns = ['g_','q','B','m','omega']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('omega_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -6313,7 +6159,7 @@ class Feynman78:
   equation_lambda = lambda args : (lambda q,h,m: q*h/(4*np.pi*m) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman78, Lecture II.34.29a
 
@@ -6323,15 +6169,15 @@ class Feynman78:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','h','m','mom','mom_without_noise']
+          pandas DataFrame ['q','h','m','mom']
       """
       q = np.random.uniform(1.0,5.0, size)
       h = np.random.uniform(1.0,5.0, size)
       m = np.random.uniform(1.0,5.0, size)
-      return Feynman78.calculate_df(q,h,m,noise_level)
+      return Feynman78.calculate_df(q,h,m,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(q,h,m, noise_level = 0):
+  def calculate_df(q,h,m, noise_level = 0, include_original_target = False):
       """
       Feynman78, Lecture II.34.29a
 
@@ -6342,19 +6188,17 @@ class Feynman78:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','h','m','mom','mom_without_noise']
+          pandas DataFrame ['q','h','m','mom']
       """
       target = Feynman78.calculate(q,h,m)
-      return pd.DataFrame(
-        list(
-          zip(
-            q,h,m
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['q','h','m','mom','mom_without_noise']
-      )
+      data = [q,h,m]
+      data.append(Noise(target,noise_level))
+      columns = ['q','h','m','mom']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('mom_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -6392,7 +6236,7 @@ class Feynman79:
   equation_lambda = lambda args : (lambda g_,h,Jz,mom,B: g_*mom*B*Jz/(h/(2*np.pi)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman79, Lecture II.34.29b
 
@@ -6402,17 +6246,17 @@ class Feynman79:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['g_','h','Jz','mom','B','E_n','E_n_without_noise']
+          pandas DataFrame ['g_','h','Jz','mom','B','E_n']
       """
       g_ = np.random.uniform(1.0,5.0, size)
       h = np.random.uniform(1.0,5.0, size)
       Jz = np.random.uniform(1.0,5.0, size)
       mom = np.random.uniform(1.0,5.0, size)
       B = np.random.uniform(1.0,5.0, size)
-      return Feynman79.calculate_df(g_,h,Jz,mom,B,noise_level)
+      return Feynman79.calculate_df(g_,h,Jz,mom,B,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(g_,h,Jz,mom,B, noise_level = 0):
+  def calculate_df(g_,h,Jz,mom,B, noise_level = 0, include_original_target = False):
       """
       Feynman79, Lecture II.34.29b
 
@@ -6425,19 +6269,17 @@ class Feynman79:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['g_','h','Jz','mom','B','E_n','E_n_without_noise']
+          pandas DataFrame ['g_','h','Jz','mom','B','E_n']
       """
       target = Feynman79.calculate(g_,h,Jz,mom,B)
-      return pd.DataFrame(
-        list(
-          zip(
-            g_,h,Jz,mom,B
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['g_','h','Jz','mom','B','E_n','E_n_without_noise']
-      )
+      data = [g_,h,Jz,mom,B]
+      data.append(Noise(target,noise_level))
+      columns = ['g_','h','Jz','mom','B','E_n']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('E_n_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -6481,7 +6323,7 @@ class Feynman80:
   equation_lambda = lambda args : (lambda n_0,kb,T,mom,B: n_0/(np.exp(mom*B/(kb*T))+np.exp(-mom*B/(kb*T))) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman80, Lecture II.35.18
 
@@ -6491,17 +6333,17 @@ class Feynman80:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['n_0','kb','T','mom','B','n','n_without_noise']
+          pandas DataFrame ['n_0','kb','T','mom','B','n']
       """
       n_0 = np.random.uniform(1.0,3.0, size)
       kb = np.random.uniform(1.0,3.0, size)
       T = np.random.uniform(1.0,3.0, size)
       mom = np.random.uniform(1.0,3.0, size)
       B = np.random.uniform(1.0,3.0, size)
-      return Feynman80.calculate_df(n_0,kb,T,mom,B,noise_level)
+      return Feynman80.calculate_df(n_0,kb,T,mom,B,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(n_0,kb,T,mom,B, noise_level = 0):
+  def calculate_df(n_0,kb,T,mom,B, noise_level = 0, include_original_target = False):
       """
       Feynman80, Lecture II.35.18
 
@@ -6514,19 +6356,17 @@ class Feynman80:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['n_0','kb','T','mom','B','n','n_without_noise']
+          pandas DataFrame ['n_0','kb','T','mom','B','n']
       """
       target = Feynman80.calculate(n_0,kb,T,mom,B)
-      return pd.DataFrame(
-        list(
-          zip(
-            n_0,kb,T,mom,B
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['n_0','kb','T','mom','B','n','n_without_noise']
-      )
+      data = [n_0,kb,T,mom,B]
+      data.append(Noise(target,noise_level))
+      columns = ['n_0','kb','T','mom','B','n']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('n_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -6570,7 +6410,7 @@ class Feynman81:
   equation_lambda = lambda args : (lambda n_rho,mom,B,kb,T: n_rho*mom*np.tanh(mom*B/(kb*T)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman81, Lecture II.35.21
 
@@ -6580,17 +6420,17 @@ class Feynman81:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['n_rho','mom','B','kb','T','M','M_without_noise']
+          pandas DataFrame ['n_rho','mom','B','kb','T','M']
       """
       n_rho = np.random.uniform(1.0,5.0, size)
       mom = np.random.uniform(1.0,5.0, size)
       B = np.random.uniform(1.0,5.0, size)
       kb = np.random.uniform(1.0,5.0, size)
       T = np.random.uniform(1.0,5.0, size)
-      return Feynman81.calculate_df(n_rho,mom,B,kb,T,noise_level)
+      return Feynman81.calculate_df(n_rho,mom,B,kb,T,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(n_rho,mom,B,kb,T, noise_level = 0):
+  def calculate_df(n_rho,mom,B,kb,T, noise_level = 0, include_original_target = False):
       """
       Feynman81, Lecture II.35.21
 
@@ -6603,19 +6443,17 @@ class Feynman81:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['n_rho','mom','B','kb','T','M','M_without_noise']
+          pandas DataFrame ['n_rho','mom','B','kb','T','M']
       """
       target = Feynman81.calculate(n_rho,mom,B,kb,T)
-      return pd.DataFrame(
-        list(
-          zip(
-            n_rho,mom,B,kb,T
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['n_rho','mom','B','kb','T','M','M_without_noise']
-      )
+      data = [n_rho,mom,B,kb,T]
+      data.append(Noise(target,noise_level))
+      columns = ['n_rho','mom','B','kb','T','M']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('M_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -6659,7 +6497,7 @@ class Feynman82:
   equation_lambda = lambda args : (lambda mom,H,kb,T,alpha,epsilon,c,M: mom*H/(kb*T)+(mom*alpha)/(epsilon*c**2*kb*T)*M )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman82, Lecture II.36.38
 
@@ -6669,7 +6507,7 @@ class Feynman82:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['mom','H','kb','T','alpha','epsilon','c','M','f','f_without_noise']
+          pandas DataFrame ['mom','H','kb','T','alpha','epsilon','c','M','f']
       """
       mom = np.random.uniform(1.0,3.0, size)
       H = np.random.uniform(1.0,3.0, size)
@@ -6679,10 +6517,10 @@ class Feynman82:
       epsilon = np.random.uniform(1.0,3.0, size)
       c = np.random.uniform(1.0,3.0, size)
       M = np.random.uniform(1.0,3.0, size)
-      return Feynman82.calculate_df(mom,H,kb,T,alpha,epsilon,c,M,noise_level)
+      return Feynman82.calculate_df(mom,H,kb,T,alpha,epsilon,c,M,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(mom,H,kb,T,alpha,epsilon,c,M, noise_level = 0):
+  def calculate_df(mom,H,kb,T,alpha,epsilon,c,M, noise_level = 0, include_original_target = False):
       """
       Feynman82, Lecture II.36.38
 
@@ -6698,19 +6536,17 @@ class Feynman82:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['mom','H','kb','T','alpha','epsilon','c','M','f','f_without_noise']
+          pandas DataFrame ['mom','H','kb','T','alpha','epsilon','c','M','f']
       """
       target = Feynman82.calculate(mom,H,kb,T,alpha,epsilon,c,M)
-      return pd.DataFrame(
-        list(
-          zip(
-            mom,H,kb,T,alpha,epsilon,c,M
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['mom','H','kb','T','alpha','epsilon','c','M','f','f_without_noise']
-      )
+      data = [mom,H,kb,T,alpha,epsilon,c,M]
+      data.append(Noise(target,noise_level))
+      columns = ['mom','H','kb','T','alpha','epsilon','c','M','f']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('f_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -6763,7 +6599,7 @@ class Feynman83:
   equation_lambda = lambda args : (lambda mom,B,chi: mom*(1+chi)*B )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman83, Lecture II.37.1
 
@@ -6773,15 +6609,15 @@ class Feynman83:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['mom','B','chi','E_n','E_n_without_noise']
+          pandas DataFrame ['mom','B','chi','E_n']
       """
       mom = np.random.uniform(1.0,5.0, size)
       B = np.random.uniform(1.0,5.0, size)
       chi = np.random.uniform(1.0,5.0, size)
-      return Feynman83.calculate_df(mom,B,chi,noise_level)
+      return Feynman83.calculate_df(mom,B,chi,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(mom,B,chi, noise_level = 0):
+  def calculate_df(mom,B,chi, noise_level = 0, include_original_target = False):
       """
       Feynman83, Lecture II.37.1
 
@@ -6792,19 +6628,17 @@ class Feynman83:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['mom','B','chi','E_n','E_n_without_noise']
+          pandas DataFrame ['mom','B','chi','E_n']
       """
       target = Feynman83.calculate(mom,B,chi)
-      return pd.DataFrame(
-        list(
-          zip(
-            mom,B,chi
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['mom','B','chi','E_n','E_n_without_noise']
-      )
+      data = [mom,B,chi]
+      data.append(Noise(target,noise_level))
+      columns = ['mom','B','chi','E_n']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('E_n_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -6842,7 +6676,7 @@ class Feynman84:
   equation_lambda = lambda args : (lambda Y,A,d,x: Y*A*x/d )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman84, Lecture II.38.3
 
@@ -6852,16 +6686,16 @@ class Feynman84:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['Y','A','d','x','F','F_without_noise']
+          pandas DataFrame ['Y','A','d','x','F']
       """
       Y = np.random.uniform(1.0,5.0, size)
       A = np.random.uniform(1.0,5.0, size)
       d = np.random.uniform(1.0,5.0, size)
       x = np.random.uniform(1.0,5.0, size)
-      return Feynman84.calculate_df(Y,A,d,x,noise_level)
+      return Feynman84.calculate_df(Y,A,d,x,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(Y,A,d,x, noise_level = 0):
+  def calculate_df(Y,A,d,x, noise_level = 0, include_original_target = False):
       """
       Feynman84, Lecture II.38.3
 
@@ -6873,19 +6707,17 @@ class Feynman84:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['Y','A','d','x','F','F_without_noise']
+          pandas DataFrame ['Y','A','d','x','F']
       """
       target = Feynman84.calculate(Y,A,d,x)
-      return pd.DataFrame(
-        list(
-          zip(
-            Y,A,d,x
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['Y','A','d','x','F','F_without_noise']
-      )
+      data = [Y,A,d,x]
+      data.append(Noise(target,noise_level))
+      columns = ['Y','A','d','x','F']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('F_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -6926,7 +6758,7 @@ class Feynman85:
   equation_lambda = lambda args : (lambda Y,sigma: Y/(2*(1+sigma)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman85, Lecture II.38.14
 
@@ -6936,14 +6768,14 @@ class Feynman85:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['Y','sigma','mu_S','mu_S_without_noise']
+          pandas DataFrame ['Y','sigma','mu_S']
       """
       Y = np.random.uniform(1.0,5.0, size)
       sigma = np.random.uniform(1.0,5.0, size)
-      return Feynman85.calculate_df(Y,sigma,noise_level)
+      return Feynman85.calculate_df(Y,sigma,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(Y,sigma, noise_level = 0):
+  def calculate_df(Y,sigma, noise_level = 0, include_original_target = False):
       """
       Feynman85, Lecture II.38.14
 
@@ -6953,19 +6785,17 @@ class Feynman85:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['Y','sigma','mu_S','mu_S_without_noise']
+          pandas DataFrame ['Y','sigma','mu_S']
       """
       target = Feynman85.calculate(Y,sigma)
-      return pd.DataFrame(
-        list(
-          zip(
-            Y,sigma
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['Y','sigma','mu_S','mu_S_without_noise']
-      )
+      data = [Y,sigma]
+      data.append(Noise(target,noise_level))
+      columns = ['Y','sigma','mu_S']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('mu_S_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -7000,7 +6830,7 @@ class Feynman86:
   equation_lambda = lambda args : (lambda h,omega,kb,T: 1/(np.exp((h/(2*np.pi))*omega/(kb*T))-1) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman86, Lecture III.4.32
 
@@ -7010,16 +6840,16 @@ class Feynman86:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['h','omega','kb','T','n','n_without_noise']
+          pandas DataFrame ['h','omega','kb','T','n']
       """
       h = np.random.uniform(1.0,5.0, size)
       omega = np.random.uniform(1.0,5.0, size)
       kb = np.random.uniform(1.0,5.0, size)
       T = np.random.uniform(1.0,5.0, size)
-      return Feynman86.calculate_df(h,omega,kb,T,noise_level)
+      return Feynman86.calculate_df(h,omega,kb,T,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(h,omega,kb,T, noise_level = 0):
+  def calculate_df(h,omega,kb,T, noise_level = 0, include_original_target = False):
       """
       Feynman86, Lecture III.4.32
 
@@ -7031,19 +6861,17 @@ class Feynman86:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['h','omega','kb','T','n','n_without_noise']
+          pandas DataFrame ['h','omega','kb','T','n']
       """
       target = Feynman86.calculate(h,omega,kb,T)
-      return pd.DataFrame(
-        list(
-          zip(
-            h,omega,kb,T
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['h','omega','kb','T','n','n_without_noise']
-      )
+      data = [h,omega,kb,T]
+      data.append(Noise(target,noise_level))
+      columns = ['h','omega','kb','T','n']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('n_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -7084,7 +6912,7 @@ class Feynman87:
   equation_lambda = lambda args : (lambda h,omega,kb,T: (h/(2*np.pi))*omega/(np.exp((h/(2*np.pi))*omega/(kb*T))-1) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman87, Lecture III.4.33
 
@@ -7094,16 +6922,16 @@ class Feynman87:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['h','omega','kb','T','E_n','E_n_without_noise']
+          pandas DataFrame ['h','omega','kb','T','E_n']
       """
       h = np.random.uniform(1.0,5.0, size)
       omega = np.random.uniform(1.0,5.0, size)
       kb = np.random.uniform(1.0,5.0, size)
       T = np.random.uniform(1.0,5.0, size)
-      return Feynman87.calculate_df(h,omega,kb,T,noise_level)
+      return Feynman87.calculate_df(h,omega,kb,T,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(h,omega,kb,T, noise_level = 0):
+  def calculate_df(h,omega,kb,T, noise_level = 0, include_original_target = False):
       """
       Feynman87, Lecture III.4.33
 
@@ -7115,19 +6943,17 @@ class Feynman87:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['h','omega','kb','T','E_n','E_n_without_noise']
+          pandas DataFrame ['h','omega','kb','T','E_n']
       """
       target = Feynman87.calculate(h,omega,kb,T)
-      return pd.DataFrame(
-        list(
-          zip(
-            h,omega,kb,T
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['h','omega','kb','T','E_n','E_n_without_noise']
-      )
+      data = [h,omega,kb,T]
+      data.append(Noise(target,noise_level))
+      columns = ['h','omega','kb','T','E_n']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('E_n_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -7168,7 +6994,7 @@ class Feynman88:
   equation_lambda = lambda args : (lambda mom,B,h: 2*mom*B/(h/(2*np.pi)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman88, Lecture III.7.38
 
@@ -7178,15 +7004,15 @@ class Feynman88:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['mom','B','h','omega','omega_without_noise']
+          pandas DataFrame ['mom','B','h','omega']
       """
       mom = np.random.uniform(1.0,5.0, size)
       B = np.random.uniform(1.0,5.0, size)
       h = np.random.uniform(1.0,5.0, size)
-      return Feynman88.calculate_df(mom,B,h,noise_level)
+      return Feynman88.calculate_df(mom,B,h,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(mom,B,h, noise_level = 0):
+  def calculate_df(mom,B,h, noise_level = 0, include_original_target = False):
       """
       Feynman88, Lecture III.7.38
 
@@ -7197,19 +7023,17 @@ class Feynman88:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['mom','B','h','omega','omega_without_noise']
+          pandas DataFrame ['mom','B','h','omega']
       """
       target = Feynman88.calculate(mom,B,h)
-      return pd.DataFrame(
-        list(
-          zip(
-            mom,B,h
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['mom','B','h','omega','omega_without_noise']
-      )
+      data = [mom,B,h]
+      data.append(Noise(target,noise_level))
+      columns = ['mom','B','h','omega']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('omega_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -7247,7 +7071,7 @@ class Feynman89:
   equation_lambda = lambda args : (lambda E_n,t,h: np.sin(E_n*t/(h/(2*np.pi)))**2 )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman89, Lecture III.8.54
 
@@ -7257,15 +7081,15 @@ class Feynman89:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['E_n','t','h','prob','prob_without_noise']
+          pandas DataFrame ['E_n','t','h','prob']
       """
       E_n = np.random.uniform(1.0,2.0, size)
       t = np.random.uniform(1.0,2.0, size)
       h = np.random.uniform(1.0,4.0, size)
-      return Feynman89.calculate_df(E_n,t,h,noise_level)
+      return Feynman89.calculate_df(E_n,t,h,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(E_n,t,h, noise_level = 0):
+  def calculate_df(E_n,t,h, noise_level = 0, include_original_target = False):
       """
       Feynman89, Lecture III.8.54
 
@@ -7276,19 +7100,17 @@ class Feynman89:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['E_n','t','h','prob','prob_without_noise']
+          pandas DataFrame ['E_n','t','h','prob']
       """
       target = Feynman89.calculate(E_n,t,h)
-      return pd.DataFrame(
-        list(
-          zip(
-            E_n,t,h
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['E_n','t','h','prob','prob_without_noise']
-      )
+      data = [E_n,t,h]
+      data.append(Noise(target,noise_level))
+      columns = ['E_n','t','h','prob']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('prob_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -7326,7 +7148,7 @@ class Feynman90:
   equation_lambda = lambda args : (lambda p_d,Ef,t,h,omega,omega_0: (p_d*Ef*t/(h/(2*np.pi)))*np.sin((omega-omega_0)*t/2)**2/((omega-omega_0)*t/2)**2 )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman90, Lecture III.9.52
 
@@ -7336,7 +7158,7 @@ class Feynman90:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['p_d','Ef','t','h','omega','omega_0','prob','prob_without_noise']
+          pandas DataFrame ['p_d','Ef','t','h','omega','omega_0','prob']
       """
       p_d = np.random.uniform(1.0,3.0, size)
       Ef = np.random.uniform(1.0,3.0, size)
@@ -7344,10 +7166,10 @@ class Feynman90:
       h = np.random.uniform(1.0,3.0, size)
       omega = np.random.uniform(1.0,5.0, size)
       omega_0 = np.random.uniform(1.0,5.0, size)
-      return Feynman90.calculate_df(p_d,Ef,t,h,omega,omega_0,noise_level)
+      return Feynman90.calculate_df(p_d,Ef,t,h,omega,omega_0,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(p_d,Ef,t,h,omega,omega_0, noise_level = 0):
+  def calculate_df(p_d,Ef,t,h,omega,omega_0, noise_level = 0, include_original_target = False):
       """
       Feynman90, Lecture III.9.52
 
@@ -7361,19 +7183,17 @@ class Feynman90:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['p_d','Ef','t','h','omega','omega_0','prob','prob_without_noise']
+          pandas DataFrame ['p_d','Ef','t','h','omega','omega_0','prob']
       """
       target = Feynman90.calculate(p_d,Ef,t,h,omega,omega_0)
-      return pd.DataFrame(
-        list(
-          zip(
-            p_d,Ef,t,h,omega,omega_0
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['p_d','Ef','t','h','omega','omega_0','prob','prob_without_noise']
-      )
+      data = [p_d,Ef,t,h,omega,omega_0]
+      data.append(Noise(target,noise_level))
+      columns = ['p_d','Ef','t','h','omega','omega_0','prob']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('prob_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -7420,7 +7240,7 @@ class Feynman91:
   equation_lambda = lambda args : (lambda mom,Bx,By,Bz: mom*np.sqrt(Bx**2+By**2+Bz**2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman91, Lecture III.10.19
 
@@ -7430,16 +7250,16 @@ class Feynman91:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['mom','Bx','By','Bz','E_n','E_n_without_noise']
+          pandas DataFrame ['mom','Bx','By','Bz','E_n']
       """
       mom = np.random.uniform(1.0,5.0, size)
       Bx = np.random.uniform(1.0,5.0, size)
       By = np.random.uniform(1.0,5.0, size)
       Bz = np.random.uniform(1.0,5.0, size)
-      return Feynman91.calculate_df(mom,Bx,By,Bz,noise_level)
+      return Feynman91.calculate_df(mom,Bx,By,Bz,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(mom,Bx,By,Bz, noise_level = 0):
+  def calculate_df(mom,Bx,By,Bz, noise_level = 0, include_original_target = False):
       """
       Feynman91, Lecture III.10.19
 
@@ -7451,19 +7271,17 @@ class Feynman91:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['mom','Bx','By','Bz','E_n','E_n_without_noise']
+          pandas DataFrame ['mom','Bx','By','Bz','E_n']
       """
       target = Feynman91.calculate(mom,Bx,By,Bz)
-      return pd.DataFrame(
-        list(
-          zip(
-            mom,Bx,By,Bz
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['mom','Bx','By','Bz','E_n','E_n_without_noise']
-      )
+      data = [mom,Bx,By,Bz]
+      data.append(Noise(target,noise_level))
+      columns = ['mom','Bx','By','Bz','E_n']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('E_n_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -7504,7 +7322,7 @@ class Feynman92:
   equation_lambda = lambda args : (lambda n,h: n*(h/(2*np.pi)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman92, Lecture III.12.43
 
@@ -7514,14 +7332,14 @@ class Feynman92:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['n','h','L','L_without_noise']
+          pandas DataFrame ['n','h','L']
       """
       n = np.random.uniform(1.0,5.0, size)
       h = np.random.uniform(1.0,5.0, size)
-      return Feynman92.calculate_df(n,h,noise_level)
+      return Feynman92.calculate_df(n,h,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(n,h, noise_level = 0):
+  def calculate_df(n,h, noise_level = 0, include_original_target = False):
       """
       Feynman92, Lecture III.12.43
 
@@ -7531,19 +7349,17 @@ class Feynman92:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['n','h','L','L_without_noise']
+          pandas DataFrame ['n','h','L']
       """
       target = Feynman92.calculate(n,h)
-      return pd.DataFrame(
-        list(
-          zip(
-            n,h
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['n','h','L','L_without_noise']
-      )
+      data = [n,h]
+      data.append(Noise(target,noise_level))
+      columns = ['n','h','L']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('L_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -7578,7 +7394,7 @@ class Feynman93:
   equation_lambda = lambda args : (lambda E_n,d,k,h: 2*E_n*d**2*k/(h/(2*np.pi)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman93, Lecture III.13.18
 
@@ -7588,16 +7404,16 @@ class Feynman93:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['E_n','d','k','h','v','v_without_noise']
+          pandas DataFrame ['E_n','d','k','h','v']
       """
       E_n = np.random.uniform(1.0,5.0, size)
       d = np.random.uniform(1.0,5.0, size)
       k = np.random.uniform(1.0,5.0, size)
       h = np.random.uniform(1.0,5.0, size)
-      return Feynman93.calculate_df(E_n,d,k,h,noise_level)
+      return Feynman93.calculate_df(E_n,d,k,h,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(E_n,d,k,h, noise_level = 0):
+  def calculate_df(E_n,d,k,h, noise_level = 0, include_original_target = False):
       """
       Feynman93, Lecture III.13.18
 
@@ -7609,19 +7425,17 @@ class Feynman93:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['E_n','d','k','h','v','v_without_noise']
+          pandas DataFrame ['E_n','d','k','h','v']
       """
       target = Feynman93.calculate(E_n,d,k,h)
-      return pd.DataFrame(
-        list(
-          zip(
-            E_n,d,k,h
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['E_n','d','k','h','v','v_without_noise']
-      )
+      data = [E_n,d,k,h]
+      data.append(Noise(target,noise_level))
+      columns = ['E_n','d','k','h','v']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('v_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -7662,7 +7476,7 @@ class Feynman94:
   equation_lambda = lambda args : (lambda I_0,q,Volt,kb,T: I_0*(np.exp(q*Volt/(kb*T))-1) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman94, Lecture III.14.14
 
@@ -7672,17 +7486,17 @@ class Feynman94:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['I_0','q','Volt','kb','T','I','I_without_noise']
+          pandas DataFrame ['I_0','q','Volt','kb','T','I']
       """
       I_0 = np.random.uniform(1.0,5.0, size)
       q = np.random.uniform(1.0,2.0, size)
       Volt = np.random.uniform(1.0,2.0, size)
       kb = np.random.uniform(1.0,2.0, size)
       T = np.random.uniform(1.0,2.0, size)
-      return Feynman94.calculate_df(I_0,q,Volt,kb,T,noise_level)
+      return Feynman94.calculate_df(I_0,q,Volt,kb,T,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(I_0,q,Volt,kb,T, noise_level = 0):
+  def calculate_df(I_0,q,Volt,kb,T, noise_level = 0, include_original_target = False):
       """
       Feynman94, Lecture III.14.14
 
@@ -7695,19 +7509,17 @@ class Feynman94:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['I_0','q','Volt','kb','T','I','I_without_noise']
+          pandas DataFrame ['I_0','q','Volt','kb','T','I']
       """
       target = Feynman94.calculate(I_0,q,Volt,kb,T)
-      return pd.DataFrame(
-        list(
-          zip(
-            I_0,q,Volt,kb,T
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['I_0','q','Volt','kb','T','I','I_without_noise']
-      )
+      data = [I_0,q,Volt,kb,T]
+      data.append(Noise(target,noise_level))
+      columns = ['I_0','q','Volt','kb','T','I']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('I_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -7751,7 +7563,7 @@ class Feynman95:
   equation_lambda = lambda args : (lambda U,k,d: 2*U*(1-np.cos(k*d)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman95, Lecture III.15.12
 
@@ -7761,15 +7573,15 @@ class Feynman95:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['U','k','d','E_n','E_n_without_noise']
+          pandas DataFrame ['U','k','d','E_n']
       """
       U = np.random.uniform(1.0,5.0, size)
       k = np.random.uniform(1.0,5.0, size)
       d = np.random.uniform(1.0,5.0, size)
-      return Feynman95.calculate_df(U,k,d,noise_level)
+      return Feynman95.calculate_df(U,k,d,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(U,k,d, noise_level = 0):
+  def calculate_df(U,k,d, noise_level = 0, include_original_target = False):
       """
       Feynman95, Lecture III.15.12
 
@@ -7780,19 +7592,17 @@ class Feynman95:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['U','k','d','E_n','E_n_without_noise']
+          pandas DataFrame ['U','k','d','E_n']
       """
       target = Feynman95.calculate(U,k,d)
-      return pd.DataFrame(
-        list(
-          zip(
-            U,k,d
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['U','k','d','E_n','E_n_without_noise']
-      )
+      data = [U,k,d]
+      data.append(Noise(target,noise_level))
+      columns = ['U','k','d','E_n']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('E_n_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -7830,7 +7640,7 @@ class Feynman96:
   equation_lambda = lambda args : (lambda h,E_n,d: (h/(2*np.pi))**2/(2*E_n*d**2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman96, Lecture III.15.14
 
@@ -7840,15 +7650,15 @@ class Feynman96:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['h','E_n','d','m','m_without_noise']
+          pandas DataFrame ['h','E_n','d','m']
       """
       h = np.random.uniform(1.0,5.0, size)
       E_n = np.random.uniform(1.0,5.0, size)
       d = np.random.uniform(1.0,5.0, size)
-      return Feynman96.calculate_df(h,E_n,d,noise_level)
+      return Feynman96.calculate_df(h,E_n,d,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(h,E_n,d, noise_level = 0):
+  def calculate_df(h,E_n,d, noise_level = 0, include_original_target = False):
       """
       Feynman96, Lecture III.15.14
 
@@ -7859,19 +7669,17 @@ class Feynman96:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['h','E_n','d','m','m_without_noise']
+          pandas DataFrame ['h','E_n','d','m']
       """
       target = Feynman96.calculate(h,E_n,d)
-      return pd.DataFrame(
-        list(
-          zip(
-            h,E_n,d
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['h','E_n','d','m','m_without_noise']
-      )
+      data = [h,E_n,d]
+      data.append(Noise(target,noise_level))
+      columns = ['h','E_n','d','m']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('m_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -7909,7 +7717,7 @@ class Feynman97:
   equation_lambda = lambda args : (lambda alpha,n,d: 2*np.pi*alpha/(n*d) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman97, Lecture III.15.27
 
@@ -7919,15 +7727,15 @@ class Feynman97:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['alpha','n','d','k','k_without_noise']
+          pandas DataFrame ['alpha','n','d','k']
       """
       alpha = np.random.uniform(1.0,5.0, size)
       n = np.random.uniform(1.0,5.0, size)
       d = np.random.uniform(1.0,5.0, size)
-      return Feynman97.calculate_df(alpha,n,d,noise_level)
+      return Feynman97.calculate_df(alpha,n,d,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(alpha,n,d, noise_level = 0):
+  def calculate_df(alpha,n,d, noise_level = 0, include_original_target = False):
       """
       Feynman97, Lecture III.15.27
 
@@ -7938,19 +7746,17 @@ class Feynman97:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['alpha','n','d','k','k_without_noise']
+          pandas DataFrame ['alpha','n','d','k']
       """
       target = Feynman97.calculate(alpha,n,d)
-      return pd.DataFrame(
-        list(
-          zip(
-            alpha,n,d
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['alpha','n','d','k','k_without_noise']
-      )
+      data = [alpha,n,d]
+      data.append(Noise(target,noise_level))
+      columns = ['alpha','n','d','k']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('k_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -7988,7 +7794,7 @@ class Feynman98:
   equation_lambda = lambda args : (lambda beta,alpha,theta: beta*(1+alpha*np.cos(theta)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman98, Lecture III.17.37
 
@@ -7998,15 +7804,15 @@ class Feynman98:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['beta','alpha','theta','f','f_without_noise']
+          pandas DataFrame ['beta','alpha','theta','f']
       """
       beta = np.random.uniform(1.0,5.0, size)
       alpha = np.random.uniform(1.0,5.0, size)
       theta = np.random.uniform(1.0,5.0, size)
-      return Feynman98.calculate_df(beta,alpha,theta,noise_level)
+      return Feynman98.calculate_df(beta,alpha,theta,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(beta,alpha,theta, noise_level = 0):
+  def calculate_df(beta,alpha,theta, noise_level = 0, include_original_target = False):
       """
       Feynman98, Lecture III.17.37
 
@@ -8017,19 +7823,17 @@ class Feynman98:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['beta','alpha','theta','f','f_without_noise']
+          pandas DataFrame ['beta','alpha','theta','f']
       """
       target = Feynman98.calculate(beta,alpha,theta)
-      return pd.DataFrame(
-        list(
-          zip(
-            beta,alpha,theta
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['beta','alpha','theta','f','f_without_noise']
-      )
+      data = [beta,alpha,theta]
+      data.append(Noise(target,noise_level))
+      columns = ['beta','alpha','theta','f']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('f_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -8067,7 +7871,7 @@ class Feynman99:
   equation_lambda = lambda args : (lambda m,q,h,n,epsilon: -m*q**4/(2*(4*np.pi*epsilon)**2*(h/(2*np.pi))**2)*(1/n**2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman99, Lecture III.19.51
 
@@ -8077,17 +7881,17 @@ class Feynman99:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m','q','h','n','epsilon','E_n','E_n_without_noise']
+          pandas DataFrame ['m','q','h','n','epsilon','E_n']
       """
       m = np.random.uniform(1.0,5.0, size)
       q = np.random.uniform(1.0,5.0, size)
       h = np.random.uniform(1.0,5.0, size)
       n = np.random.uniform(1.0,5.0, size)
       epsilon = np.random.uniform(1.0,5.0, size)
-      return Feynman99.calculate_df(m,q,h,n,epsilon,noise_level)
+      return Feynman99.calculate_df(m,q,h,n,epsilon,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(m,q,h,n,epsilon, noise_level = 0):
+  def calculate_df(m,q,h,n,epsilon, noise_level = 0, include_original_target = False):
       """
       Feynman99, Lecture III.19.51
 
@@ -8100,19 +7904,17 @@ class Feynman99:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m','q','h','n','epsilon','E_n','E_n_without_noise']
+          pandas DataFrame ['m','q','h','n','epsilon','E_n']
       """
       target = Feynman99.calculate(m,q,h,n,epsilon)
-      return pd.DataFrame(
-        list(
-          zip(
-            m,q,h,n,epsilon
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['m','q','h','n','epsilon','E_n','E_n_without_noise']
-      )
+      data = [m,q,h,n,epsilon]
+      data.append(Noise(target,noise_level))
+      columns = ['m','q','h','n','epsilon','E_n']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('E_n_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -8156,7 +7958,7 @@ class Feynman100:
   equation_lambda = lambda args : (lambda rho_c_0,q,A_vec,m: -rho_c_0*q*A_vec/m )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Feynman100, Lecture III.21.20
 
@@ -8166,16 +7968,16 @@ class Feynman100:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['rho_c_0','q','A_vec','m','j','j_without_noise']
+          pandas DataFrame ['rho_c_0','q','A_vec','m','j']
       """
       rho_c_0 = np.random.uniform(1.0,5.0, size)
       q = np.random.uniform(1.0,5.0, size)
       A_vec = np.random.uniform(1.0,5.0, size)
       m = np.random.uniform(1.0,5.0, size)
-      return Feynman100.calculate_df(rho_c_0,q,A_vec,m,noise_level)
+      return Feynman100.calculate_df(rho_c_0,q,A_vec,m,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(rho_c_0,q,A_vec,m, noise_level = 0):
+  def calculate_df(rho_c_0,q,A_vec,m, noise_level = 0, include_original_target = False):
       """
       Feynman100, Lecture III.21.20
 
@@ -8187,19 +7989,17 @@ class Feynman100:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['rho_c_0','q','A_vec','m','j','j_without_noise']
+          pandas DataFrame ['rho_c_0','q','A_vec','m','j']
       """
       target = Feynman100.calculate(rho_c_0,q,A_vec,m)
-      return pd.DataFrame(
-        list(
-          zip(
-            rho_c_0,q,A_vec,m
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['rho_c_0','q','A_vec','m','j','j_without_noise']
-      )
+      data = [rho_c_0,q,A_vec,m]
+      data.append(Noise(target,noise_level))
+      columns = ['rho_c_0','q','A_vec','m','j']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('j_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -8240,7 +8040,7 @@ class Bonus1:
   equation_lambda = lambda args : (lambda Z_1,Z_2,alpha,hbar,c,E_n,theta: (Z_1*Z_2*alpha*hbar*c/(4*E_n*np.sin(theta/2)**2))**2 )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Bonus1.0, Rutherford scattering
 
@@ -8250,7 +8050,7 @@ class Bonus1:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['Z_1','Z_2','alpha','hbar','c','E_n','theta','A','A_without_noise']
+          pandas DataFrame ['Z_1','Z_2','alpha','hbar','c','E_n','theta','A']
       """
       Z_1 = np.random.uniform(1.0,2.0, size)
       Z_2 = np.random.uniform(1.0,2.0, size)
@@ -8259,10 +8059,10 @@ class Bonus1:
       c = np.random.uniform(1.0,2.0, size)
       E_n = np.random.uniform(1.0,3.0, size)
       theta = np.random.uniform(1.0,3.0, size)
-      return Bonus1.calculate_df(Z_1,Z_2,alpha,hbar,c,E_n,theta,noise_level)
+      return Bonus1.calculate_df(Z_1,Z_2,alpha,hbar,c,E_n,theta,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(Z_1,Z_2,alpha,hbar,c,E_n,theta, noise_level = 0):
+  def calculate_df(Z_1,Z_2,alpha,hbar,c,E_n,theta, noise_level = 0, include_original_target = False):
       """
       Bonus1.0, Rutherford scattering
 
@@ -8277,19 +8077,17 @@ class Bonus1:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['Z_1','Z_2','alpha','hbar','c','E_n','theta','A','A_without_noise']
+          pandas DataFrame ['Z_1','Z_2','alpha','hbar','c','E_n','theta','A']
       """
       target = Bonus1.calculate(Z_1,Z_2,alpha,hbar,c,E_n,theta)
-      return pd.DataFrame(
-        list(
-          zip(
-            Z_1,Z_2,alpha,hbar,c,E_n,theta
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['Z_1','Z_2','alpha','hbar','c','E_n','theta','A','A_without_noise']
-      )
+      data = [Z_1,Z_2,alpha,hbar,c,E_n,theta]
+      data.append(Noise(target,noise_level))
+      columns = ['Z_1','Z_2','alpha','hbar','c','E_n','theta','A']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('A_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -8339,7 +8137,7 @@ class Bonus2:
   equation_lambda = lambda args : (lambda m,k_G,L,E_n,theta1,theta2: m*k_G/L**2*(1+np.sqrt(1+2*E_n*L**2/(m*k_G**2))*np.cos(theta1-theta2)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Bonus2.0, 3.55 Goldstein
 
@@ -8349,7 +8147,7 @@ class Bonus2:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m','k_G','L','E_n','theta1','theta2','k','k_without_noise']
+          pandas DataFrame ['m','k_G','L','E_n','theta1','theta2','k']
       """
       m = np.random.uniform(1.0,3.0, size)
       k_G = np.random.uniform(1.0,3.0, size)
@@ -8357,10 +8155,10 @@ class Bonus2:
       E_n = np.random.uniform(1.0,3.0, size)
       theta1 = np.random.uniform(0.0,6.0, size)
       theta2 = np.random.uniform(0.0,6.0, size)
-      return Bonus2.calculate_df(m,k_G,L,E_n,theta1,theta2,noise_level)
+      return Bonus2.calculate_df(m,k_G,L,E_n,theta1,theta2,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(m,k_G,L,E_n,theta1,theta2, noise_level = 0):
+  def calculate_df(m,k_G,L,E_n,theta1,theta2, noise_level = 0, include_original_target = False):
       """
       Bonus2.0, 3.55 Goldstein
 
@@ -8374,19 +8172,17 @@ class Bonus2:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m','k_G','L','E_n','theta1','theta2','k','k_without_noise']
+          pandas DataFrame ['m','k_G','L','E_n','theta1','theta2','k']
       """
       target = Bonus2.calculate(m,k_G,L,E_n,theta1,theta2)
-      return pd.DataFrame(
-        list(
-          zip(
-            m,k_G,L,E_n,theta1,theta2
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['m','k_G','L','E_n','theta1','theta2','k','k_without_noise']
-      )
+      data = [m,k_G,L,E_n,theta1,theta2]
+      data.append(Noise(target,noise_level))
+      columns = ['m','k_G','L','E_n','theta1','theta2','k']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('k_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -8433,7 +8229,7 @@ class Bonus3:
   equation_lambda = lambda args : (lambda d,alpha,theta1,theta2: d*(1-alpha**2)/(1+alpha*np.cos(theta1-theta2)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Bonus3.0, 3.64 Goldstein
 
@@ -8443,16 +8239,16 @@ class Bonus3:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['d','alpha','theta1','theta2','r','r_without_noise']
+          pandas DataFrame ['d','alpha','theta1','theta2','r']
       """
       d = np.random.uniform(1.0,3.0, size)
       alpha = np.random.uniform(2.0,4.0, size)
       theta1 = np.random.uniform(4.0,5.0, size)
       theta2 = np.random.uniform(4.0,5.0, size)
-      return Bonus3.calculate_df(d,alpha,theta1,theta2,noise_level)
+      return Bonus3.calculate_df(d,alpha,theta1,theta2,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(d,alpha,theta1,theta2, noise_level = 0):
+  def calculate_df(d,alpha,theta1,theta2, noise_level = 0, include_original_target = False):
       """
       Bonus3.0, 3.64 Goldstein
 
@@ -8464,19 +8260,17 @@ class Bonus3:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['d','alpha','theta1','theta2','r','r_without_noise']
+          pandas DataFrame ['d','alpha','theta1','theta2','r']
       """
       target = Bonus3.calculate(d,alpha,theta1,theta2)
-      return pd.DataFrame(
-        list(
-          zip(
-            d,alpha,theta1,theta2
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['d','alpha','theta1','theta2','r','r_without_noise']
-      )
+      data = [d,alpha,theta1,theta2]
+      data.append(Noise(target,noise_level))
+      columns = ['d','alpha','theta1','theta2','r']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('r_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -8517,7 +8311,7 @@ class Bonus4:
   equation_lambda = lambda args : (lambda m,E_n,U,L,r: np.sqrt(2/m*(E_n-U-L**2/(2*m*r**2))) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Bonus4.0, 3.16 Goldstein
 
@@ -8527,17 +8321,17 @@ class Bonus4:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m','E_n','U','L','r','v','v_without_noise']
+          pandas DataFrame ['m','E_n','U','L','r','v']
       """
       m = np.random.uniform(1.0,3.0, size)
       E_n = np.random.uniform(8.0,12.0, size)
       U = np.random.uniform(1.0,3.0, size)
       L = np.random.uniform(1.0,3.0, size)
       r = np.random.uniform(1.0,3.0, size)
-      return Bonus4.calculate_df(m,E_n,U,L,r,noise_level)
+      return Bonus4.calculate_df(m,E_n,U,L,r,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(m,E_n,U,L,r, noise_level = 0):
+  def calculate_df(m,E_n,U,L,r, noise_level = 0, include_original_target = False):
       """
       Bonus4.0, 3.16 Goldstein
 
@@ -8550,19 +8344,17 @@ class Bonus4:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m','E_n','U','L','r','v','v_without_noise']
+          pandas DataFrame ['m','E_n','U','L','r','v']
       """
       target = Bonus4.calculate(m,E_n,U,L,r)
-      return pd.DataFrame(
-        list(
-          zip(
-            m,E_n,U,L,r
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['m','E_n','U','L','r','v','v_without_noise']
-      )
+      data = [m,E_n,U,L,r]
+      data.append(Noise(target,noise_level))
+      columns = ['m','E_n','U','L','r','v']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('v_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -8606,7 +8398,7 @@ class Bonus5:
   equation_lambda = lambda args : (lambda d,G,m1,m2: 2*np.pi*d**(3/2)/np.sqrt(G*(m1+m2)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Bonus5.0, 3.74 Goldstein
 
@@ -8616,16 +8408,16 @@ class Bonus5:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['d','G','m1','m2','t','t_without_noise']
+          pandas DataFrame ['d','G','m1','m2','t']
       """
       d = np.random.uniform(1.0,3.0, size)
       G = np.random.uniform(1.0,3.0, size)
       m1 = np.random.uniform(1.0,3.0, size)
       m2 = np.random.uniform(1.0,3.0, size)
-      return Bonus5.calculate_df(d,G,m1,m2,noise_level)
+      return Bonus5.calculate_df(d,G,m1,m2,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(d,G,m1,m2, noise_level = 0):
+  def calculate_df(d,G,m1,m2, noise_level = 0, include_original_target = False):
       """
       Bonus5.0, 3.74 Goldstein
 
@@ -8637,19 +8429,17 @@ class Bonus5:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['d','G','m1','m2','t','t_without_noise']
+          pandas DataFrame ['d','G','m1','m2','t']
       """
       target = Bonus5.calculate(d,G,m1,m2)
-      return pd.DataFrame(
-        list(
-          zip(
-            d,G,m1,m2
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['d','G','m1','m2','t','t_without_noise']
-      )
+      data = [d,G,m1,m2]
+      data.append(Noise(target,noise_level))
+      columns = ['d','G','m1','m2','t']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('t_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -8690,7 +8480,7 @@ class Bonus6:
   equation_lambda = lambda args : (lambda epsilon,L,m,Z_1,Z_2,q,E_n: np.sqrt(1+2*epsilon**2*E_n*L**2/(m*(Z_1*Z_2*q**2)**2)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Bonus6.0, 3.99 Goldstein
 
@@ -8700,7 +8490,7 @@ class Bonus6:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['epsilon','L','m','Z_1','Z_2','q','E_n','alpha','alpha_without_noise']
+          pandas DataFrame ['epsilon','L','m','Z_1','Z_2','q','E_n','alpha']
       """
       epsilon = np.random.uniform(1.0,3.0, size)
       L = np.random.uniform(1.0,3.0, size)
@@ -8709,10 +8499,10 @@ class Bonus6:
       Z_2 = np.random.uniform(1.0,3.0, size)
       q = np.random.uniform(1.0,3.0, size)
       E_n = np.random.uniform(1.0,3.0, size)
-      return Bonus6.calculate_df(epsilon,L,m,Z_1,Z_2,q,E_n,noise_level)
+      return Bonus6.calculate_df(epsilon,L,m,Z_1,Z_2,q,E_n,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(epsilon,L,m,Z_1,Z_2,q,E_n, noise_level = 0):
+  def calculate_df(epsilon,L,m,Z_1,Z_2,q,E_n, noise_level = 0, include_original_target = False):
       """
       Bonus6.0, 3.99 Goldstein
 
@@ -8727,19 +8517,17 @@ class Bonus6:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['epsilon','L','m','Z_1','Z_2','q','E_n','alpha','alpha_without_noise']
+          pandas DataFrame ['epsilon','L','m','Z_1','Z_2','q','E_n','alpha']
       """
       target = Bonus6.calculate(epsilon,L,m,Z_1,Z_2,q,E_n)
-      return pd.DataFrame(
-        list(
-          zip(
-            epsilon,L,m,Z_1,Z_2,q,E_n
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['epsilon','L','m','Z_1','Z_2','q','E_n','alpha','alpha_without_noise']
-      )
+      data = [epsilon,L,m,Z_1,Z_2,q,E_n]
+      data.append(Noise(target,noise_level))
+      columns = ['epsilon','L','m','Z_1','Z_2','q','E_n','alpha']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('alpha_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -8789,7 +8577,7 @@ class Bonus7:
   equation_lambda = lambda args : (lambda G,rho,alpha,c,d: np.sqrt(8*np.pi*G*rho/3-alpha*c**2/d**2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Bonus7.0, Friedman Equation
 
@@ -8799,17 +8587,17 @@ class Bonus7:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['G','rho','alpha','c','d','H_G','H_G_without_noise']
+          pandas DataFrame ['G','rho','alpha','c','d','H_G']
       """
       G = np.random.uniform(1.0,3.0, size)
       rho = np.random.uniform(1.0,3.0, size)
       alpha = np.random.uniform(1.0,2.0, size)
       c = np.random.uniform(1.0,2.0, size)
       d = np.random.uniform(1.0,3.0, size)
-      return Bonus7.calculate_df(G,rho,alpha,c,d,noise_level)
+      return Bonus7.calculate_df(G,rho,alpha,c,d,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(G,rho,alpha,c,d, noise_level = 0):
+  def calculate_df(G,rho,alpha,c,d, noise_level = 0, include_original_target = False):
       """
       Bonus7.0, Friedman Equation
 
@@ -8822,19 +8610,17 @@ class Bonus7:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['G','rho','alpha','c','d','H_G','H_G_without_noise']
+          pandas DataFrame ['G','rho','alpha','c','d','H_G']
       """
       target = Bonus7.calculate(G,rho,alpha,c,d)
-      return pd.DataFrame(
-        list(
-          zip(
-            G,rho,alpha,c,d
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['G','rho','alpha','c','d','H_G','H_G_without_noise']
-      )
+      data = [G,rho,alpha,c,d]
+      data.append(Noise(target,noise_level))
+      columns = ['G','rho','alpha','c','d','H_G']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('H_G_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -8878,7 +8664,7 @@ class Bonus8:
   equation_lambda = lambda args : (lambda E_n,m,c,theta: E_n/(1+E_n/(m*c**2)*(1-np.cos(theta))) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Bonus8.0, Compton Scattering
 
@@ -8888,16 +8674,16 @@ class Bonus8:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['E_n','m','c','theta','K','K_without_noise']
+          pandas DataFrame ['E_n','m','c','theta','K']
       """
       E_n = np.random.uniform(1.0,3.0, size)
       m = np.random.uniform(1.0,3.0, size)
       c = np.random.uniform(1.0,3.0, size)
       theta = np.random.uniform(1.0,3.0, size)
-      return Bonus8.calculate_df(E_n,m,c,theta,noise_level)
+      return Bonus8.calculate_df(E_n,m,c,theta,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(E_n,m,c,theta, noise_level = 0):
+  def calculate_df(E_n,m,c,theta, noise_level = 0, include_original_target = False):
       """
       Bonus8.0, Compton Scattering
 
@@ -8909,19 +8695,17 @@ class Bonus8:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['E_n','m','c','theta','K','K_without_noise']
+          pandas DataFrame ['E_n','m','c','theta','K']
       """
       target = Bonus8.calculate(E_n,m,c,theta)
-      return pd.DataFrame(
-        list(
-          zip(
-            E_n,m,c,theta
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['E_n','m','c','theta','K','K_without_noise']
-      )
+      data = [E_n,m,c,theta]
+      data.append(Noise(target,noise_level))
+      columns = ['E_n','m','c','theta','K']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('K_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -8962,7 +8746,7 @@ class Bonus9:
   equation_lambda = lambda args : (lambda G,c,m1,m2,r: -32/5*G**4/c**5*(m1*m2)**2*(m1+m2)/r**5 )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Bonus9.0, Gravitational wave ratiated power
 
@@ -8972,17 +8756,17 @@ class Bonus9:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['G','c','m1','m2','r','Pwr','Pwr_without_noise']
+          pandas DataFrame ['G','c','m1','m2','r','Pwr']
       """
       G = np.random.uniform(1.0,2.0, size)
       c = np.random.uniform(1.0,2.0, size)
       m1 = np.random.uniform(1.0,5.0, size)
       m2 = np.random.uniform(1.0,5.0, size)
       r = np.random.uniform(1.0,2.0, size)
-      return Bonus9.calculate_df(G,c,m1,m2,r,noise_level)
+      return Bonus9.calculate_df(G,c,m1,m2,r,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(G,c,m1,m2,r, noise_level = 0):
+  def calculate_df(G,c,m1,m2,r, noise_level = 0, include_original_target = False):
       """
       Bonus9.0, Gravitational wave ratiated power
 
@@ -8995,19 +8779,17 @@ class Bonus9:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['G','c','m1','m2','r','Pwr','Pwr_without_noise']
+          pandas DataFrame ['G','c','m1','m2','r','Pwr']
       """
       target = Bonus9.calculate(G,c,m1,m2,r)
-      return pd.DataFrame(
-        list(
-          zip(
-            G,c,m1,m2,r
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['G','c','m1','m2','r','Pwr','Pwr_without_noise']
-      )
+      data = [G,c,m1,m2,r]
+      data.append(Noise(target,noise_level))
+      columns = ['G','c','m1','m2','r','Pwr']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('Pwr_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -9051,7 +8833,7 @@ class Bonus10:
   equation_lambda = lambda args : (lambda c,v,theta2: np.arccos((np.cos(theta2)-v/c)/(1-v/c*np.cos(theta2))) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Bonus10.0, Relativistic aberation
 
@@ -9061,15 +8843,15 @@ class Bonus10:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['c','v','theta2','theta1','theta1_without_noise']
+          pandas DataFrame ['c','v','theta2','theta1']
       """
       c = np.random.uniform(4.0,6.0, size)
       v = np.random.uniform(1.0,3.0, size)
       theta2 = np.random.uniform(1.0,3.0, size)
-      return Bonus10.calculate_df(c,v,theta2,noise_level)
+      return Bonus10.calculate_df(c,v,theta2,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(c,v,theta2, noise_level = 0):
+  def calculate_df(c,v,theta2, noise_level = 0, include_original_target = False):
       """
       Bonus10.0, Relativistic aberation
 
@@ -9080,19 +8862,17 @@ class Bonus10:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['c','v','theta2','theta1','theta1_without_noise']
+          pandas DataFrame ['c','v','theta2','theta1']
       """
       target = Bonus10.calculate(c,v,theta2)
-      return pd.DataFrame(
-        list(
-          zip(
-            c,v,theta2
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['c','v','theta2','theta1','theta1_without_noise']
-      )
+      data = [c,v,theta2]
+      data.append(Noise(target,noise_level))
+      columns = ['c','v','theta2','theta1']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('theta1_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -9130,7 +8910,7 @@ class Bonus11:
   equation_lambda = lambda args : (lambda I_0,alpha,delta,n: I_0*(np.sin(alpha/2)*np.sin(n*delta/2)/(alpha/2*np.sin(delta/2)))**2 )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Bonus11.0, N-slit diffraction
 
@@ -9140,16 +8920,16 @@ class Bonus11:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['I_0','alpha','delta','n','I','I_without_noise']
+          pandas DataFrame ['I_0','alpha','delta','n','I']
       """
       I_0 = np.random.uniform(1.0,3.0, size)
       alpha = np.random.uniform(1.0,3.0, size)
       delta = np.random.uniform(1.0,3.0, size)
       n = np.random.uniform(1.0,2.0, size)
-      return Bonus11.calculate_df(I_0,alpha,delta,n,noise_level)
+      return Bonus11.calculate_df(I_0,alpha,delta,n,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(I_0,alpha,delta,n, noise_level = 0):
+  def calculate_df(I_0,alpha,delta,n, noise_level = 0, include_original_target = False):
       """
       Bonus11.0, N-slit diffraction
 
@@ -9161,19 +8941,17 @@ class Bonus11:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['I_0','alpha','delta','n','I','I_without_noise']
+          pandas DataFrame ['I_0','alpha','delta','n','I']
       """
       target = Bonus11.calculate(I_0,alpha,delta,n)
-      return pd.DataFrame(
-        list(
-          zip(
-            I_0,alpha,delta,n
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['I_0','alpha','delta','n','I','I_without_noise']
-      )
+      data = [I_0,alpha,delta,n]
+      data.append(Noise(target,noise_level))
+      columns = ['I_0','alpha','delta','n','I']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('I_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -9214,7 +8992,7 @@ class Bonus12:
   equation_lambda = lambda args : (lambda q,y,Volt,d,epsilon: q/(4*np.pi*epsilon*y**2)*(4*np.pi*epsilon*Volt*d-q*d*y**3/(y**2-d**2)**2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Bonus12.0, 2.11 Jackson
 
@@ -9224,17 +9002,17 @@ class Bonus12:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','y','Volt','d','epsilon','F','F_without_noise']
+          pandas DataFrame ['q','y','Volt','d','epsilon','F']
       """
       q = np.random.uniform(1.0,5.0, size)
       y = np.random.uniform(1.0,3.0, size)
       Volt = np.random.uniform(1.0,5.0, size)
       d = np.random.uniform(4.0,6.0, size)
       epsilon = np.random.uniform(1.0,5.0, size)
-      return Bonus12.calculate_df(q,y,Volt,d,epsilon,noise_level)
+      return Bonus12.calculate_df(q,y,Volt,d,epsilon,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(q,y,Volt,d,epsilon, noise_level = 0):
+  def calculate_df(q,y,Volt,d,epsilon, noise_level = 0, include_original_target = False):
       """
       Bonus12.0, 2.11 Jackson
 
@@ -9247,19 +9025,17 @@ class Bonus12:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','y','Volt','d','epsilon','F','F_without_noise']
+          pandas DataFrame ['q','y','Volt','d','epsilon','F']
       """
       target = Bonus12.calculate(q,y,Volt,d,epsilon)
-      return pd.DataFrame(
-        list(
-          zip(
-            q,y,Volt,d,epsilon
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['q','y','Volt','d','epsilon','F','F_without_noise']
-      )
+      data = [q,y,Volt,d,epsilon]
+      data.append(Noise(target,noise_level))
+      columns = ['q','y','Volt','d','epsilon','F']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('F_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -9303,7 +9079,7 @@ class Bonus13:
   equation_lambda = lambda args : (lambda q,r,d,alpha,epsilon: 1/(4*np.pi*epsilon)*q/np.sqrt(r**2+d**2-2*r*d*np.cos(alpha)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Bonus13.0, 3.45 Jackson
 
@@ -9313,17 +9089,17 @@ class Bonus13:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','r','d','alpha','epsilon','Volt','Volt_without_noise']
+          pandas DataFrame ['q','r','d','alpha','epsilon','Volt']
       """
       q = np.random.uniform(1.0,5.0, size)
       r = np.random.uniform(1.0,3.0, size)
       d = np.random.uniform(4.0,6.0, size)
       alpha = np.random.uniform(0.0,6.0, size)
       epsilon = np.random.uniform(1.0,5.0, size)
-      return Bonus13.calculate_df(q,r,d,alpha,epsilon,noise_level)
+      return Bonus13.calculate_df(q,r,d,alpha,epsilon,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(q,r,d,alpha,epsilon, noise_level = 0):
+  def calculate_df(q,r,d,alpha,epsilon, noise_level = 0, include_original_target = False):
       """
       Bonus13.0, 3.45 Jackson
 
@@ -9336,19 +9112,17 @@ class Bonus13:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['q','r','d','alpha','epsilon','Volt','Volt_without_noise']
+          pandas DataFrame ['q','r','d','alpha','epsilon','Volt']
       """
       target = Bonus13.calculate(q,r,d,alpha,epsilon)
-      return pd.DataFrame(
-        list(
-          zip(
-            q,r,d,alpha,epsilon
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['q','r','d','alpha','epsilon','Volt','Volt_without_noise']
-      )
+      data = [q,r,d,alpha,epsilon]
+      data.append(Noise(target,noise_level))
+      columns = ['q','r','d','alpha','epsilon','Volt']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('Volt_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -9392,7 +9166,7 @@ class Bonus14:
   equation_lambda = lambda args : (lambda Ef,theta,r,d,alpha: Ef*np.cos(theta)*(-r+d**3/r**2*(alpha-1)/(alpha+2)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Bonus14.0, 4.60' Jackson
 
@@ -9402,17 +9176,17 @@ class Bonus14:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['Ef','theta','r','d','alpha','Volt','Volt_without_noise']
+          pandas DataFrame ['Ef','theta','r','d','alpha','Volt']
       """
       Ef = np.random.uniform(1.0,5.0, size)
       theta = np.random.uniform(0.0,6.0, size)
       r = np.random.uniform(1.0,5.0, size)
       d = np.random.uniform(1.0,5.0, size)
       alpha = np.random.uniform(1.0,5.0, size)
-      return Bonus14.calculate_df(Ef,theta,r,d,alpha,noise_level)
+      return Bonus14.calculate_df(Ef,theta,r,d,alpha,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(Ef,theta,r,d,alpha, noise_level = 0):
+  def calculate_df(Ef,theta,r,d,alpha, noise_level = 0, include_original_target = False):
       """
       Bonus14.0, 4.60' Jackson
 
@@ -9425,19 +9199,17 @@ class Bonus14:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['Ef','theta','r','d','alpha','Volt','Volt_without_noise']
+          pandas DataFrame ['Ef','theta','r','d','alpha','Volt']
       """
       target = Bonus14.calculate(Ef,theta,r,d,alpha)
-      return pd.DataFrame(
-        list(
-          zip(
-            Ef,theta,r,d,alpha
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['Ef','theta','r','d','alpha','Volt','Volt_without_noise']
-      )
+      data = [Ef,theta,r,d,alpha]
+      data.append(Noise(target,noise_level))
+      columns = ['Ef','theta','r','d','alpha','Volt']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('Volt_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -9481,7 +9253,7 @@ class Bonus15:
   equation_lambda = lambda args : (lambda c,v,omega,theta: np.sqrt(1-v**2/c**2)*omega/(1+v/c*np.cos(theta)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Bonus15.0, 11.38 Jackson
 
@@ -9491,16 +9263,16 @@ class Bonus15:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['c','v','omega','theta','omega_0','omega_0_without_noise']
+          pandas DataFrame ['c','v','omega','theta','omega_0']
       """
       c = np.random.uniform(5.0,20.0, size)
       v = np.random.uniform(1.0,3.0, size)
       omega = np.random.uniform(1.0,5.0, size)
       theta = np.random.uniform(0.0,6.0, size)
-      return Bonus15.calculate_df(c,v,omega,theta,noise_level)
+      return Bonus15.calculate_df(c,v,omega,theta,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(c,v,omega,theta, noise_level = 0):
+  def calculate_df(c,v,omega,theta, noise_level = 0, include_original_target = False):
       """
       Bonus15.0, 11.38 Jackson
 
@@ -9512,19 +9284,17 @@ class Bonus15:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['c','v','omega','theta','omega_0','omega_0_without_noise']
+          pandas DataFrame ['c','v','omega','theta','omega_0']
       """
       target = Bonus15.calculate(c,v,omega,theta)
-      return pd.DataFrame(
-        list(
-          zip(
-            c,v,omega,theta
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['c','v','omega','theta','omega_0','omega_0_without_noise']
-      )
+      data = [c,v,omega,theta]
+      data.append(Noise(target,noise_level))
+      columns = ['c','v','omega','theta','omega_0']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('omega_0_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -9565,7 +9335,7 @@ class Bonus16:
   equation_lambda = lambda args : (lambda m,c,p,q,A_vec,Volt: np.sqrt((p-q*A_vec)**2*c**2+m**2*c**4)+q*Volt )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Bonus16.0, 8.56 Goldstein
 
@@ -9575,7 +9345,7 @@ class Bonus16:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m','c','p','q','A_vec','Volt','E_n','E_n_without_noise']
+          pandas DataFrame ['m','c','p','q','A_vec','Volt','E_n']
       """
       m = np.random.uniform(1.0,5.0, size)
       c = np.random.uniform(1.0,5.0, size)
@@ -9583,10 +9353,10 @@ class Bonus16:
       q = np.random.uniform(1.0,5.0, size)
       A_vec = np.random.uniform(1.0,5.0, size)
       Volt = np.random.uniform(1.0,5.0, size)
-      return Bonus16.calculate_df(m,c,p,q,A_vec,Volt,noise_level)
+      return Bonus16.calculate_df(m,c,p,q,A_vec,Volt,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(m,c,p,q,A_vec,Volt, noise_level = 0):
+  def calculate_df(m,c,p,q,A_vec,Volt, noise_level = 0, include_original_target = False):
       """
       Bonus16.0, 8.56 Goldstein
 
@@ -9600,19 +9370,17 @@ class Bonus16:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m','c','p','q','A_vec','Volt','E_n','E_n_without_noise']
+          pandas DataFrame ['m','c','p','q','A_vec','Volt','E_n']
       """
       target = Bonus16.calculate(m,c,p,q,A_vec,Volt)
-      return pd.DataFrame(
-        list(
-          zip(
-            m,c,p,q,A_vec,Volt
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['m','c','p','q','A_vec','Volt','E_n','E_n_without_noise']
-      )
+      data = [m,c,p,q,A_vec,Volt]
+      data.append(Noise(target,noise_level))
+      columns = ['m','c','p','q','A_vec','Volt','E_n']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('E_n_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -9659,7 +9427,7 @@ class Bonus17:
   equation_lambda = lambda args : (lambda m,omega,p,y,x,alpha: 1/(2*m)*(p**2+m**2*omega**2*x**2*(1+alpha*x/y)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Bonus17.0, 12.80' Goldstein
 
@@ -9669,7 +9437,7 @@ class Bonus17:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m','omega','p','y','x','alpha','E_n','E_n_without_noise']
+          pandas DataFrame ['m','omega','p','y','x','alpha','E_n']
       """
       m = np.random.uniform(1.0,5.0, size)
       omega = np.random.uniform(1.0,5.0, size)
@@ -9677,10 +9445,10 @@ class Bonus17:
       y = np.random.uniform(1.0,5.0, size)
       x = np.random.uniform(1.0,5.0, size)
       alpha = np.random.uniform(1.0,5.0, size)
-      return Bonus17.calculate_df(m,omega,p,y,x,alpha,noise_level)
+      return Bonus17.calculate_df(m,omega,p,y,x,alpha,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(m,omega,p,y,x,alpha, noise_level = 0):
+  def calculate_df(m,omega,p,y,x,alpha, noise_level = 0, include_original_target = False):
       """
       Bonus17.0, 12.80' Goldstein
 
@@ -9694,19 +9462,17 @@ class Bonus17:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['m','omega','p','y','x','alpha','E_n','E_n_without_noise']
+          pandas DataFrame ['m','omega','p','y','x','alpha','E_n']
       """
       target = Bonus17.calculate(m,omega,p,y,x,alpha)
-      return pd.DataFrame(
-        list(
-          zip(
-            m,omega,p,y,x,alpha
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['m','omega','p','y','x','alpha','E_n','E_n_without_noise']
-      )
+      data = [m,omega,p,y,x,alpha]
+      data.append(Noise(target,noise_level))
+      columns = ['m','omega','p','y','x','alpha','E_n']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('E_n_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -9753,7 +9519,7 @@ class Bonus18:
   equation_lambda = lambda args : (lambda G,k_f,r,H_G,c: 3/(8*np.pi*G)*(c**2*k_f/r**2+H_G**2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Bonus18.0, 15.2.1 Weinberg
 
@@ -9763,17 +9529,17 @@ class Bonus18:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['G','k_f','r','H_G','c','rho_0','rho_0_without_noise']
+          pandas DataFrame ['G','k_f','r','H_G','c','rho_0']
       """
       G = np.random.uniform(1.0,5.0, size)
       k_f = np.random.uniform(1.0,5.0, size)
       r = np.random.uniform(1.0,5.0, size)
       H_G = np.random.uniform(1.0,5.0, size)
       c = np.random.uniform(1.0,5.0, size)
-      return Bonus18.calculate_df(G,k_f,r,H_G,c,noise_level)
+      return Bonus18.calculate_df(G,k_f,r,H_G,c,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(G,k_f,r,H_G,c, noise_level = 0):
+  def calculate_df(G,k_f,r,H_G,c, noise_level = 0, include_original_target = False):
       """
       Bonus18.0, 15.2.1 Weinberg
 
@@ -9786,19 +9552,17 @@ class Bonus18:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['G','k_f','r','H_G','c','rho_0','rho_0_without_noise']
+          pandas DataFrame ['G','k_f','r','H_G','c','rho_0']
       """
       target = Bonus18.calculate(G,k_f,r,H_G,c)
-      return pd.DataFrame(
-        list(
-          zip(
-            G,k_f,r,H_G,c
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['G','k_f','r','H_G','c','rho_0','rho_0_without_noise']
-      )
+      data = [G,k_f,r,H_G,c]
+      data.append(Noise(target,noise_level))
+      columns = ['G','k_f','r','H_G','c','rho_0']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('rho_0_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -9842,7 +9606,7 @@ class Bonus19:
   equation_lambda = lambda args : (lambda G,k_f,r,H_G,alpha,c: -1/(8*np.pi*G)*(c**4*k_f/r**2+H_G**2*c**2*(1-2*alpha)) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Bonus19.0, 15.2.2 Weinberg
 
@@ -9852,7 +9616,7 @@ class Bonus19:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['G','k_f','r','H_G','alpha','c','pr','pr_without_noise']
+          pandas DataFrame ['G','k_f','r','H_G','alpha','c','pr']
       """
       G = np.random.uniform(1.0,5.0, size)
       k_f = np.random.uniform(1.0,5.0, size)
@@ -9860,10 +9624,10 @@ class Bonus19:
       H_G = np.random.uniform(1.0,5.0, size)
       alpha = np.random.uniform(1.0,5.0, size)
       c = np.random.uniform(1.0,5.0, size)
-      return Bonus19.calculate_df(G,k_f,r,H_G,alpha,c,noise_level)
+      return Bonus19.calculate_df(G,k_f,r,H_G,alpha,c,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(G,k_f,r,H_G,alpha,c, noise_level = 0):
+  def calculate_df(G,k_f,r,H_G,alpha,c, noise_level = 0, include_original_target = False):
       """
       Bonus19.0, 15.2.2 Weinberg
 
@@ -9877,19 +9641,17 @@ class Bonus19:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['G','k_f','r','H_G','alpha','c','pr','pr_without_noise']
+          pandas DataFrame ['G','k_f','r','H_G','alpha','c','pr']
       """
       target = Bonus19.calculate(G,k_f,r,H_G,alpha,c)
-      return pd.DataFrame(
-        list(
-          zip(
-            G,k_f,r,H_G,alpha,c
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['G','k_f','r','H_G','alpha','c','pr','pr_without_noise']
-      )
+      data = [G,k_f,r,H_G,alpha,c]
+      data.append(Noise(target,noise_level))
+      columns = ['G','k_f','r','H_G','alpha','c','pr']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('pr_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
@@ -9936,7 +9698,7 @@ class Bonus20:
   equation_lambda = lambda args : (lambda omega,omega_0,alpha,h,m,c,beta: 1/(4*np.pi)*alpha**2*h**2/(m**2*c**2)*(omega_0/omega)**2*(omega_0/omega+omega/omega_0-np.sin(beta)**2) )(*args)
 
   @staticmethod
-  def generate_df(size = 10000, noise_level = 0):
+  def generate_df(size = 10000, noise_level = 0, include_original_target = False):
       """
       Bonus20.0, Klein-Nishina (13.132 Schwarz)
 
@@ -9946,7 +9708,7 @@ class Bonus20:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['omega','omega_0','alpha','h','m','c','beta','A','A_without_noise']
+          pandas DataFrame ['omega','omega_0','alpha','h','m','c','beta','A']
       """
       omega = np.random.uniform(1.0,5.0, size)
       omega_0 = np.random.uniform(1.0,5.0, size)
@@ -9955,10 +9717,10 @@ class Bonus20:
       m = np.random.uniform(1.0,5.0, size)
       c = np.random.uniform(1.0,5.0, size)
       beta = np.random.uniform(0.0,6.0, size)
-      return Bonus20.calculate_df(omega,omega_0,alpha,h,m,c,beta,noise_level)
+      return Bonus20.calculate_df(omega,omega_0,alpha,h,m,c,beta,noise_level,include_original_target)
 
   @staticmethod
-  def calculate_df(omega,omega_0,alpha,h,m,c,beta, noise_level = 0):
+  def calculate_df(omega,omega_0,alpha,h,m,c,beta, noise_level = 0, include_original_target = False):
       """
       Bonus20.0, Klein-Nishina (13.132 Schwarz)
 
@@ -9973,19 +9735,17 @@ class Bonus20:
           noise_level: normal distributed noise added as target's 
                 standard deviation times sqrt(noise_level/(1-noise_level))
       Returns:
-          pandas DataFrame ['omega','omega_0','alpha','h','m','c','beta','A','A_without_noise']
+          pandas DataFrame ['omega','omega_0','alpha','h','m','c','beta','A']
       """
       target = Bonus20.calculate(omega,omega_0,alpha,h,m,c,beta)
-      return pd.DataFrame(
-        list(
-          zip(
-            omega,omega_0,alpha,h,m,c,beta
-            ,Noise(target,noise_level)
-            ,target
-          )
-        )
-        ,columns=['omega','omega_0','alpha','h','m','c','beta','A','A_without_noise']
-      )
+      data = [omega,omega_0,alpha,h,m,c,beta]
+      data.append(Noise(target,noise_level))
+      columns = ['omega','omega_0','alpha','h','m','c','beta','A']
+
+      if(include_original_target):
+         data.append(target)
+         columns.append('A_without_noise')
+      return pd.DataFrame( list(zip(*data)), columns=columns)
 
   @staticmethod
   def calculate_batch(X):
