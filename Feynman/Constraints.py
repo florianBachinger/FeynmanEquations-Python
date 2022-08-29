@@ -1,5 +1,5 @@
 constraints = [
-  {'EquationName': 'Feynman1', 'DescriptiveName': 'Feynman1, Lecture I.6.2a', 'Constriants': [
+  {'EquationName': 'Feynman1', 'DescriptiveName': 'Feynman1, Lecture I.6.2a', 'Constraints': [
       {'name': 'theta', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': '-sqrt(2)*theta*exp(-theta**2/2)/(2*sqrt(pi))', 'derivative_lambda': 'lambda args : (lambda theta: -sqrt(2)*theta*exp(-theta**2/2)/(2*sqrt(pi)) )(*args)'
       },
       {'name': 'theta', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': 'sqrt(2)*(theta**2 - 1)*exp(-theta**2/2)/(2*sqrt(pi))', 'derivative_lambda': 'lambda args : (lambda theta: sqrt(2)*(theta**2 - 1)*exp(-theta**2/2)/(2*sqrt(pi)) )(*args)'
@@ -9,7 +9,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman2', 'DescriptiveName': 'Feynman2, Lecture I.6.2', 'Constriants': [
+  {'EquationName': 'Feynman2', 'DescriptiveName': 'Feynman2, Lecture I.6.2', 'Constraints': [
       {'name': 'sigma', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '-sqrt(2)*exp(-theta**2/(2*sigma**2))/(2*sqrt(pi)*sigma**2) + sqrt(2)*theta**2*exp(-theta**2/(2*sigma**2))/(2*sqrt(pi)*sigma**4)', 'derivative_lambda': 'lambda args : (lambda sigma,theta: -sqrt(2)*exp(-theta**2/(2*sigma**2))/(2*sqrt(pi)*sigma**2) + sqrt(2)*theta**2*exp(-theta**2/(2*sigma**2))/(2*sqrt(pi)*sigma**4) )(*args)'
       },
       {'name': 'sigma', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': 'sqrt(2)*(1 - theta**2*(3 - theta**2/sigma**2)/(2*sigma**2) - theta**2/sigma**2)*exp(-theta**2/(2*sigma**2))/(sqrt(pi)*sigma**3)', 'derivative_lambda': 'lambda args : (lambda sigma,theta: sqrt(2)*(1 - theta**2*(3 - theta**2/sigma**2)/(2*sigma**2) - theta**2/sigma**2)*exp(-theta**2/(2*sigma**2))/(sqrt(pi)*sigma**3) )(*args)'
@@ -25,7 +25,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman3', 'DescriptiveName': 'Feynman3, Lecture I.6.2b', 'Constriants': [
+  {'EquationName': 'Feynman3', 'DescriptiveName': 'Feynman3, Lecture I.6.2b', 'Constraints': [
       {'name': 'sigma', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': '-sqrt(2)*exp(-(theta - theta1)**2/(2*sigma**2))/(2*sqrt(pi)*sigma**2) + sqrt(2)*(theta - theta1)**2*exp(-(theta - theta1)**2/(2*sigma**2))/(2*sqrt(pi)*sigma**4)', 'derivative_lambda': 'lambda args : (lambda sigma,theta,theta1: -sqrt(2)*exp(-(theta - theta1)**2/(2*sigma**2))/(2*sqrt(pi)*sigma**2) + sqrt(2)*(theta - theta1)**2*exp(-(theta - theta1)**2/(2*sigma**2))/(2*sqrt(pi)*sigma**4) )(*args)'
       },
       {'name': 'sigma', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': 'sqrt(2)*(1 - (3 - (theta - theta1)**2/sigma**2)*(theta - theta1)**2/(2*sigma**2) - (theta - theta1)**2/sigma**2)*exp(-(theta - theta1)**2/(2*sigma**2))/(sqrt(pi)*sigma**3)', 'derivative_lambda': 'lambda args : (lambda sigma,theta,theta1: sqrt(2)*(1 - (3 - (theta - theta1)**2/sigma**2)*(theta - theta1)**2/(2*sigma**2) - (theta - theta1)**2/sigma**2)*exp(-(theta - theta1)**2/(2*sigma**2))/(sqrt(pi)*sigma**3) )(*args)'
@@ -47,7 +47,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman4', 'DescriptiveName': 'Feynman4, Lecture I.8.14', 'Constriants': [
+  {'EquationName': 'Feynman4', 'DescriptiveName': 'Feynman4, Lecture I.8.14', 'Constraints': [
       {'name': 'x1', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': '(x1 - x2)/sqrt((-x1 + x2)**2 + (-y1 + y2)**2)', 'derivative_lambda': 'lambda args : (lambda x1,x2,y1,y2: (x1 - x2)/sqrt((-x1 + x2)**2 + (-y1 + y2)**2) )(*args)'
       },
       {'name': 'x1', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': '(-(x1 - x2)**2/((x1 - x2)**2 + (y1 - y2)**2) + 1)/sqrt((x1 - x2)**2 + (y1 - y2)**2)', 'derivative_lambda': 'lambda args : (lambda x1,x2,y1,y2: (-(x1 - x2)**2/((x1 - x2)**2 + (y1 - y2)**2) + 1)/sqrt((x1 - x2)**2 + (y1 - y2)**2) )(*args)'
@@ -75,7 +75,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman5', 'DescriptiveName': 'Feynman5, Lecture I.9.18', 'Constriants': [
+  {'EquationName': 'Feynman5', 'DescriptiveName': 'Feynman5, Lecture I.9.18', 'Constraints': [
       {'name': 'm1', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'G*m2/((-x1 + x2)**2 + (-y1 + y2)**2 + (-z1 + z2)**2)', 'derivative_lambda': 'lambda args : (lambda m1,m2,G,x1,x2,y1,y2,z1,z2: G*m2/((-x1 + x2)**2 + (-y1 + y2)**2 + (-z1 + z2)**2) )(*args)'
       },
       {'name': 'm1', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda m1,m2,G,x1,x2,y1,y2,z1,z2: 0 )(*args)'
@@ -133,7 +133,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman6', 'DescriptiveName': 'Feynman6, Lecture I.10.7', 'Constriants': [
+  {'EquationName': 'Feynman6', 'DescriptiveName': 'Feynman6, Lecture I.10.7', 'Constraints': [
       {'name': 'm_0', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '1/sqrt(1 - v**2/c**2)', 'derivative_lambda': 'lambda args : (lambda m_0,v,c: 1/sqrt(1 - v**2/c**2) )(*args)'
       },
       {'name': 'm_0', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda m_0,v,c: 0 )(*args)'
@@ -155,7 +155,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman7', 'DescriptiveName': 'Feynman7, Lecture I.11.19', 'Constriants': [
+  {'EquationName': 'Feynman7', 'DescriptiveName': 'Feynman7, Lecture I.11.19', 'Constraints': [
       {'name': 'x1', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'y1', 'derivative_lambda': 'lambda args : (lambda x1,x2,x3,y1,y2,y3: y1 )(*args)'
       },
       {'name': 'x1', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda x1,x2,x3,y1,y2,y3: 0 )(*args)'
@@ -195,7 +195,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman8', 'DescriptiveName': 'Feynman8, Lecture I.12.1', 'Constriants': [
+  {'EquationName': 'Feynman8', 'DescriptiveName': 'Feynman8, Lecture I.12.1', 'Constraints': [
       {'name': 'mu', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'Nn', 'derivative_lambda': 'lambda args : (lambda mu,Nn: Nn )(*args)'
       },
       {'name': 'mu', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda mu,Nn: 0 )(*args)'
@@ -211,7 +211,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman10', 'DescriptiveName': 'Feynman10, Lecture I.12.2', 'Constriants': [
+  {'EquationName': 'Feynman10', 'DescriptiveName': 'Feynman10, Lecture I.12.2', 'Constraints': [
       {'name': 'q1', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'q2/(4*pi*epsilon*r**2)', 'derivative_lambda': 'lambda args : (lambda q1,q2,epsilon,r: q2/(4*pi*epsilon*r**2) )(*args)'
       },
       {'name': 'q1', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda q1,q2,epsilon,r: 0 )(*args)'
@@ -239,7 +239,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman11', 'DescriptiveName': 'Feynman11, Lecture I.12.4', 'Constriants': [
+  {'EquationName': 'Feynman11', 'DescriptiveName': 'Feynman11, Lecture I.12.4', 'Constraints': [
       {'name': 'q1', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '1/(4*pi*epsilon*r**2)', 'derivative_lambda': 'lambda args : (lambda q1,epsilon,r: 1/(4*pi*epsilon*r**2) )(*args)'
       },
       {'name': 'q1', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda q1,epsilon,r: 0 )(*args)'
@@ -261,7 +261,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman12', 'DescriptiveName': 'Feynman12, Lecture I.12.5', 'Constriants': [
+  {'EquationName': 'Feynman12', 'DescriptiveName': 'Feynman12, Lecture I.12.5', 'Constraints': [
       {'name': 'q2', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'Ef', 'derivative_lambda': 'lambda args : (lambda q2,Ef: Ef )(*args)'
       },
       {'name': 'q2', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda q2,Ef: 0 )(*args)'
@@ -277,7 +277,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman13', 'DescriptiveName': 'Feynman13, Lecture I.12.11', 'Constriants': [
+  {'EquationName': 'Feynman13', 'DescriptiveName': 'Feynman13, Lecture I.12.11', 'Constraints': [
       {'name': 'q', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': 'B*v*sin(theta) + Ef', 'derivative_lambda': 'lambda args : (lambda q,Ef,B,v,theta: B*v*sin(theta) + Ef )(*args)'
       },
       {'name': 'q', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda q,Ef,B,v,theta: 0 )(*args)'
@@ -311,7 +311,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman9', 'DescriptiveName': 'Feynman9, Lecture I.13.4', 'Constriants': [
+  {'EquationName': 'Feynman9', 'DescriptiveName': 'Feynman9, Lecture I.13.4', 'Constraints': [
       {'name': 'm', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'u**2/2 + v**2/2 + w**2/2', 'derivative_lambda': 'lambda args : (lambda m,v,u,w: u**2/2 + v**2/2 + w**2/2 )(*args)'
       },
       {'name': 'm', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda m,v,u,w: 0 )(*args)'
@@ -339,7 +339,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman14', 'DescriptiveName': 'Feynman14, Lecture I.13.12', 'Constriants': [
+  {'EquationName': 'Feynman14', 'DescriptiveName': 'Feynman14, Lecture I.13.12', 'Constraints': [
       {'name': 'm1', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': 'G*m2*(1/r2 - 1/r1)', 'derivative_lambda': 'lambda args : (lambda m1,m2,r1,r2,G: G*m2*(1/r2 - 1/r1) )(*args)'
       },
       {'name': 'm1', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda m1,m2,r1,r2,G: 0 )(*args)'
@@ -373,7 +373,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman15', 'DescriptiveName': 'Feynman15, Lecture I.14.3', 'Constriants': [
+  {'EquationName': 'Feynman15', 'DescriptiveName': 'Feynman15, Lecture I.14.3', 'Constraints': [
       {'name': 'm', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'g*z', 'derivative_lambda': 'lambda args : (lambda m,g,z: g*z )(*args)'
       },
       {'name': 'm', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda m,g,z: 0 )(*args)'
@@ -395,7 +395,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman16', 'DescriptiveName': 'Feynman16, Lecture I.14.4', 'Constriants': [
+  {'EquationName': 'Feynman16', 'DescriptiveName': 'Feynman16, Lecture I.14.4', 'Constraints': [
       {'name': 'k_spring', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'x**2/2', 'derivative_lambda': 'lambda args : (lambda k_spring,x: x**2/2 )(*args)'
       },
       {'name': 'k_spring', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda k_spring,x: 0 )(*args)'
@@ -411,7 +411,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman17', 'DescriptiveName': 'Feynman17, Lecture I.15.3x', 'Constriants': [
+  {'EquationName': 'Feynman17', 'DescriptiveName': 'Feynman17, Lecture I.15.3x', 'Constraints': [
       {'name': 'x', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '1/sqrt(1 - u**2/c**2)', 'derivative_lambda': 'lambda args : (lambda x,u,c,t: 1/sqrt(1 - u**2/c**2) )(*args)'
       },
       {'name': 'x', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda x,u,c,t: 0 )(*args)'
@@ -439,7 +439,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman18', 'DescriptiveName': 'Feynman18, Lecture I.15.3t', 'Constriants': [
+  {'EquationName': 'Feynman18', 'DescriptiveName': 'Feynman18, Lecture I.15.3t', 'Constraints': [
       {'name': 'x', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': '-u/(c**2*sqrt(1 - u**2/c**2))', 'derivative_lambda': 'lambda args : (lambda x,c,u,t: -u/(c**2*sqrt(1 - u**2/c**2)) )(*args)'
       },
       {'name': 'x', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda x,c,u,t: 0 )(*args)'
@@ -467,7 +467,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman19', 'DescriptiveName': 'Feynman19, Lecture I.15.1', 'Constriants': [
+  {'EquationName': 'Feynman19', 'DescriptiveName': 'Feynman19, Lecture I.15.1', 'Constraints': [
       {'name': 'm_0', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'v/sqrt(1 - v**2/c**2)', 'derivative_lambda': 'lambda args : (lambda m_0,v,c: v/sqrt(1 - v**2/c**2) )(*args)'
       },
       {'name': 'm_0', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda m_0,v,c: 0 )(*args)'
@@ -489,7 +489,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman20', 'DescriptiveName': 'Feynman20, Lecture I.16.6', 'Constriants': [
+  {'EquationName': 'Feynman20', 'DescriptiveName': 'Feynman20, Lecture I.16.6', 'Constraints': [
       {'name': 'c', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '2*u*v*(u + v)/(c**3*(1 + u*v/c**2)**2)', 'derivative_lambda': 'lambda args : (lambda c,v,u: 2*u*v*(u + v)/(c**3*(1 + u*v/c**2)**2) )(*args)'
       },
       {'name': 'c', 'order_derivative': 2, 'monotonicity': 'decreasing', 'derivative': '-2*u*v*(3 - 4*u*v/(c**2*(1 + u*v/c**2)))*(u + v)/(c**4*(1 + u*v/c**2)**2)', 'derivative_lambda': 'lambda args : (lambda c,v,u: -2*u*v*(3 - 4*u*v/(c**2*(1 + u*v/c**2)))*(u + v)/(c**4*(1 + u*v/c**2)**2) )(*args)'
@@ -511,7 +511,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman21', 'DescriptiveName': 'Feynman21, Lecture I.18.4', 'Constriants': [
+  {'EquationName': 'Feynman21', 'DescriptiveName': 'Feynman21, Lecture I.18.4', 'Constraints': [
       {'name': 'm1', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'r1/(m1 + m2) - (m1*r1 + m2*r2)/(m1 + m2)**2', 'derivative_lambda': 'lambda args : (lambda m1,m2,r1,r2: r1/(m1 + m2) - (m1*r1 + m2*r2)/(m1 + m2)**2 )(*args)'
       },
       {'name': 'm1', 'order_derivative': 2, 'monotonicity': 'decreasing', 'derivative': '2*(-r1 + (m1*r1 + m2*r2)/(m1 + m2))/(m1 + m2)**2', 'derivative_lambda': 'lambda args : (lambda m1,m2,r1,r2: 2*(-r1 + (m1*r1 + m2*r2)/(m1 + m2))/(m1 + m2)**2 )(*args)'
@@ -539,7 +539,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman22', 'DescriptiveName': 'Feynman22, Lecture I.18.12', 'Constriants': [
+  {'EquationName': 'Feynman22', 'DescriptiveName': 'Feynman22, Lecture I.18.12', 'Constraints': [
       {'name': 'r', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'F*sin(theta)', 'derivative_lambda': 'lambda args : (lambda r,F,theta: F*sin(theta) )(*args)'
       },
       {'name': 'r', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda r,F,theta: 0 )(*args)'
@@ -561,7 +561,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman23', 'DescriptiveName': 'Feynman23, Lecture I.18.14', 'Constriants': [
+  {'EquationName': 'Feynman23', 'DescriptiveName': 'Feynman23, Lecture I.18.14', 'Constraints': [
       {'name': 'm', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'r*v*sin(theta)', 'derivative_lambda': 'lambda args : (lambda m,r,v,theta: r*v*sin(theta) )(*args)'
       },
       {'name': 'm', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda m,r,v,theta: 0 )(*args)'
@@ -589,7 +589,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman24', 'DescriptiveName': 'Feynman24, Lecture I.24.6', 'Constriants': [
+  {'EquationName': 'Feynman24', 'DescriptiveName': 'Feynman24, Lecture I.24.6', 'Constraints': [
       {'name': 'm', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'x**2*(omega**2 + omega_0**2)/4', 'derivative_lambda': 'lambda args : (lambda m,omega,omega_0,x: x**2*(omega**2 + omega_0**2)/4 )(*args)'
       },
       {'name': 'm', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda m,omega,omega_0,x: 0 )(*args)'
@@ -617,7 +617,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman25', 'DescriptiveName': 'Feynman25, Lecture I.25.13', 'Constriants': [
+  {'EquationName': 'Feynman25', 'DescriptiveName': 'Feynman25, Lecture I.25.13', 'Constraints': [
       {'name': 'q', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '1/C', 'derivative_lambda': 'lambda args : (lambda q,C: 1/C )(*args)'
       },
       {'name': 'q', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda q,C: 0 )(*args)'
@@ -633,7 +633,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman26', 'DescriptiveName': 'Feynman26, Lecture I.26.2', 'Constriants': [
+  {'EquationName': 'Feynman26', 'DescriptiveName': 'Feynman26, Lecture I.26.2', 'Constraints': [
       {'name': 'n', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': 'sin(theta2)/sqrt(-n**2*sin(theta2)**2 + 1)', 'derivative_lambda': 'lambda args : (lambda n,theta2: sin(theta2)/sqrt(-n**2*sin(theta2)**2 + 1) )(*args)'
       },
       {'name': 'n', 'order_derivative': 2, 'monotonicity': 'decreasing', 'derivative': 'n*sin(theta2)**3/(-n**2*sin(theta2)**2 + 1)**(3/2)', 'derivative_lambda': 'lambda args : (lambda n,theta2: n*sin(theta2)**3/(-n**2*sin(theta2)**2 + 1)**(3/2) )(*args)'
@@ -649,7 +649,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman27', 'DescriptiveName': 'Feynman27, Lecture I.27.6', 'Constriants': [
+  {'EquationName': 'Feynman27', 'DescriptiveName': 'Feynman27, Lecture I.27.6', 'Constraints': [
       {'name': 'd1', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '1/(d1**2*(n/d2 + 1/d1)**2)', 'derivative_lambda': 'lambda args : (lambda d1,d2,n: 1/(d1**2*(n/d2 + 1/d1)**2) )(*args)'
       },
       {'name': 'd1', 'order_derivative': 2, 'monotonicity': 'decreasing', 'derivative': '2*(-1 + 1/(d1*(n/d2 + 1/d1)))/(d1**3*(n/d2 + 1/d1)**2)', 'derivative_lambda': 'lambda args : (lambda d1,d2,n: 2*(-1 + 1/(d1*(n/d2 + 1/d1)))/(d1**3*(n/d2 + 1/d1)**2) )(*args)'
@@ -671,7 +671,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman28', 'DescriptiveName': 'Feynman28, Lecture I.29.4', 'Constriants': [
+  {'EquationName': 'Feynman28', 'DescriptiveName': 'Feynman28, Lecture I.29.4', 'Constraints': [
       {'name': 'omega', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '1/c', 'derivative_lambda': 'lambda args : (lambda omega,c: 1/c )(*args)'
       },
       {'name': 'omega', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda omega,c: 0 )(*args)'
@@ -687,7 +687,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman29', 'DescriptiveName': 'Feynman29, Lecture I.29.16', 'Constriants': [
+  {'EquationName': 'Feynman29', 'DescriptiveName': 'Feynman29, Lecture I.29.16', 'Constraints': [
       {'name': 'x1', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': '(x1 - x2*cos(theta1 - theta2))/sqrt(x1**2 - 2*x1*x2*cos(theta1 - theta2) + x2**2)', 'derivative_lambda': 'lambda args : (lambda x1,x2,theta1,theta2: (x1 - x2*cos(theta1 - theta2))/sqrt(x1**2 - 2*x1*x2*cos(theta1 - theta2) + x2**2) )(*args)'
       },
       {'name': 'x1', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': '(-(x1 - x2*cos(theta1 - theta2))**2/(x1**2 - 2*x1*x2*cos(theta1 - theta2) + x2**2) + 1)/sqrt(x1**2 - 2*x1*x2*cos(theta1 - theta2) + x2**2)', 'derivative_lambda': 'lambda args : (lambda x1,x2,theta1,theta2: (-(x1 - x2*cos(theta1 - theta2))**2/(x1**2 - 2*x1*x2*cos(theta1 - theta2) + x2**2) + 1)/sqrt(x1**2 - 2*x1*x2*cos(theta1 - theta2) + x2**2) )(*args)'
@@ -715,7 +715,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman30', 'DescriptiveName': 'Feynman30, Lecture I.30.3', 'Constriants': [
+  {'EquationName': 'Feynman30', 'DescriptiveName': 'Feynman30, Lecture I.30.3', 'Constraints': [
       {'name': 'Int_0', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'sin(n*theta/2)**2/sin(theta/2)**2', 'derivative_lambda': 'lambda args : (lambda Int_0,theta,n: sin(n*theta/2)**2/sin(theta/2)**2 )(*args)'
       },
       {'name': 'Int_0', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda Int_0,theta,n: 0 )(*args)'
@@ -737,7 +737,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman31', 'DescriptiveName': 'Feynman31, Lecture I.30.5', 'Constriants': [
+  {'EquationName': 'Feynman31', 'DescriptiveName': 'Feynman31, Lecture I.30.5', 'Constraints': [
       {'name': 'lambd', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '1/(d*n*sqrt(1 - lambd**2/(d**2*n**2)))', 'derivative_lambda': 'lambda args : (lambda lambd,d,n: 1/(d*n*sqrt(1 - lambd**2/(d**2*n**2))) )(*args)'
       },
       {'name': 'lambd', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': 'lambd/(d**3*n**3*(1 - lambd**2/(d**2*n**2))**(3/2))', 'derivative_lambda': 'lambda args : (lambda lambd,d,n: lambd/(d**3*n**3*(1 - lambd**2/(d**2*n**2))**(3/2)) )(*args)'
@@ -759,7 +759,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman32', 'DescriptiveName': 'Feynman32, Lecture I.32.5', 'Constriants': [
+  {'EquationName': 'Feynman32', 'DescriptiveName': 'Feynman32, Lecture I.32.5', 'Constraints': [
       {'name': 'q', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'a**2*q/(3*pi*c**3*epsilon)', 'derivative_lambda': 'lambda args : (lambda q,a,epsilon,c: a**2*q/(3*pi*c**3*epsilon) )(*args)'
       },
       {'name': 'q', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': 'a**2/(3*pi*c**3*epsilon)', 'derivative_lambda': 'lambda args : (lambda q,a,epsilon,c: a**2/(3*pi*c**3*epsilon) )(*args)'
@@ -787,7 +787,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman33', 'DescriptiveName': 'Feynman33, Lecture I.32.17', 'Constriants': [
+  {'EquationName': 'Feynman33', 'DescriptiveName': 'Feynman33, Lecture I.32.17', 'Constraints': [
       {'name': 'epsilon', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '4*pi*Ef**2*c*omega**4*r**2/(3*(omega**2 - omega_0**2)**2)', 'derivative_lambda': 'lambda args : (lambda epsilon,c,Ef,r,omega,omega_0: 4*pi*Ef**2*c*omega**4*r**2/(3*(omega**2 - omega_0**2)**2) )(*args)'
       },
       {'name': 'epsilon', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda epsilon,c,Ef,r,omega,omega_0: 0 )(*args)'
@@ -827,7 +827,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman34', 'DescriptiveName': 'Feynman34, Lecture I.34.8', 'Constriants': [
+  {'EquationName': 'Feynman34', 'DescriptiveName': 'Feynman34, Lecture I.34.8', 'Constraints': [
       {'name': 'q', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'B*v/p', 'derivative_lambda': 'lambda args : (lambda q,v,B,p: B*v/p )(*args)'
       },
       {'name': 'q', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda q,v,B,p: 0 )(*args)'
@@ -855,7 +855,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman35', 'DescriptiveName': 'Feynman35, Lecture I.34.1', 'Constriants': [
+  {'EquationName': 'Feynman35', 'DescriptiveName': 'Feynman35, Lecture I.34.1', 'Constraints': [
       {'name': 'c', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': '-omega_0*v/(c**2*(1 - v/c)**2)', 'derivative_lambda': 'lambda args : (lambda c,v,omega_0: -omega_0*v/(c**2*(1 - v/c)**2) )(*args)'
       },
       {'name': 'c', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': '2*omega_0*v*(1 + v/(c*(1 - v/c)))/(c**3*(1 - v/c)**2)', 'derivative_lambda': 'lambda args : (lambda c,v,omega_0: 2*omega_0*v*(1 + v/(c*(1 - v/c)))/(c**3*(1 - v/c)**2) )(*args)'
@@ -877,7 +877,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman36', 'DescriptiveName': 'Feynman36, Lecture I.34.14', 'Constriants': [
+  {'EquationName': 'Feynman36', 'DescriptiveName': 'Feynman36, Lecture I.34.14', 'Constraints': [
       {'name': 'c', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': '-omega_0*v/(c**2*sqrt(1 - v**2/c**2)) - omega_0*v**2*(1 + v/c)/(c**3*(1 - v**2/c**2)**(3/2))', 'derivative_lambda': 'lambda args : (lambda c,v,omega_0: -omega_0*v/(c**2*sqrt(1 - v**2/c**2)) - omega_0*v**2*(1 + v/c)/(c**3*(1 - v**2/c**2)**(3/2)) )(*args)'
       },
       {'name': 'c', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': 'omega_0*v*(2 + 3*v*(1 + v/c)*(1 + v**2/(c**2*(1 - v**2/c**2)))/(c*(1 - v**2/c**2)) + 2*v**2/(c**2*(1 - v**2/c**2)))/(c**3*sqrt(1 - v**2/c**2))', 'derivative_lambda': 'lambda args : (lambda c,v,omega_0: omega_0*v*(2 + 3*v*(1 + v/c)*(1 + v**2/(c**2*(1 - v**2/c**2)))/(c*(1 - v**2/c**2)) + 2*v**2/(c**2*(1 - v**2/c**2)))/(c**3*sqrt(1 - v**2/c**2)) )(*args)'
@@ -899,7 +899,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman37', 'DescriptiveName': 'Feynman37, Lecture I.34.27', 'Constriants': [
+  {'EquationName': 'Feynman37', 'DescriptiveName': 'Feynman37, Lecture I.34.27', 'Constraints': [
       {'name': 'omega', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'h/(2*pi)', 'derivative_lambda': 'lambda args : (lambda omega,h: h/(2*pi) )(*args)'
       },
       {'name': 'omega', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda omega,h: 0 )(*args)'
@@ -915,7 +915,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman38', 'DescriptiveName': 'Feynman38, Lecture I.37.4', 'Constriants': [
+  {'EquationName': 'Feynman38', 'DescriptiveName': 'Feynman38, Lecture I.37.4', 'Constraints': [
       {'name': 'I1', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '1 + sqrt(I1*I2)*cos(delta)/I1', 'derivative_lambda': 'lambda args : (lambda I1,I2,delta: 1 + sqrt(I1*I2)*cos(delta)/I1 )(*args)'
       },
       {'name': 'I1', 'order_derivative': 2, 'monotonicity': 'decreasing', 'derivative': '-sqrt(I1*I2)*cos(delta)/(2*I1**2)', 'derivative_lambda': 'lambda args : (lambda I1,I2,delta: -sqrt(I1*I2)*cos(delta)/(2*I1**2) )(*args)'
@@ -937,7 +937,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman39', 'DescriptiveName': 'Feynman39, Lecture I.38.12', 'Constriants': [
+  {'EquationName': 'Feynman39', 'DescriptiveName': 'Feynman39, Lecture I.38.12', 'Constraints': [
       {'name': 'm', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': '-epsilon*h**2/(pi*m**2*q**2)', 'derivative_lambda': 'lambda args : (lambda m,q,h,epsilon: -epsilon*h**2/(pi*m**2*q**2) )(*args)'
       },
       {'name': 'm', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': '2*epsilon*h**2/(pi*m**3*q**2)', 'derivative_lambda': 'lambda args : (lambda m,q,h,epsilon: 2*epsilon*h**2/(pi*m**3*q**2) )(*args)'
@@ -965,7 +965,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman40', 'DescriptiveName': 'Feynman40, Lecture I.39.1', 'Constriants': [
+  {'EquationName': 'Feynman40', 'DescriptiveName': 'Feynman40, Lecture I.39.1', 'Constraints': [
       {'name': 'pr', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '3*V/2', 'derivative_lambda': 'lambda args : (lambda pr,V: 3*V/2 )(*args)'
       },
       {'name': 'pr', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda pr,V: 0 )(*args)'
@@ -981,7 +981,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman41', 'DescriptiveName': 'Feynman41, Lecture I.39.11', 'Constriants': [
+  {'EquationName': 'Feynman41', 'DescriptiveName': 'Feynman41, Lecture I.39.11', 'Constraints': [
       {'name': 'gamma', 'order_derivative': 1, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda gamma,pr,V: 0 )(*args)'
       },
       {'name': 'gamma', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda gamma,pr,V: 0 )(*args)'
@@ -1003,7 +1003,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman42', 'DescriptiveName': 'Feynman42, Lecture I.39.22', 'Constriants': [
+  {'EquationName': 'Feynman42', 'DescriptiveName': 'Feynman42, Lecture I.39.22', 'Constraints': [
       {'name': 'n', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'T*kb/V', 'derivative_lambda': 'lambda args : (lambda n,T,V,kb: T*kb/V )(*args)'
       },
       {'name': 'n', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda n,T,V,kb: 0 )(*args)'
@@ -1031,7 +1031,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman43', 'DescriptiveName': 'Feynman43, Lecture I.40.1', 'Constriants': [
+  {'EquationName': 'Feynman43', 'DescriptiveName': 'Feynman43, Lecture I.40.1', 'Constraints': [
       {'name': 'n_0', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'exp(-g*m*x/(T*kb))', 'derivative_lambda': 'lambda args : (lambda n_0,m,x,T,g,kb: exp(-g*m*x/(T*kb)) )(*args)'
       },
       {'name': 'n_0', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda n_0,m,x,T,g,kb: 0 )(*args)'
@@ -1071,7 +1071,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman44', 'DescriptiveName': 'Feynman44, Lecture I.41.16', 'Constriants': [
+  {'EquationName': 'Feynman44', 'DescriptiveName': 'Feynman44, Lecture I.41.16', 'Constraints': [
       {'name': 'omega', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '3*h*omega**2/(2*pi**3*c**2*(exp(h*omega/(2*pi*T*kb)) - 1)) - h**2*omega**3*exp(h*omega/(2*pi*T*kb))/(4*pi**4*T*c**2*kb*(exp(h*omega/(2*pi*T*kb)) - 1)**2)', 'derivative_lambda': 'lambda args : (lambda omega,T,h,kb,c: 3*h*omega**2/(2*pi**3*c**2*(exp(h*omega/(2*pi*T*kb)) - 1)) - h**2*omega**3*exp(h*omega/(2*pi*T*kb))/(4*pi**4*T*c**2*kb*(exp(h*omega/(2*pi*T*kb)) - 1)**2) )(*args)'
       },
       {'name': 'omega', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': 'h*omega*(3 - 3*h*omega*exp(h*omega/(2*pi*T*kb))/(2*pi*T*kb*(exp(h*omega/(2*pi*T*kb)) - 1)) - h**2*omega**2*(exp(h*omega/(2*pi*T*kb)) - 2*exp(h*omega/(pi*T*kb))/(exp(h*omega/(2*pi*T*kb)) - 1))/(8*pi**2*T**2*kb**2*(exp(h*omega/(2*pi*T*kb)) - 1)))/(pi**3*c**2*(exp(h*omega/(2*pi*T*kb)) - 1))', 'derivative_lambda': 'lambda args : (lambda omega,T,h,kb,c: h*omega*(3 - 3*h*omega*exp(h*omega/(2*pi*T*kb))/(2*pi*T*kb*(exp(h*omega/(2*pi*T*kb)) - 1)) - h**2*omega**2*(exp(h*omega/(2*pi*T*kb)) - 2*exp(h*omega/(pi*T*kb))/(exp(h*omega/(2*pi*T*kb)) - 1))/(8*pi**2*T**2*kb**2*(exp(h*omega/(2*pi*T*kb)) - 1)))/(pi**3*c**2*(exp(h*omega/(2*pi*T*kb)) - 1)) )(*args)'
@@ -1105,7 +1105,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman45', 'DescriptiveName': 'Feynman45, Lecture I.43.16', 'Constriants': [
+  {'EquationName': 'Feynman45', 'DescriptiveName': 'Feynman45, Lecture I.43.16', 'Constraints': [
       {'name': 'mu_drift', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'Volt*q/d', 'derivative_lambda': 'lambda args : (lambda mu_drift,q,Volt,d: Volt*q/d )(*args)'
       },
       {'name': 'mu_drift', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda mu_drift,q,Volt,d: 0 )(*args)'
@@ -1133,7 +1133,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman46', 'DescriptiveName': 'Feynman46, Lecture I.43.31', 'Constriants': [
+  {'EquationName': 'Feynman46', 'DescriptiveName': 'Feynman46, Lecture I.43.31', 'Constraints': [
       {'name': 'mob', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'T*kb', 'derivative_lambda': 'lambda args : (lambda mob,T,kb: T*kb )(*args)'
       },
       {'name': 'mob', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda mob,T,kb: 0 )(*args)'
@@ -1155,7 +1155,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman47', 'DescriptiveName': 'Feynman47, Lecture I.43.43', 'Constriants': [
+  {'EquationName': 'Feynman47', 'DescriptiveName': 'Feynman47, Lecture I.43.43', 'Constraints': [
       {'name': 'gamma', 'order_derivative': 1, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda gamma,kb,A,v: 0 )(*args)'
       },
       {'name': 'gamma', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda gamma,kb,A,v: 0 )(*args)'
@@ -1183,7 +1183,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman48', 'DescriptiveName': 'Feynman48, Lecture I.44.4', 'Constriants': [
+  {'EquationName': 'Feynman48', 'DescriptiveName': 'Feynman48, Lecture I.44.4', 'Constraints': [
       {'name': 'n', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': 'T*kb*log(V2/V1)', 'derivative_lambda': 'lambda args : (lambda n,kb,T,V1,V2: T*kb*log(V2/V1) )(*args)'
       },
       {'name': 'n', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda n,kb,T,V1,V2: 0 )(*args)'
@@ -1217,7 +1217,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman49', 'DescriptiveName': 'Feynman49, Lecture I.47.23', 'Constriants': [
+  {'EquationName': 'Feynman49', 'DescriptiveName': 'Feynman49, Lecture I.47.23', 'Constraints': [
       {'name': 'gamma', 'order_derivative': 1, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda gamma,pr,rho: 0 )(*args)'
       },
       {'name': 'gamma', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda gamma,pr,rho: 0 )(*args)'
@@ -1239,7 +1239,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman50', 'DescriptiveName': 'Feynman50, Lecture I.48.2', 'Constriants': [
+  {'EquationName': 'Feynman50', 'DescriptiveName': 'Feynman50, Lecture I.48.2', 'Constraints': [
       {'name': 'm', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'c**2/sqrt(1 - v**2/c**2)', 'derivative_lambda': 'lambda args : (lambda m,v,c: c**2/sqrt(1 - v**2/c**2) )(*args)'
       },
       {'name': 'm', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda m,v,c: 0 )(*args)'
@@ -1261,7 +1261,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman51', 'DescriptiveName': 'Feynman51, Lecture I.50.26', 'Constriants': [
+  {'EquationName': 'Feynman51', 'DescriptiveName': 'Feynman51, Lecture I.50.26', 'Constraints': [
       {'name': 'x1', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'alpha*cos(omega*t)**2 + cos(omega*t)', 'derivative_lambda': 'lambda args : (lambda x1,omega,t,alpha: alpha*cos(omega*t)**2 + cos(omega*t) )(*args)'
       },
       {'name': 'x1', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda x1,omega,t,alpha: 0 )(*args)'
@@ -1289,7 +1289,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman52', 'DescriptiveName': 'Feynman52, Lecture II.2.42', 'Constriants': [
+  {'EquationName': 'Feynman52', 'DescriptiveName': 'Feynman52, Lecture II.2.42', 'Constraints': [
       {'name': 'kappa', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': 'A*(-T1 + T2)/d', 'derivative_lambda': 'lambda args : (lambda kappa,T1,T2,A,d: A*(-T1 + T2)/d )(*args)'
       },
       {'name': 'kappa', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda kappa,T1,T2,A,d: 0 )(*args)'
@@ -1323,7 +1323,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman53', 'DescriptiveName': 'Feynman53, Lecture II.3.24', 'Constriants': [
+  {'EquationName': 'Feynman53', 'DescriptiveName': 'Feynman53, Lecture II.3.24', 'Constraints': [
       {'name': 'Pwr', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '1/(4*pi*r**2)', 'derivative_lambda': 'lambda args : (lambda Pwr,r: 1/(4*pi*r**2) )(*args)'
       },
       {'name': 'Pwr', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda Pwr,r: 0 )(*args)'
@@ -1339,7 +1339,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman54', 'DescriptiveName': 'Feynman54, Lecture II.4.23', 'Constriants': [
+  {'EquationName': 'Feynman54', 'DescriptiveName': 'Feynman54, Lecture II.4.23', 'Constraints': [
       {'name': 'q', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '1/(4*pi*epsilon*r)', 'derivative_lambda': 'lambda args : (lambda q,epsilon,r: 1/(4*pi*epsilon*r) )(*args)'
       },
       {'name': 'q', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda q,epsilon,r: 0 )(*args)'
@@ -1361,7 +1361,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman55', 'DescriptiveName': 'Feynman55, Lecture II.6.11', 'Constriants': [
+  {'EquationName': 'Feynman55', 'DescriptiveName': 'Feynman55, Lecture II.6.11', 'Constraints': [
       {'name': 'epsilon', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '-p_d*cos(theta)/(4*pi*epsilon**2*r**2)', 'derivative_lambda': 'lambda args : (lambda epsilon,p_d,theta,r: -p_d*cos(theta)/(4*pi*epsilon**2*r**2) )(*args)'
       },
       {'name': 'epsilon', 'order_derivative': 2, 'monotonicity': 'decreasing', 'derivative': 'p_d*cos(theta)/(2*pi*epsilon**3*r**2)', 'derivative_lambda': 'lambda args : (lambda epsilon,p_d,theta,r: p_d*cos(theta)/(2*pi*epsilon**3*r**2) )(*args)'
@@ -1389,7 +1389,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman56', 'DescriptiveName': 'Feynman56, Lecture II.6.15a', 'Constriants': [
+  {'EquationName': 'Feynman56', 'DescriptiveName': 'Feynman56, Lecture II.6.15a', 'Constraints': [
       {'name': 'epsilon', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': '-3*p_d*z*sqrt(x**2 + y**2)/(4*pi*epsilon**2*r**5)', 'derivative_lambda': 'lambda args : (lambda epsilon,p_d,r,x,y,z: -3*p_d*z*sqrt(x**2 + y**2)/(4*pi*epsilon**2*r**5) )(*args)'
       },
       {'name': 'epsilon', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': '3*p_d*z*sqrt(x**2 + y**2)/(2*pi*epsilon**3*r**5)', 'derivative_lambda': 'lambda args : (lambda epsilon,p_d,r,x,y,z: 3*p_d*z*sqrt(x**2 + y**2)/(2*pi*epsilon**3*r**5) )(*args)'
@@ -1429,7 +1429,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman57', 'DescriptiveName': 'Feynman57, Lecture II.6.15b', 'Constriants': [
+  {'EquationName': 'Feynman57', 'DescriptiveName': 'Feynman57, Lecture II.6.15b', 'Constraints': [
       {'name': 'epsilon', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': '-3*p_d*sin(theta)*cos(theta)/(4*pi*epsilon**2*r**3)', 'derivative_lambda': 'lambda args : (lambda epsilon,p_d,theta,r: -3*p_d*sin(theta)*cos(theta)/(4*pi*epsilon**2*r**3) )(*args)'
       },
       {'name': 'epsilon', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': '3*p_d*sin(theta)*cos(theta)/(2*pi*epsilon**3*r**3)', 'derivative_lambda': 'lambda args : (lambda epsilon,p_d,theta,r: 3*p_d*sin(theta)*cos(theta)/(2*pi*epsilon**3*r**3) )(*args)'
@@ -1457,7 +1457,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman58', 'DescriptiveName': 'Feynman58, Lecture II.8.7', 'Constriants': [
+  {'EquationName': 'Feynman58', 'DescriptiveName': 'Feynman58, Lecture II.8.7', 'Constraints': [
       {'name': 'q', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '3*q/(10*pi*d*epsilon)', 'derivative_lambda': 'lambda args : (lambda q,epsilon,d: 3*q/(10*pi*d*epsilon) )(*args)'
       },
       {'name': 'q', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': '3/(10*pi*d*epsilon)', 'derivative_lambda': 'lambda args : (lambda q,epsilon,d: 3/(10*pi*d*epsilon) )(*args)'
@@ -1479,7 +1479,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman59', 'DescriptiveName': 'Feynman59, Lecture II.8.31', 'Constriants': [
+  {'EquationName': 'Feynman59', 'DescriptiveName': 'Feynman59, Lecture II.8.31', 'Constraints': [
       {'name': 'epsilon', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'Ef**2/2', 'derivative_lambda': 'lambda args : (lambda epsilon,Ef: Ef**2/2 )(*args)'
       },
       {'name': 'epsilon', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda epsilon,Ef: 0 )(*args)'
@@ -1495,7 +1495,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman60', 'DescriptiveName': 'Feynman60, Lecture II.10.9', 'Constriants': [
+  {'EquationName': 'Feynman60', 'DescriptiveName': 'Feynman60, Lecture II.10.9', 'Constraints': [
       {'name': 'sigma_den', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '1/(epsilon*(chi + 1))', 'derivative_lambda': 'lambda args : (lambda sigma_den,epsilon,chi: 1/(epsilon*(chi + 1)) )(*args)'
       },
       {'name': 'sigma_den', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda sigma_den,epsilon,chi: 0 )(*args)'
@@ -1517,7 +1517,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman61', 'DescriptiveName': 'Feynman61, Lecture II.11.3', 'Constriants': [
+  {'EquationName': 'Feynman61', 'DescriptiveName': 'Feynman61, Lecture II.11.3', 'Constraints': [
       {'name': 'q', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'Ef/(m*(-omega**2 + omega_0**2))', 'derivative_lambda': 'lambda args : (lambda q,Ef,m,omega_0,omega: Ef/(m*(-omega**2 + omega_0**2)) )(*args)'
       },
       {'name': 'q', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda q,Ef,m,omega_0,omega: 0 )(*args)'
@@ -1551,7 +1551,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman62', 'DescriptiveName': 'Feynman62, Lecture II.11.17', 'Constriants': [
+  {'EquationName': 'Feynman62', 'DescriptiveName': 'Feynman62, Lecture II.11.17', 'Constraints': [
       {'name': 'n_0', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'Ef*p_d*cos(theta)/(T*kb) + 1', 'derivative_lambda': 'lambda args : (lambda n_0,kb,T,theta,p_d,Ef: Ef*p_d*cos(theta)/(T*kb) + 1 )(*args)'
       },
       {'name': 'n_0', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda n_0,kb,T,theta,p_d,Ef: 0 )(*args)'
@@ -1591,7 +1591,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman63', 'DescriptiveName': 'Feynman63, Lecture II.11.20', 'Constriants': [
+  {'EquationName': 'Feynman63', 'DescriptiveName': 'Feynman63, Lecture II.11.20', 'Constraints': [
       {'name': 'n_rho', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'Ef*p_d**2/(3*T*kb)', 'derivative_lambda': 'lambda args : (lambda n_rho,p_d,Ef,kb,T: Ef*p_d**2/(3*T*kb) )(*args)'
       },
       {'name': 'n_rho', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda n_rho,p_d,Ef,kb,T: 0 )(*args)'
@@ -1625,7 +1625,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman64', 'DescriptiveName': 'Feynman64, Lecture II.11.27', 'Constriants': [
+  {'EquationName': 'Feynman64', 'DescriptiveName': 'Feynman64, Lecture II.11.27', 'Constraints': [
       {'name': 'n', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'Ef*alpha**2*epsilon*n/(3*(-alpha*n/3 + 1)**2) + Ef*alpha*epsilon/(-alpha*n/3 + 1)', 'derivative_lambda': 'lambda args : (lambda n,alpha,epsilon,Ef: Ef*alpha**2*epsilon*n/(3*(-alpha*n/3 + 1)**2) + Ef*alpha*epsilon/(-alpha*n/3 + 1) )(*args)'
       },
       {'name': 'n', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': '6*Ef*alpha**2*epsilon*(-alpha*n/(alpha*n - 3) + 1)/(alpha*n - 3)**2', 'derivative_lambda': 'lambda args : (lambda n,alpha,epsilon,Ef: 6*Ef*alpha**2*epsilon*(-alpha*n/(alpha*n - 3) + 1)/(alpha*n - 3)**2 )(*args)'
@@ -1653,7 +1653,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman65', 'DescriptiveName': 'Feynman65, Lecture II.11.28', 'Constriants': [
+  {'EquationName': 'Feynman65', 'DescriptiveName': 'Feynman65, Lecture II.11.28', 'Constraints': [
       {'name': 'n', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'alpha**2*n/(3*(-alpha*n/3 + 1)**2) + alpha/(-alpha*n/3 + 1)', 'derivative_lambda': 'lambda args : (lambda n,alpha: alpha**2*n/(3*(-alpha*n/3 + 1)**2) + alpha/(-alpha*n/3 + 1) )(*args)'
       },
       {'name': 'n', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': '6*alpha**2*(-alpha*n/(alpha*n - 3) + 1)/(alpha*n - 3)**2', 'derivative_lambda': 'lambda args : (lambda n,alpha: 6*alpha**2*(-alpha*n/(alpha*n - 3) + 1)/(alpha*n - 3)**2 )(*args)'
@@ -1669,7 +1669,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman67', 'DescriptiveName': 'Feynman67, Lecture II.13.23', 'Constriants': [
+  {'EquationName': 'Feynman67', 'DescriptiveName': 'Feynman67, Lecture II.13.23', 'Constraints': [
       {'name': 'rho_c_0', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '1/sqrt(1 - v**2/c**2)', 'derivative_lambda': 'lambda args : (lambda rho_c_0,v,c: 1/sqrt(1 - v**2/c**2) )(*args)'
       },
       {'name': 'rho_c_0', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda rho_c_0,v,c: 0 )(*args)'
@@ -1691,7 +1691,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman68', 'DescriptiveName': 'Feynman68, Lecture II.13.34', 'Constriants': [
+  {'EquationName': 'Feynman68', 'DescriptiveName': 'Feynman68, Lecture II.13.34', 'Constraints': [
       {'name': 'rho_c_0', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'v/sqrt(1 - v**2/c**2)', 'derivative_lambda': 'lambda args : (lambda rho_c_0,v,c: v/sqrt(1 - v**2/c**2) )(*args)'
       },
       {'name': 'rho_c_0', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda rho_c_0,v,c: 0 )(*args)'
@@ -1713,7 +1713,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman69', 'DescriptiveName': 'Feynman69, Lecture II.15.4', 'Constriants': [
+  {'EquationName': 'Feynman69', 'DescriptiveName': 'Feynman69, Lecture II.15.4', 'Constraints': [
       {'name': 'mom', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '-B*cos(theta)', 'derivative_lambda': 'lambda args : (lambda mom,B,theta: -B*cos(theta) )(*args)'
       },
       {'name': 'mom', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda mom,B,theta: 0 )(*args)'
@@ -1735,7 +1735,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman70', 'DescriptiveName': 'Feynman70, Lecture II.15.5', 'Constriants': [
+  {'EquationName': 'Feynman70', 'DescriptiveName': 'Feynman70, Lecture II.15.5', 'Constraints': [
       {'name': 'p_d', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '-Ef*cos(theta)', 'derivative_lambda': 'lambda args : (lambda p_d,Ef,theta: -Ef*cos(theta) )(*args)'
       },
       {'name': 'p_d', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda p_d,Ef,theta: 0 )(*args)'
@@ -1757,7 +1757,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman71', 'DescriptiveName': 'Feynman71, Lecture II.21.32', 'Constriants': [
+  {'EquationName': 'Feynman71', 'DescriptiveName': 'Feynman71, Lecture II.21.32', 'Constraints': [
       {'name': 'q', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '1/(4*pi*epsilon*r*(1 - v/c))', 'derivative_lambda': 'lambda args : (lambda q,epsilon,r,v,c: 1/(4*pi*epsilon*r*(1 - v/c)) )(*args)'
       },
       {'name': 'q', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda q,epsilon,r,v,c: 0 )(*args)'
@@ -1791,7 +1791,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman72', 'DescriptiveName': 'Feynman72, Lecture II.24.17', 'Constriants': [
+  {'EquationName': 'Feynman72', 'DescriptiveName': 'Feynman72, Lecture II.24.17', 'Constraints': [
       {'name': 'omega', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'omega/(c**2*sqrt(-pi**2/d**2 + omega**2/c**2))', 'derivative_lambda': 'lambda args : (lambda omega,c,d: omega/(c**2*sqrt(-pi**2/d**2 + omega**2/c**2)) )(*args)'
       },
       {'name': 'omega', 'order_derivative': 2, 'monotonicity': 'decreasing', 'derivative': '(1 - omega**2/(c**2*(-pi**2/d**2 + omega**2/c**2)))/(c**2*sqrt(-pi**2/d**2 + omega**2/c**2))', 'derivative_lambda': 'lambda args : (lambda omega,c,d: (1 - omega**2/(c**2*(-pi**2/d**2 + omega**2/c**2)))/(c**2*sqrt(-pi**2/d**2 + omega**2/c**2)) )(*args)'
@@ -1813,7 +1813,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman73', 'DescriptiveName': 'Feynman73, Lecture II.27.16', 'Constriants': [
+  {'EquationName': 'Feynman73', 'DescriptiveName': 'Feynman73, Lecture II.27.16', 'Constraints': [
       {'name': 'epsilon', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'Ef**2*c', 'derivative_lambda': 'lambda args : (lambda epsilon,c,Ef: Ef**2*c )(*args)'
       },
       {'name': 'epsilon', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda epsilon,c,Ef: 0 )(*args)'
@@ -1835,7 +1835,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman74', 'DescriptiveName': 'Feynman74, Lecture II.27.18', 'Constriants': [
+  {'EquationName': 'Feynman74', 'DescriptiveName': 'Feynman74, Lecture II.27.18', 'Constraints': [
       {'name': 'epsilon', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'Ef**2', 'derivative_lambda': 'lambda args : (lambda epsilon,Ef: Ef**2 )(*args)'
       },
       {'name': 'epsilon', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda epsilon,Ef: 0 )(*args)'
@@ -1851,7 +1851,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman75', 'DescriptiveName': 'Feynman75, Lecture II.34.2a', 'Constriants': [
+  {'EquationName': 'Feynman75', 'DescriptiveName': 'Feynman75, Lecture II.34.2a', 'Constraints': [
       {'name': 'q', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'v/(2*pi*r)', 'derivative_lambda': 'lambda args : (lambda q,v,r: v/(2*pi*r) )(*args)'
       },
       {'name': 'q', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda q,v,r: 0 )(*args)'
@@ -1873,7 +1873,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman76', 'DescriptiveName': 'Feynman76, Lecture II.34.2', 'Constriants': [
+  {'EquationName': 'Feynman76', 'DescriptiveName': 'Feynman76, Lecture II.34.2', 'Constraints': [
       {'name': 'q', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'r*v/2', 'derivative_lambda': 'lambda args : (lambda q,v,r: r*v/2 )(*args)'
       },
       {'name': 'q', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda q,v,r: 0 )(*args)'
@@ -1895,7 +1895,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman77', 'DescriptiveName': 'Feynman77, Lecture II.34.11', 'Constriants': [
+  {'EquationName': 'Feynman77', 'DescriptiveName': 'Feynman77, Lecture II.34.11', 'Constraints': [
       {'name': 'g_', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'B*q/(2*m)', 'derivative_lambda': 'lambda args : (lambda g_,q,B,m: B*q/(2*m) )(*args)'
       },
       {'name': 'g_', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda g_,q,B,m: 0 )(*args)'
@@ -1923,7 +1923,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman78', 'DescriptiveName': 'Feynman78, Lecture II.34.29a', 'Constriants': [
+  {'EquationName': 'Feynman78', 'DescriptiveName': 'Feynman78, Lecture II.34.29a', 'Constraints': [
       {'name': 'q', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'h/(4*pi*m)', 'derivative_lambda': 'lambda args : (lambda q,h,m: h/(4*pi*m) )(*args)'
       },
       {'name': 'q', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda q,h,m: 0 )(*args)'
@@ -1945,7 +1945,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman79', 'DescriptiveName': 'Feynman79, Lecture II.34.29b', 'Constriants': [
+  {'EquationName': 'Feynman79', 'DescriptiveName': 'Feynman79, Lecture II.34.29b', 'Constraints': [
       {'name': 'g_', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '2*pi*B*Jz*mom/h', 'derivative_lambda': 'lambda args : (lambda g_,h,Jz,mom,B: 2*pi*B*Jz*mom/h )(*args)'
       },
       {'name': 'g_', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda g_,h,Jz,mom,B: 0 )(*args)'
@@ -1979,7 +1979,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman80', 'DescriptiveName': 'Feynman80, Lecture II.35.18', 'Constriants': [
+  {'EquationName': 'Feynman80', 'DescriptiveName': 'Feynman80, Lecture II.35.18', 'Constraints': [
       {'name': 'n_0', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '1/(exp(B*mom/(T*kb)) + exp(-B*mom/(T*kb)))', 'derivative_lambda': 'lambda args : (lambda n_0,kb,T,mom,B: 1/(exp(B*mom/(T*kb)) + exp(-B*mom/(T*kb))) )(*args)'
       },
       {'name': 'n_0', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda n_0,kb,T,mom,B: 0 )(*args)'
@@ -2013,7 +2013,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman81', 'DescriptiveName': 'Feynman81, Lecture II.35.21', 'Constriants': [
+  {'EquationName': 'Feynman81', 'DescriptiveName': 'Feynman81, Lecture II.35.21', 'Constraints': [
       {'name': 'n_rho', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'mom*tanh(B*mom/(T*kb))', 'derivative_lambda': 'lambda args : (lambda n_rho,mom,B,kb,T: mom*tanh(B*mom/(T*kb)) )(*args)'
       },
       {'name': 'n_rho', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda n_rho,mom,B,kb,T: 0 )(*args)'
@@ -2047,7 +2047,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman87', 'DescriptiveName': 'Feynman87, Lecture III.4.33', 'Constriants': [
+  {'EquationName': 'Feynman87', 'DescriptiveName': 'Feynman87, Lecture III.4.33', 'Constraints': [
       {'name': 'h', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': 'omega/(2*pi*(exp(h*omega/(2*pi*T*kb)) - 1)) - h*omega**2*exp(h*omega/(2*pi*T*kb))/(4*pi**2*T*kb*(exp(h*omega/(2*pi*T*kb)) - 1)**2)', 'derivative_lambda': 'lambda args : (lambda h,omega,kb,T: omega/(2*pi*(exp(h*omega/(2*pi*T*kb)) - 1)) - h*omega**2*exp(h*omega/(2*pi*T*kb))/(4*pi**2*T*kb*(exp(h*omega/(2*pi*T*kb)) - 1)**2) )(*args)'
       },
       {'name': 'h', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': '-omega**2*(4*exp(h*omega/(2*pi*T*kb)) + h*omega*(exp(h*omega/(2*pi*T*kb)) - 2*exp(h*omega/(pi*T*kb))/(exp(h*omega/(2*pi*T*kb)) - 1))/(pi*T*kb))/(8*pi**2*T*kb*(exp(h*omega/(2*pi*T*kb)) - 1)**2)', 'derivative_lambda': 'lambda args : (lambda h,omega,kb,T: -omega**2*(4*exp(h*omega/(2*pi*T*kb)) + h*omega*(exp(h*omega/(2*pi*T*kb)) - 2*exp(h*omega/(pi*T*kb))/(exp(h*omega/(2*pi*T*kb)) - 1))/(pi*T*kb))/(8*pi**2*T*kb*(exp(h*omega/(2*pi*T*kb)) - 1)**2) )(*args)'
@@ -2075,7 +2075,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman88', 'DescriptiveName': 'Feynman88, Lecture III.7.38', 'Constriants': [
+  {'EquationName': 'Feynman88', 'DescriptiveName': 'Feynman88, Lecture III.7.38', 'Constraints': [
       {'name': 'mom', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '4*pi*B/h', 'derivative_lambda': 'lambda args : (lambda mom,B,h: 4*pi*B/h )(*args)'
       },
       {'name': 'mom', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda mom,B,h: 0 )(*args)'
@@ -2097,7 +2097,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman89', 'DescriptiveName': 'Feynman89, Lecture III.8.54', 'Constriants': [
+  {'EquationName': 'Feynman89', 'DescriptiveName': 'Feynman89, Lecture III.8.54', 'Constraints': [
       {'name': 'E_n', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '4*pi*t*sin(2*pi*E_n*t/h)*cos(2*pi*E_n*t/h)/h', 'derivative_lambda': 'lambda args : (lambda E_n,t,h: 4*pi*t*sin(2*pi*E_n*t/h)*cos(2*pi*E_n*t/h)/h )(*args)'
       },
       {'name': 'E_n', 'order_derivative': 2, 'monotonicity': 'decreasing', 'derivative': '8*pi**2*t**2*(-sin(2*pi*E_n*t/h)**2 + cos(2*pi*E_n*t/h)**2)/h**2', 'derivative_lambda': 'lambda args : (lambda E_n,t,h: 8*pi**2*t**2*(-sin(2*pi*E_n*t/h)**2 + cos(2*pi*E_n*t/h)**2)/h**2 )(*args)'
@@ -2119,7 +2119,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman90', 'DescriptiveName': 'Feynman90, Lecture III.9.52', 'Constriants': [
+  {'EquationName': 'Feynman90', 'DescriptiveName': 'Feynman90, Lecture III.9.52', 'Constraints': [
       {'name': 'p_d', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '8*pi*Ef*sin(t*(omega - omega_0)/2)**2/(h*t*(omega - omega_0)**2)', 'derivative_lambda': 'lambda args : (lambda p_d,Ef,t,h,omega,omega_0: 8*pi*Ef*sin(t*(omega - omega_0)/2)**2/(h*t*(omega - omega_0)**2) )(*args)'
       },
       {'name': 'p_d', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda p_d,Ef,t,h,omega,omega_0: 0 )(*args)'
@@ -2159,7 +2159,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman91', 'DescriptiveName': 'Feynman91, Lecture III.10.19', 'Constriants': [
+  {'EquationName': 'Feynman91', 'DescriptiveName': 'Feynman91, Lecture III.10.19', 'Constraints': [
       {'name': 'mom', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'sqrt(Bx**2 + By**2 + Bz**2)', 'derivative_lambda': 'lambda args : (lambda mom,Bx,By,Bz: sqrt(Bx**2 + By**2 + Bz**2) )(*args)'
       },
       {'name': 'mom', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda mom,Bx,By,Bz: 0 )(*args)'
@@ -2187,7 +2187,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman92', 'DescriptiveName': 'Feynman92, Lecture III.12.43', 'Constriants': [
+  {'EquationName': 'Feynman92', 'DescriptiveName': 'Feynman92, Lecture III.12.43', 'Constraints': [
       {'name': 'n', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'h/(2*pi)', 'derivative_lambda': 'lambda args : (lambda n,h: h/(2*pi) )(*args)'
       },
       {'name': 'n', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda n,h: 0 )(*args)'
@@ -2203,7 +2203,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman93', 'DescriptiveName': 'Feynman93, Lecture III.13.18', 'Constriants': [
+  {'EquationName': 'Feynman93', 'DescriptiveName': 'Feynman93, Lecture III.13.18', 'Constraints': [
       {'name': 'E_n', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '4*pi*d**2*k/h', 'derivative_lambda': 'lambda args : (lambda E_n,d,k,h: 4*pi*d**2*k/h )(*args)'
       },
       {'name': 'E_n', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda E_n,d,k,h: 0 )(*args)'
@@ -2231,7 +2231,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman94', 'DescriptiveName': 'Feynman94, Lecture III.14.14', 'Constriants': [
+  {'EquationName': 'Feynman94', 'DescriptiveName': 'Feynman94, Lecture III.14.14', 'Constraints': [
       {'name': 'I_0', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'exp(Volt*q/(T*kb)) - 1', 'derivative_lambda': 'lambda args : (lambda I_0,q,Volt,kb,T: exp(Volt*q/(T*kb)) - 1 )(*args)'
       },
       {'name': 'I_0', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda I_0,q,Volt,kb,T: 0 )(*args)'
@@ -2265,7 +2265,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman95', 'DescriptiveName': 'Feynman95, Lecture III.15.12', 'Constriants': [
+  {'EquationName': 'Feynman95', 'DescriptiveName': 'Feynman95, Lecture III.15.12', 'Constraints': [
       {'name': 'U', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '2 - 2*cos(d*k)', 'derivative_lambda': 'lambda args : (lambda U,k,d: 2 - 2*cos(d*k) )(*args)'
       },
       {'name': 'U', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda U,k,d: 0 )(*args)'
@@ -2287,7 +2287,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman96', 'DescriptiveName': 'Feynman96, Lecture III.15.14', 'Constriants': [
+  {'EquationName': 'Feynman96', 'DescriptiveName': 'Feynman96, Lecture III.15.14', 'Constraints': [
       {'name': 'h', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'h/(4*pi**2*E_n*d**2)', 'derivative_lambda': 'lambda args : (lambda h,E_n,d: h/(4*pi**2*E_n*d**2) )(*args)'
       },
       {'name': 'h', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': '1/(4*pi**2*E_n*d**2)', 'derivative_lambda': 'lambda args : (lambda h,E_n,d: 1/(4*pi**2*E_n*d**2) )(*args)'
@@ -2309,7 +2309,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman97', 'DescriptiveName': 'Feynman97, Lecture III.15.27', 'Constriants': [
+  {'EquationName': 'Feynman97', 'DescriptiveName': 'Feynman97, Lecture III.15.27', 'Constraints': [
       {'name': 'alpha', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '2*pi/(d*n)', 'derivative_lambda': 'lambda args : (lambda alpha,n,d: 2*pi/(d*n) )(*args)'
       },
       {'name': 'alpha', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda alpha,n,d: 0 )(*args)'
@@ -2331,7 +2331,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman98', 'DescriptiveName': 'Feynman98, Lecture III.17.37', 'Constriants': [
+  {'EquationName': 'Feynman98', 'DescriptiveName': 'Feynman98, Lecture III.17.37', 'Constraints': [
       {'name': 'beta', 'order_derivative': 1, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda beta,alpha,theta: 0 )(*args)'
       },
       {'name': 'beta', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda beta,alpha,theta: 0 )(*args)'
@@ -2353,7 +2353,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman99', 'DescriptiveName': 'Feynman99, Lecture III.19.51', 'Constriants': [
+  {'EquationName': 'Feynman99', 'DescriptiveName': 'Feynman99, Lecture III.19.51', 'Constraints': [
       {'name': 'm', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': '-q**4/(8*epsilon**2*h**2*n**2)', 'derivative_lambda': 'lambda args : (lambda m,q,h,n,epsilon: -q**4/(8*epsilon**2*h**2*n**2) )(*args)'
       },
       {'name': 'm', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda m,q,h,n,epsilon: 0 )(*args)'
@@ -2387,7 +2387,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Feynman100', 'DescriptiveName': 'Feynman100, Lecture III.21.20', 'Constriants': [
+  {'EquationName': 'Feynman100', 'DescriptiveName': 'Feynman100, Lecture III.21.20', 'Constraints': [
       {'name': 'rho_c_0', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': '-A_vec*q/m', 'derivative_lambda': 'lambda args : (lambda rho_c_0,q,A_vec,m: -A_vec*q/m )(*args)'
       },
       {'name': 'rho_c_0', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda rho_c_0,q,A_vec,m: 0 )(*args)'
@@ -2415,7 +2415,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus1', 'DescriptiveName': 'Bonus1.0, Rutherford scattering', 'Constriants': [
+  {'EquationName': 'Bonus1', 'DescriptiveName': 'Bonus1.0, Rutherford scattering', 'Constraints': [
       {'name': 'Z_1', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'Z_1*Z_2**2*alpha**2*c**2*hbar**2/(8*E_n**2*sin(theta/2)**4)', 'derivative_lambda': 'lambda args : (lambda Z_1,Z_2,alpha,hbar,c,E_n,theta: Z_1*Z_2**2*alpha**2*c**2*hbar**2/(8*E_n**2*sin(theta/2)**4) )(*args)'
       },
       {'name': 'Z_1', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': 'Z_2**2*alpha**2*c**2*hbar**2/(8*E_n**2*sin(theta/2)**4)', 'derivative_lambda': 'lambda args : (lambda Z_1,Z_2,alpha,hbar,c,E_n,theta: Z_2**2*alpha**2*c**2*hbar**2/(8*E_n**2*sin(theta/2)**4) )(*args)'
@@ -2461,7 +2461,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus2', 'DescriptiveName': 'Bonus2.0, 3.55 Goldstein', 'Constriants': [
+  {'EquationName': 'Bonus2', 'DescriptiveName': 'Bonus2.0, 3.55 Goldstein', 'Constraints': [
       {'name': 'm', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': '-E_n*cos(theta1 - theta2)/(k_G*m*sqrt(2*E_n*L**2/(k_G**2*m) + 1)) + k_G*(sqrt(2*E_n*L**2/(k_G**2*m) + 1)*cos(theta1 - theta2) + 1)/L**2', 'derivative_lambda': 'lambda args : (lambda m,k_G,L,E_n,theta1,theta2: -E_n*cos(theta1 - theta2)/(k_G*m*sqrt(2*E_n*L**2/(k_G**2*m) + 1)) + k_G*(sqrt(2*E_n*L**2/(k_G**2*m) + 1)*cos(theta1 - theta2) + 1)/L**2 )(*args)'
       },
       {'name': 'm', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': '-E_n**2*L**2*cos(theta1 - theta2)/(k_G**3*m**3*(2*E_n*L**2/(k_G**2*m) + 1)**(3/2))', 'derivative_lambda': 'lambda args : (lambda m,k_G,L,E_n,theta1,theta2: -E_n**2*L**2*cos(theta1 - theta2)/(k_G**3*m**3*(2*E_n*L**2/(k_G**2*m) + 1)**(3/2)) )(*args)'
@@ -2501,7 +2501,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus3', 'DescriptiveName': 'Bonus3.0, 3.64 Goldstein', 'Constriants': [
+  {'EquationName': 'Bonus3', 'DescriptiveName': 'Bonus3.0, 3.64 Goldstein', 'Constraints': [
       {'name': 'd', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': '(1 - alpha**2)/(alpha*cos(theta1 - theta2) + 1)', 'derivative_lambda': 'lambda args : (lambda d,alpha,theta1,theta2: (1 - alpha**2)/(alpha*cos(theta1 - theta2) + 1) )(*args)'
       },
       {'name': 'd', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda d,alpha,theta1,theta2: 0 )(*args)'
@@ -2529,7 +2529,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus4', 'DescriptiveName': 'Bonus4.0, 3.16 Goldstein', 'Constriants': [
+  {'EquationName': 'Bonus4', 'DescriptiveName': 'Bonus4.0, 3.16 Goldstein', 'Constraints': [
       {'name': 'm', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': 'sqrt(2)*m*sqrt((E_n - L**2/(2*m*r**2) - U)/m)*(L**2/(4*m**3*r**2) - (E_n - L**2/(2*m*r**2) - U)/(2*m**2))/(E_n - L**2/(2*m*r**2) - U)', 'derivative_lambda': 'lambda args : (lambda m,E_n,U,L,r: sqrt(2)*m*sqrt((E_n - L**2/(2*m*r**2) - U)/m)*(L**2/(4*m**3*r**2) - (E_n - L**2/(2*m*r**2) - U)/(2*m**2))/(E_n - L**2/(2*m*r**2) - U) )(*args)'
       },
       {'name': 'm', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': 'sqrt(2)*sqrt(-(-E_n + L**2/(2*m*r**2) + U)/m)*(-E_n + 2*L**2/(m*r**2) - L**2*(-E_n + L**2/(m*r**2) + U)/(m*r**2*(-2*E_n + L**2/(m*r**2) + 2*U)) + U + (-E_n + L**2/(m*r**2) + U)**2/(-2*E_n + L**2/(m*r**2) + 2*U))/(m**2*(-2*E_n + L**2/(m*r**2) + 2*U))', 'derivative_lambda': 'lambda args : (lambda m,E_n,U,L,r: sqrt(2)*sqrt(-(-E_n + L**2/(2*m*r**2) + U)/m)*(-E_n + 2*L**2/(m*r**2) - L**2*(-E_n + L**2/(m*r**2) + U)/(m*r**2*(-2*E_n + L**2/(m*r**2) + 2*U)) + U + (-E_n + L**2/(m*r**2) + U)**2/(-2*E_n + L**2/(m*r**2) + 2*U))/(m**2*(-2*E_n + L**2/(m*r**2) + 2*U)) )(*args)'
@@ -2563,7 +2563,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus5', 'DescriptiveName': 'Bonus5.0 3.74 Goldstein', 'Constriants': [
+  {'EquationName': 'Bonus5', 'DescriptiveName': 'Bonus5.0 3.74 Goldstein', 'Constraints': [
       {'name': 'd', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '3*pi*sqrt(d)/sqrt(G*(m1 + m2))', 'derivative_lambda': 'lambda args : (lambda d,G,m1,m2: 3*pi*sqrt(d)/sqrt(G*(m1 + m2)) )(*args)'
       },
       {'name': 'd', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': '3*pi/(2*sqrt(d)*sqrt(G*(m1 + m2)))', 'derivative_lambda': 'lambda args : (lambda d,G,m1,m2: 3*pi/(2*sqrt(d)*sqrt(G*(m1 + m2))) )(*args)'
@@ -2591,7 +2591,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus6', 'DescriptiveName': 'Bonus6.0,  3.99 Goldstein', 'Constriants': [
+  {'EquationName': 'Bonus6', 'DescriptiveName': 'Bonus6.0,  3.99 Goldstein', 'Constraints': [
       {'name': 'epsilon', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '2*E_n*L**2*epsilon/(Z_1**2*Z_2**2*m*q**4*sqrt(2*E_n*L**2*epsilon**2/(Z_1**2*Z_2**2*m*q**4) + 1))', 'derivative_lambda': 'lambda args : (lambda epsilon,L,m,Z_1,Z_2,q,E_n: 2*E_n*L**2*epsilon/(Z_1**2*Z_2**2*m*q**4*sqrt(2*E_n*L**2*epsilon**2/(Z_1**2*Z_2**2*m*q**4) + 1)) )(*args)'
       },
       {'name': 'epsilon', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': '2*E_n*L**2*(-2*E_n*L**2*epsilon**2/(Z_1**2*Z_2**2*m*q**4*(2*E_n*L**2*epsilon**2/(Z_1**2*Z_2**2*m*q**4) + 1)) + 1)/(Z_1**2*Z_2**2*m*q**4*sqrt(2*E_n*L**2*epsilon**2/(Z_1**2*Z_2**2*m*q**4) + 1))', 'derivative_lambda': 'lambda args : (lambda epsilon,L,m,Z_1,Z_2,q,E_n: 2*E_n*L**2*(-2*E_n*L**2*epsilon**2/(Z_1**2*Z_2**2*m*q**4*(2*E_n*L**2*epsilon**2/(Z_1**2*Z_2**2*m*q**4) + 1)) + 1)/(Z_1**2*Z_2**2*m*q**4*sqrt(2*E_n*L**2*epsilon**2/(Z_1**2*Z_2**2*m*q**4) + 1)) )(*args)'
@@ -2637,7 +2637,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus7', 'DescriptiveName': 'Bonus7.0, Friedman Equation', 'Constriants': [
+  {'EquationName': 'Bonus7', 'DescriptiveName': 'Bonus7.0, Friedman Equation', 'Constraints': [
       {'name': 'G', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '4*pi*rho/(3*sqrt(8*pi*G*rho/3 - alpha*c**2/d**2))', 'derivative_lambda': 'lambda args : (lambda G,rho,alpha,c,d: 4*pi*rho/(3*sqrt(8*pi*G*rho/3 - alpha*c**2/d**2)) )(*args)'
       },
       {'name': 'G', 'order_derivative': 2, 'monotonicity': 'decreasing', 'derivative': '-16*pi**2*rho**2/(9*(8*pi*G*rho/3 - alpha*c**2/d**2)**(3/2))', 'derivative_lambda': 'lambda args : (lambda G,rho,alpha,c,d: -16*pi**2*rho**2/(9*(8*pi*G*rho/3 - alpha*c**2/d**2)**(3/2)) )(*args)'
@@ -2671,7 +2671,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus8', 'DescriptiveName': 'Bonus8.0, Compton Scattering', 'Constriants': [
+  {'EquationName': 'Bonus8', 'DescriptiveName': 'Bonus8.0, Compton Scattering', 'Constraints': [
       {'name': 'E_n', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '-E_n*(1 - cos(theta))/(c**2*m*(E_n*(1 - cos(theta))/(c**2*m) + 1)**2) + 1/(E_n*(1 - cos(theta))/(c**2*m) + 1)', 'derivative_lambda': 'lambda args : (lambda E_n,m,c,theta: -E_n*(1 - cos(theta))/(c**2*m*(E_n*(1 - cos(theta))/(c**2*m) + 1)**2) + 1/(E_n*(1 - cos(theta))/(c**2*m) + 1) )(*args)'
       },
       {'name': 'E_n', 'order_derivative': 2, 'monotonicity': 'decreasing', 'derivative': '2*(-E_n*(cos(theta) - 1)/(c**2*m*(E_n*(cos(theta) - 1)/(c**2*m) - 1)) + 1)*(cos(theta) - 1)/(c**2*m*(E_n*(cos(theta) - 1)/(c**2*m) - 1)**2)', 'derivative_lambda': 'lambda args : (lambda E_n,m,c,theta: 2*(-E_n*(cos(theta) - 1)/(c**2*m*(E_n*(cos(theta) - 1)/(c**2*m) - 1)) + 1)*(cos(theta) - 1)/(c**2*m*(E_n*(cos(theta) - 1)/(c**2*m) - 1)**2) )(*args)'
@@ -2699,7 +2699,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus9', 'DescriptiveName': 'Bonus9.0, Gravitational wave ratiated power', 'Constriants': [
+  {'EquationName': 'Bonus9', 'DescriptiveName': 'Bonus9.0, Gravitational wave ratiated power', 'Constraints': [
       {'name': 'G', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': '-128*G**3*m1**2*m2**2*(m1 + m2)/(5*c**5*r**5)', 'derivative_lambda': 'lambda args : (lambda G,c,m1,m2,r: -128*G**3*m1**2*m2**2*(m1 + m2)/(5*c**5*r**5) )(*args)'
       },
       {'name': 'G', 'order_derivative': 2, 'monotonicity': 'decreasing', 'derivative': '-384*G**2*m1**2*m2**2*(m1 + m2)/(5*c**5*r**5)', 'derivative_lambda': 'lambda args : (lambda G,c,m1,m2,r: -384*G**2*m1**2*m2**2*(m1 + m2)/(5*c**5*r**5) )(*args)'
@@ -2733,7 +2733,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus10', 'DescriptiveName': 'Bonus10.0, Relativistic aberation', 'Constriants': [
+  {'EquationName': 'Bonus10', 'DescriptiveName': 'Bonus10.0, Relativistic aberation', 'Constraints': [
       {'name': 'c', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': '-(v/(c**2*(1 - v*cos(theta2)/c)) - v*(cos(theta2) - v/c)*cos(theta2)/(c**2*(1 - v*cos(theta2)/c)**2))/sqrt(1 - (cos(theta2) - v/c)**2/(1 - v*cos(theta2)/c)**2)', 'derivative_lambda': 'lambda args : (lambda c,v,theta2: -(v/(c**2*(1 - v*cos(theta2)/c)) - v*(cos(theta2) - v/c)*cos(theta2)/(c**2*(1 - v*cos(theta2)/c)**2))/sqrt(1 - (cos(theta2) - v/c)**2/(1 - v*cos(theta2)/c)**2) )(*args)'
       },
       {'name': 'c', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': 'v*(2 - 2*(cos(theta2) - v/c)*cos(theta2)/(1 - v*cos(theta2)/c) + 2*v*cos(theta2)/(c*(1 - v*cos(theta2)/c)) - 2*v*(cos(theta2) - v/c)*cos(theta2)**2/(c*(1 - v*cos(theta2)/c)**2) - v*(1 - (cos(theta2) - v/c)*cos(theta2)/(1 - v*cos(theta2)/c))**2*(cos(theta2) - v/c)/(c*(1 - (cos(theta2) - v/c)**2/(1 - v*cos(theta2)/c)**2)*(1 - v*cos(theta2)/c)**2))/(c**3*sqrt(1 - (cos(theta2) - v/c)**2/(1 - v*cos(theta2)/c)**2)*(1 - v*cos(theta2)/c))', 'derivative_lambda': 'lambda args : (lambda c,v,theta2: v*(2 - 2*(cos(theta2) - v/c)*cos(theta2)/(1 - v*cos(theta2)/c) + 2*v*cos(theta2)/(c*(1 - v*cos(theta2)/c)) - 2*v*(cos(theta2) - v/c)*cos(theta2)**2/(c*(1 - v*cos(theta2)/c)**2) - v*(1 - (cos(theta2) - v/c)*cos(theta2)/(1 - v*cos(theta2)/c))**2*(cos(theta2) - v/c)/(c*(1 - (cos(theta2) - v/c)**2/(1 - v*cos(theta2)/c)**2)*(1 - v*cos(theta2)/c)**2))/(c**3*sqrt(1 - (cos(theta2) - v/c)**2/(1 - v*cos(theta2)/c)**2)*(1 - v*cos(theta2)/c)) )(*args)'
@@ -2755,7 +2755,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus11', 'DescriptiveName': 'Bonus11.0, N-slit diffraction', 'Constriants': [
+  {'EquationName': 'Bonus11', 'DescriptiveName': 'Bonus11.0, N-slit diffraction', 'Constraints': [
       {'name': 'I_0', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '4*sin(alpha/2)**2*sin(delta*n/2)**2/(alpha**2*sin(delta/2)**2)', 'derivative_lambda': 'lambda args : (lambda I_0,alpha,delta,n: 4*sin(alpha/2)**2*sin(delta*n/2)**2/(alpha**2*sin(delta/2)**2) )(*args)'
       },
       {'name': 'I_0', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda I_0,alpha,delta,n: 0 )(*args)'
@@ -2783,7 +2783,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus12', 'DescriptiveName': 'Bonus12.0, 2.11 Jackson', 'Constriants': [
+  {'EquationName': 'Bonus12', 'DescriptiveName': 'Bonus12.0, 2.11 Jackson', 'Constraints': [
       {'name': 'q', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '-d*q*y/(4*pi*epsilon*(-d**2 + y**2)**2) + (4*pi*Volt*d*epsilon - d*q*y**3/(-d**2 + y**2)**2)/(4*pi*epsilon*y**2)', 'derivative_lambda': 'lambda args : (lambda q,y,Volt,d,epsilon: -d*q*y/(4*pi*epsilon*(-d**2 + y**2)**2) + (4*pi*Volt*d*epsilon - d*q*y**3/(-d**2 + y**2)**2)/(4*pi*epsilon*y**2) )(*args)'
       },
       {'name': 'q', 'order_derivative': 2, 'monotonicity': 'decreasing', 'derivative': '-d*y/(2*pi*epsilon*(d**2 - y**2)**2)', 'derivative_lambda': 'lambda args : (lambda q,y,Volt,d,epsilon: -d*y/(2*pi*epsilon*(d**2 - y**2)**2) )(*args)'
@@ -2817,7 +2817,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus13', 'DescriptiveName': 'Bonus13.0, 3.45 Jackson', 'Constriants': [
+  {'EquationName': 'Bonus13', 'DescriptiveName': 'Bonus13.0, 3.45 Jackson', 'Constraints': [
       {'name': 'q', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': '1/(4*pi*epsilon*sqrt(d**2 - 2*d*r*cos(alpha) + r**2))', 'derivative_lambda': 'lambda args : (lambda q,r,d,alpha,epsilon: 1/(4*pi*epsilon*sqrt(d**2 - 2*d*r*cos(alpha) + r**2)) )(*args)'
       },
       {'name': 'q', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda q,r,d,alpha,epsilon: 0 )(*args)'
@@ -2851,7 +2851,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus14', 'DescriptiveName': "Bonus14.0, 4.60' Jackson", 'Constriants': [
+  {'EquationName': 'Bonus14', 'DescriptiveName': "Bonus14.0, 4.60' Jackson", 'Constraints': [
       {'name': 'Ef', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': '(d**3*(alpha - 1)/(r**2*(alpha + 2)) - r)*cos(theta)', 'derivative_lambda': 'lambda args : (lambda Ef,theta,r,d,alpha: (d**3*(alpha - 1)/(r**2*(alpha + 2)) - r)*cos(theta) )(*args)'
       },
       {'name': 'Ef', 'order_derivative': 2, 'monotonicity': 'constant', 'derivative': '0', 'derivative_lambda': 'lambda args : (lambda Ef,theta,r,d,alpha: 0 )(*args)'
@@ -2885,7 +2885,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus15', 'DescriptiveName': 'Bonus15.0, 11.38 Jackson', 'Constriants': [
+  {'EquationName': 'Bonus15', 'DescriptiveName': 'Bonus15.0, 11.38 Jackson', 'Constraints': [
       {'name': 'c', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'omega*v*sqrt(1 - v**2/c**2)*cos(theta)/(c**2*(1 + v*cos(theta)/c)**2) + omega*v**2/(c**3*sqrt(1 - v**2/c**2)*(1 + v*cos(theta)/c))', 'derivative_lambda': 'lambda args : (lambda c,v,omega,theta: omega*v*sqrt(1 - v**2/c**2)*cos(theta)/(c**2*(1 + v*cos(theta)/c)**2) + omega*v**2/(c**3*sqrt(1 - v**2/c**2)*(1 + v*cos(theta)/c)) )(*args)'
       },
       {'name': 'c', 'order_derivative': 2, 'monotonicity': 'decreasing', 'derivative': 'omega*v*(-2*sqrt(1 - v**2/c**2)*(1 - v*cos(theta)/(c*(1 + v*cos(theta)/c)))*cos(theta)/(1 + v*cos(theta)/c) - v*(3 + v**2/(c**2*(1 - v**2/c**2)))/(c*sqrt(1 - v**2/c**2)) + 2*v**2*cos(theta)/(c**2*sqrt(1 - v**2/c**2)*(1 + v*cos(theta)/c)))/(c**3*(1 + v*cos(theta)/c))', 'derivative_lambda': 'lambda args : (lambda c,v,omega,theta: omega*v*(-2*sqrt(1 - v**2/c**2)*(1 - v*cos(theta)/(c*(1 + v*cos(theta)/c)))*cos(theta)/(1 + v*cos(theta)/c) - v*(3 + v**2/(c**2*(1 - v**2/c**2)))/(c*sqrt(1 - v**2/c**2)) + 2*v**2*cos(theta)/(c**2*sqrt(1 - v**2/c**2)*(1 + v*cos(theta)/c)))/(c**3*(1 + v*cos(theta)/c)) )(*args)'
@@ -2913,7 +2913,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus16', 'DescriptiveName': 'Bonus16.0, 8.56 Goldstein', 'Constriants': [
+  {'EquationName': 'Bonus16', 'DescriptiveName': 'Bonus16.0, 8.56 Goldstein', 'Constraints': [
       {'name': 'm', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'c**4*m/sqrt(c**4*m**2 + c**2*(-A_vec*q + p)**2)', 'derivative_lambda': 'lambda args : (lambda m,c,p,q,A_vec,Volt: c**4*m/sqrt(c**4*m**2 + c**2*(-A_vec*q + p)**2) )(*args)'
       },
       {'name': 'm', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': 'c**4*(-c**2*m**2/(c**2*m**2 + (A_vec*q - p)**2) + 1)/sqrt(c**2*(c**2*m**2 + (A_vec*q - p)**2))', 'derivative_lambda': 'lambda args : (lambda m,c,p,q,A_vec,Volt: c**4*(-c**2*m**2/(c**2*m**2 + (A_vec*q - p)**2) + 1)/sqrt(c**2*(c**2*m**2 + (A_vec*q - p)**2)) )(*args)'
@@ -2953,7 +2953,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus17', 'DescriptiveName': "Bonus17.0, 12.80' Goldstein", 'Constriants': [
+  {'EquationName': 'Bonus17', 'DescriptiveName': "Bonus17.0, 12.80' Goldstein", 'Constraints': [
       {'name': 'm', 'order_derivative': 1, 'monotonicity': 'increasing', 'derivative': 'omega**2*x**2*(alpha*x/y + 1) - (m**2*omega**2*x**2*(alpha*x/y + 1) + p**2)/(2*m**2)', 'derivative_lambda': 'lambda args : (lambda m,omega,p,y,x,alpha: omega**2*x**2*(alpha*x/y + 1) - (m**2*omega**2*x**2*(alpha*x/y + 1) + p**2)/(2*m**2) )(*args)'
       },
       {'name': 'm', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': '(-omega**2*x**2*(alpha*x/y + 1) + (m**2*omega**2*x**2*(alpha*x/y + 1) + p**2)/m**2)/m', 'derivative_lambda': 'lambda args : (lambda m,omega,p,y,x,alpha: (-omega**2*x**2*(alpha*x/y + 1) + (m**2*omega**2*x**2*(alpha*x/y + 1) + p**2)/m**2)/m )(*args)'
@@ -2993,7 +2993,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus18', 'DescriptiveName': "Bonus18.0, 15.2.1 Weinberg", 'Constriants': [
+  {'EquationName': 'Bonus18', 'DescriptiveName': "Bonus18.0, 15.2.1 Weinberg", 'Constraints': [
       {'name': 'G', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': '-3*(H_G**2 + c**2*k_f/r**2)/(8*pi*G**2)', 'derivative_lambda': 'lambda args : (lambda G,k_f,r,H_G,c: -3*(H_G**2 + c**2*k_f/r**2)/(8*pi*G**2) )(*args)'
       },
       {'name': 'G', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': '3*(H_G**2 + c**2*k_f/r**2)/(4*pi*G**3)', 'derivative_lambda': 'lambda args : (lambda G,k_f,r,H_G,c: 3*(H_G**2 + c**2*k_f/r**2)/(4*pi*G**3) )(*args)'
@@ -3027,7 +3027,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus19', 'DescriptiveName': 'Bonus19.0, 15.2.2 Weinberg', 'Constriants': [
+  {'EquationName': 'Bonus19', 'DescriptiveName': 'Bonus19.0, 15.2.2 Weinberg', 'Constraints': [
       {'name': 'G', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': '(H_G**2*c**2*(1 - 2*alpha) + c**4*k_f/r**2)/(8*pi*G**2)', 'derivative_lambda': 'lambda args : (lambda G,k_f,r,H_G,alpha,c: (H_G**2*c**2*(1 - 2*alpha) + c**4*k_f/r**2)/(8*pi*G**2) )(*args)'
       },
       {'name': 'G', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': 'c**2*(H_G**2*(2*alpha - 1) - c**2*k_f/r**2)/(4*pi*G**3)', 'derivative_lambda': 'lambda args : (lambda G,k_f,r,H_G,alpha,c: c**2*(H_G**2*(2*alpha - 1) - c**2*k_f/r**2)/(4*pi*G**3) )(*args)'
@@ -3067,7 +3067,7 @@ constraints = [
       }
     ]
   },
-  {'EquationName': 'Bonus20', 'DescriptiveName': 'Bonus20.0, Klein-Nishina (13.132 Schwarz)', 'Constriants': [
+  {'EquationName': 'Bonus20', 'DescriptiveName': 'Bonus20.0, Klein-Nishina (13.132 Schwarz)', 'Constraints': [
       {'name': 'omega', 'order_derivative': 1, 'monotonicity': 'decreasing', 'derivative': 'alpha**2*h**2*omega_0**2*(1/omega_0 - omega_0/omega**2)/(4*pi*c**2*m**2*omega**2) - alpha**2*h**2*omega_0**2*(omega/omega_0 - sin(beta)**2 + omega_0/omega)/(2*pi*c**2*m**2*omega**3)', 'derivative_lambda': 'lambda args : (lambda omega,omega_0,alpha,h,m,c,beta: alpha**2*h**2*omega_0**2*(1/omega_0 - omega_0/omega**2)/(4*pi*c**2*m**2*omega**2) - alpha**2*h**2*omega_0**2*(omega/omega_0 - sin(beta)**2 + omega_0/omega)/(2*pi*c**2*m**2*omega**3) )(*args)'
       },
       {'name': 'omega', 'order_derivative': 2, 'monotonicity': 'increasing', 'derivative': 'alpha**2*h**2*omega_0**2*(-1/omega_0 + 3*(omega/omega_0 - sin(beta)**2 + omega_0/omega)/(2*omega) + 3*omega_0/(2*omega**2))/(pi*c**2*m**2*omega**3)', 'derivative_lambda': 'lambda args : (lambda omega,omega_0,alpha,h,m,c,beta: alpha**2*h**2*omega_0**2*(-1/omega_0 + 3*(omega/omega_0 - sin(beta)**2 + omega_0/omega)/(2*omega) + 3*omega_0/(2*omega**2))/(pi*c**2*m**2*omega**3) )(*args)'

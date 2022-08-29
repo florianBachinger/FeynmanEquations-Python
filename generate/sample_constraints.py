@@ -84,7 +84,7 @@ with open("Feynman/Constraints.py", "a") as text_file:
 
     text_file.write(str( {'EquationName':fObj.EquationName,
           'DescriptiveName':fObj.DescriptiveName,
-          'Constriants': constraints,
+          'Constraints': constraints,
           'Variables': functionDictionary['Variables']
             }))
     text_file.write(',')
