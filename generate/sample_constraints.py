@@ -4,6 +4,8 @@ from sympy import parse_expr, diff, Symbol
 from sympy import sqrt,exp,pi,asin,sin,acos,cos, tanh, ln, log
 import Feynman.Functions as ff
 
+numpyShort = 'np'
+
 # declaring a class
 class obj:
     # constructor
@@ -29,7 +31,7 @@ with open("Feynman/Constraints.py", "a") as text_file:
     #generate uniform input space for range as specified in Feynman equations
     xs = np.random.uniform([v.low for v in fObj.Variables],
                             [v.high for v in fObj.Variables],
-                            (10000, dim)
+                            (100000, dim)
                         ).astype(float)
     print(f"{i} - Equation {fObj.EquationName} - {fObj.DescriptiveName}")
     i=i+1
@@ -55,8 +57,26 @@ with open("Feynman/Constraints.py", "a") as text_file:
         symb_deriv = diff(equation,var, order)
         print(f"> derive over {var} in order {order}: {symb_deriv}")
 
+        derived_equation_string = str(symb_deriv)
+
+        # sqrt,exp,pi,asin,sin,acos,cos, tanh, ln, log
+        derived_equation_string = derived_equation_string.replace('asin',f'placeholder1')
+        derived_equation_string = derived_equation_string.replace('acos',f'placeholder2')
+
+        derived_equation_string = derived_equation_string.replace('sqrt',f'{numpyShort}.sqrt')
+        derived_equation_string = derived_equation_string.replace('exp',f'{numpyShort}.exp')
+        derived_equation_string = derived_equation_string.replace('pi',f'{numpyShort}.pi')
+        derived_equation_string = derived_equation_string.replace('sin',f'{numpyShort}.sin')
+        derived_equation_string = derived_equation_string.replace('cos',f'{numpyShort}.cos')
+        derived_equation_string = derived_equation_string.replace('tanh',f'{numpyShort}.tanh')
+        derived_equation_string = derived_equation_string.replace('ln',f'{numpyShort}.ln')
+
+        derived_equation_string = derived_equation_string.replace('placeholder1',f'{numpyShort}.arcsin')
+        derived_equation_string = derived_equation_string.replace('placeholder2',f'{numpyShort}.arccos')
+
+
         #put derivative in lambda stump to be enable calculation
-        diff_eq_lambda_str = fObj.Formula_Lambda_Stump.format(symb_deriv)
+        diff_eq_lambda_str = fObj.Formula_Lambda_Stump.format(derived_equation_string)
         diff_eq = eval(diff_eq_lambda_str)
 
         #calculate gradient per data point
@@ -73,7 +93,7 @@ with open("Feynman/Constraints.py", "a") as text_file:
             descriptor = "increasing"
 
         #do all gradients have the same sign
-        if(np.all( np.sign(gradients))):
+        if( len(np.unique(np.sign(gradients))) == 1 ):
           print(f">> monotonic {descriptor}")
 
         constraints.append({'name':var,
