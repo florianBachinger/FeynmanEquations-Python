@@ -95,6 +95,8 @@ with open("Feynman/Constraints.py", "a") as text_file:
         #do all gradients have the same sign
         if( len(np.unique(np.sign(gradients))) == 1 ):
           print(f">> monotonic {descriptor}")
+        else: 
+          descriptor = 'None'
 
         constraints.append({'name':var,
               'order_derivative':order,

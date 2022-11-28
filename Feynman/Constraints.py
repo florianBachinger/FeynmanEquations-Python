@@ -33,14 +33,14 @@ constraints = [
       {
         'name': 'sigma',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-sqrt(2)*exp(-theta**2/(2*sigma**2))/(2*sqrt(pi)*sigma**2) + sqrt(2)*theta**2*exp(-theta**2/(2*sigma**2))/(2*sqrt(pi)*sigma**4)',
         'derivative_lambda': 'lambda args : (lambda sigma,theta: -np.sqrt(2)*np.exp(-theta**2/(2*sigma**2))/(2*np.sqrt(np.pi)*sigma**2) + np.sqrt(2)*theta**2*np.exp(-theta**2/(2*sigma**2))/(2*np.sqrt(np.pi)*sigma**4) )(*args)'
       },
       {
         'name': 'sigma',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'sqrt(2)*(1 - theta**2*(3 - theta**2/sigma**2)/(2*sigma**2) - theta**2/sigma**2)*exp(-theta**2/(2*sigma**2))/(sqrt(pi)*sigma**3)',
         'derivative_lambda': 'lambda args : (lambda sigma,theta: np.sqrt(2)*(1 - theta**2*(3 - theta**2/sigma**2)/(2*sigma**2) - theta**2/sigma**2)*np.exp(-theta**2/(2*sigma**2))/(np.sqrt(np.pi)*sigma**3) )(*args)'
       },
@@ -54,7 +54,7 @@ constraints = [
       {
         'name': 'theta',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-sqrt(2)*(1 - theta**2/sigma**2)*exp(-theta**2/(2*sigma**2))/(2*sqrt(pi)*sigma**3)',
         'derivative_lambda': 'lambda args : (lambda sigma,theta: -np.sqrt(2)*(1 - theta**2/sigma**2)*np.exp(-theta**2/(2*sigma**2))/(2*np.sqrt(np.pi)*sigma**3) )(*args)'
       }
@@ -79,42 +79,42 @@ constraints = [
       {
         'name': 'sigma',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-sqrt(2)*exp(-(theta - theta1)**2/(2*sigma**2))/(2*sqrt(pi)*sigma**2) + sqrt(2)*(theta - theta1)**2*exp(-(theta - theta1)**2/(2*sigma**2))/(2*sqrt(pi)*sigma**4)',
         'derivative_lambda': 'lambda args : (lambda sigma,theta,theta1: -np.sqrt(2)*np.exp(-(theta - theta1)**2/(2*sigma**2))/(2*np.sqrt(np.pi)*sigma**2) + np.sqrt(2)*(theta - theta1)**2*np.exp(-(theta - theta1)**2/(2*sigma**2))/(2*np.sqrt(np.pi)*sigma**4) )(*args)'
       },
       {
         'name': 'sigma',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'sqrt(2)*(1 - (3 - (theta - theta1)**2/sigma**2)*(theta - theta1)**2/(2*sigma**2) - (theta - theta1)**2/sigma**2)*exp(-(theta - theta1)**2/(2*sigma**2))/(sqrt(pi)*sigma**3)',
         'derivative_lambda': 'lambda args : (lambda sigma,theta,theta1: np.sqrt(2)*(1 - (3 - (theta - theta1)**2/sigma**2)*(theta - theta1)**2/(2*sigma**2) - (theta - theta1)**2/sigma**2)*np.exp(-(theta - theta1)**2/(2*sigma**2))/(np.sqrt(np.pi)*sigma**3) )(*args)'
       },
       {
         'name': 'theta',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-sqrt(2)*(2*theta - 2*theta1)*exp(-(theta - theta1)**2/(2*sigma**2))/(4*sqrt(pi)*sigma**3)',
         'derivative_lambda': 'lambda args : (lambda sigma,theta,theta1: -np.sqrt(2)*(2*theta - 2*theta1)*np.exp(-(theta - theta1)**2/(2*sigma**2))/(4*np.sqrt(np.pi)*sigma**3) )(*args)'
       },
       {
         'name': 'theta',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-sqrt(2)*(1 - (theta - theta1)**2/sigma**2)*exp(-(theta - theta1)**2/(2*sigma**2))/(2*sqrt(pi)*sigma**3)',
         'derivative_lambda': 'lambda args : (lambda sigma,theta,theta1: -np.sqrt(2)*(1 - (theta - theta1)**2/sigma**2)*np.exp(-(theta - theta1)**2/(2*sigma**2))/(2*np.sqrt(np.pi)*sigma**3) )(*args)'
       },
       {
         'name': 'theta1',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-sqrt(2)*(-2*theta + 2*theta1)*exp(-(theta - theta1)**2/(2*sigma**2))/(4*sqrt(pi)*sigma**3)',
         'derivative_lambda': 'lambda args : (lambda sigma,theta,theta1: -np.sqrt(2)*(-2*theta + 2*theta1)*np.exp(-(theta - theta1)**2/(2*sigma**2))/(4*np.sqrt(np.pi)*sigma**3) )(*args)'
       },
       {
         'name': 'theta1',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-sqrt(2)*(1 - (theta - theta1)**2/sigma**2)*exp(-(theta - theta1)**2/(2*sigma**2))/(2*sqrt(pi)*sigma**3)',
         'derivative_lambda': 'lambda args : (lambda sigma,theta,theta1: -np.sqrt(2)*(1 - (theta - theta1)**2/sigma**2)*np.exp(-(theta - theta1)**2/(2*sigma**2))/(2*np.sqrt(np.pi)*sigma**3) )(*args)'
       }
@@ -144,7 +144,7 @@ constraints = [
       {
         'name': 'x1',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '(x1 - x2)/sqrt((-x1 + x2)**2 + (-y1 + y2)**2)',
         'derivative_lambda': 'lambda args : (lambda x1,x2,y1,y2: (x1 - x2)/np.sqrt((-x1 + x2)**2 + (-y1 + y2)**2) )(*args)'
       },
@@ -158,7 +158,7 @@ constraints = [
       {
         'name': 'x2',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '(-x1 + x2)/sqrt((-x1 + x2)**2 + (-y1 + y2)**2)',
         'derivative_lambda': 'lambda args : (lambda x1,x2,y1,y2: (-x1 + x2)/np.sqrt((-x1 + x2)**2 + (-y1 + y2)**2) )(*args)'
       },
@@ -172,7 +172,7 @@ constraints = [
       {
         'name': 'y1',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '(y1 - y2)/sqrt((-x1 + x2)**2 + (-y1 + y2)**2)',
         'derivative_lambda': 'lambda args : (lambda x1,x2,y1,y2: (y1 - y2)/np.sqrt((-x1 + x2)**2 + (-y1 + y2)**2) )(*args)'
       },
@@ -186,7 +186,7 @@ constraints = [
       {
         'name': 'y2',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '(-y1 + y2)/sqrt((-x1 + x2)**2 + (-y1 + y2)**2)',
         'derivative_lambda': 'lambda args : (lambda x1,x2,y1,y2: (-y1 + y2)/np.sqrt((-x1 + x2)**2 + (-y1 + y2)**2) )(*args)'
       },
@@ -277,7 +277,7 @@ constraints = [
       {
         'name': 'x1',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '2*G*m1*m2*(4*(x1 - x2)**2/((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2) - 1)/((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2)**2',
         'derivative_lambda': 'lambda args : (lambda m1,m2,G,x1,x2,y1,y2,z1,z2: 2*G*m1*m2*(4*(x1 - x2)**2/((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2) - 1)/((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2)**2 )(*args)'
       },
@@ -291,7 +291,7 @@ constraints = [
       {
         'name': 'x2',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '2*G*m1*m2*(4*(x1 - x2)**2/((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2) - 1)/((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2)**2',
         'derivative_lambda': 'lambda args : (lambda m1,m2,G,x1,x2,y1,y2,z1,z2: 2*G*m1*m2*(4*(x1 - x2)**2/((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2) - 1)/((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2)**2 )(*args)'
       },
@@ -305,7 +305,7 @@ constraints = [
       {
         'name': 'y1',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '2*G*m1*m2*(4*(y1 - y2)**2/((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2) - 1)/((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2)**2',
         'derivative_lambda': 'lambda args : (lambda m1,m2,G,x1,x2,y1,y2,z1,z2: 2*G*m1*m2*(4*(y1 - y2)**2/((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2) - 1)/((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2)**2 )(*args)'
       },
@@ -319,7 +319,7 @@ constraints = [
       {
         'name': 'y2',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '2*G*m1*m2*(4*(y1 - y2)**2/((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2) - 1)/((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2)**2',
         'derivative_lambda': 'lambda args : (lambda m1,m2,G,x1,x2,y1,y2,z1,z2: 2*G*m1*m2*(4*(y1 - y2)**2/((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2) - 1)/((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2)**2 )(*args)'
       },
@@ -333,7 +333,7 @@ constraints = [
       {
         'name': 'z1',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '2*G*m1*m2*(4*(z1 - z2)**2/((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2) - 1)/((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2)**2',
         'derivative_lambda': 'lambda args : (lambda m1,m2,G,x1,x2,y1,y2,z1,z2: 2*G*m1*m2*(4*(z1 - z2)**2/((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2) - 1)/((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2)**2 )(*args)'
       },
@@ -347,7 +347,7 @@ constraints = [
       {
         'name': 'z2',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '2*G*m1*m2*(4*(z1 - z2)**2/((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2) - 1)/((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2)**2',
         'derivative_lambda': 'lambda args : (lambda m1,m2,G,x1,x2,y1,y2,z1,z2: 2*G*m1*m2*(4*(z1 - z2)**2/((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2) - 1)/((x1 - x2)**2 + (y1 - y2)**2 + (z1 - z2)**2)**2 )(*args)'
       }
@@ -835,7 +835,7 @@ constraints = [
       {
         'name': 'q',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'B*v*sin(theta) + Ef',
         'derivative_lambda': 'lambda args : (lambda q,Ef,B,v,theta: B*v*np.sin(theta) + Ef )(*args)'
       },
@@ -863,7 +863,7 @@ constraints = [
       {
         'name': 'B',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'q*v*sin(theta)',
         'derivative_lambda': 'lambda args : (lambda q,Ef,B,v,theta: q*v*np.sin(theta) )(*args)'
       },
@@ -877,7 +877,7 @@ constraints = [
       {
         'name': 'v',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'B*q*sin(theta)',
         'derivative_lambda': 'lambda args : (lambda q,Ef,B,v,theta: B*q*np.sin(theta) )(*args)'
       },
@@ -891,14 +891,14 @@ constraints = [
       {
         'name': 'theta',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'B*q*v*cos(theta)',
         'derivative_lambda': 'lambda args : (lambda q,Ef,B,v,theta: B*q*v*np.cos(theta) )(*args)'
       },
       {
         'name': 'theta',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-B*q*v*sin(theta)',
         'derivative_lambda': 'lambda args : (lambda q,Ef,B,v,theta: -B*q*v*np.sin(theta) )(*args)'
       }
@@ -1022,7 +1022,7 @@ constraints = [
       {
         'name': 'm1',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'G*m2*(1/r2 - 1/r1)',
         'derivative_lambda': 'lambda args : (lambda m1,m2,r1,r2,G: G*m2*(1/r2 - 1/r1) )(*args)'
       },
@@ -1036,7 +1036,7 @@ constraints = [
       {
         'name': 'm2',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'G*m1*(1/r2 - 1/r1)',
         'derivative_lambda': 'lambda args : (lambda m1,m2,r1,r2,G: G*m1*(1/r2 - 1/r1) )(*args)'
       },
@@ -1078,7 +1078,7 @@ constraints = [
       {
         'name': 'G',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'm1*m2*(1/r2 - 1/r1)',
         'derivative_lambda': 'lambda args : (lambda m1,m2,r1,r2,G: m1*m2*(1/r2 - 1/r1) )(*args)'
       },
@@ -1250,14 +1250,14 @@ constraints = [
       {
         'name': 'u',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-t/sqrt(1 - u**2/c**2) + u*(-t*u + x)/(c**2*(1 - u**2/c**2)**(3/2))',
         'derivative_lambda': 'lambda args : (lambda x,u,c,t: -t/np.sqrt(1 - u**2/c**2) + u*(-t*u + x)/(c**2*(1 - u**2/c**2)**(3/2)) )(*args)'
       },
       {
         'name': 'u',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-(2*t*u + (1 + 3*u**2/(c**2*(1 - u**2/c**2)))*(t*u - x))/(c**2*(1 - u**2/c**2)**(3/2))',
         'derivative_lambda': 'lambda args : (lambda x,u,c,t: -(2*t*u + (1 + 3*u**2/(c**2*(1 - u**2/c**2)))*(t*u - x))/(c**2*(1 - u**2/c**2)**(3/2)) )(*args)'
       },
@@ -1334,28 +1334,28 @@ constraints = [
       {
         'name': 'c',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-u**2*(t - u*x/c**2)/(c**3*(1 - u**2/c**2)**(3/2)) + 2*u*x/(c**3*sqrt(1 - u**2/c**2))',
         'derivative_lambda': 'lambda args : (lambda x,c,u,t: -u**2*(t - u*x/c**2)/(c**3*(1 - u**2/c**2)**(3/2)) + 2*u*x/(c**3*np.sqrt(1 - u**2/c**2)) )(*args)'
       },
       {
         'name': 'c',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'u*(3*u*(1 + u**2/(c**2*(1 - u**2/c**2)))*(t - u*x/c**2)/(1 - u**2/c**2) - 6*x - 4*u**2*x/(c**2*(1 - u**2/c**2)))/(c**4*sqrt(1 - u**2/c**2))',
         'derivative_lambda': 'lambda args : (lambda x,c,u,t: u*(3*u*(1 + u**2/(c**2*(1 - u**2/c**2)))*(t - u*x/c**2)/(1 - u**2/c**2) - 6*x - 4*u**2*x/(c**2*(1 - u**2/c**2)))/(c**4*np.sqrt(1 - u**2/c**2)) )(*args)'
       },
       {
         'name': 'u',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'u*(t - u*x/c**2)/(c**2*(1 - u**2/c**2)**(3/2)) - x/(c**2*sqrt(1 - u**2/c**2))',
         'derivative_lambda': 'lambda args : (lambda x,c,u,t: u*(t - u*x/c**2)/(c**2*(1 - u**2/c**2)**(3/2)) - x/(c**2*np.sqrt(1 - u**2/c**2)) )(*args)'
       },
       {
         'name': 'u',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '((1 + 3*u**2/(c**2*(1 - u**2/c**2)))*(t - u*x/c**2) - 2*u*x/c**2)/(c**2*(1 - u**2/c**2)**(3/2))',
         'derivative_lambda': 'lambda args : (lambda x,c,u,t: ((1 + 3*u**2/(c**2*(1 - u**2/c**2)))*(t - u*x/c**2) - 2*u*x/c**2)/(c**2*(1 - u**2/c**2)**(3/2)) )(*args)'
       },
@@ -1476,35 +1476,35 @@ constraints = [
       {
         'name': 'c',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-2*u*v*(3 - 4*u*v/(c**2*(1 + u*v/c**2)))*(u + v)/(c**4*(1 + u*v/c**2)**2)',
         'derivative_lambda': 'lambda args : (lambda c,v,u: -2*u*v*(3 - 4*u*v/(c**2*(1 + u*v/c**2)))*(u + v)/(c**4*(1 + u*v/c**2)**2) )(*args)'
       },
       {
         'name': 'v',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '1/(1 + u*v/c**2) - u*(u + v)/(c**2*(1 + u*v/c**2)**2)',
         'derivative_lambda': 'lambda args : (lambda c,v,u: 1/(1 + u*v/c**2) - u*(u + v)/(c**2*(1 + u*v/c**2)**2) )(*args)'
       },
       {
         'name': 'v',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '2*u*(-1 + u*(u + v)/(c**2*(1 + u*v/c**2)))/(c**2*(1 + u*v/c**2)**2)',
         'derivative_lambda': 'lambda args : (lambda c,v,u: 2*u*(-1 + u*(u + v)/(c**2*(1 + u*v/c**2)))/(c**2*(1 + u*v/c**2)**2) )(*args)'
       },
       {
         'name': 'u',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '1/(1 + u*v/c**2) - v*(u + v)/(c**2*(1 + u*v/c**2)**2)',
         'derivative_lambda': 'lambda args : (lambda c,v,u: 1/(1 + u*v/c**2) - v*(u + v)/(c**2*(1 + u*v/c**2)**2) )(*args)'
       },
       {
         'name': 'u',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '2*v*(-1 + v*(u + v)/(c**2*(1 + u*v/c**2)))/(c**2*(1 + u*v/c**2)**2)',
         'derivative_lambda': 'lambda args : (lambda c,v,u: 2*v*(-1 + v*(u + v)/(c**2*(1 + u*v/c**2)))/(c**2*(1 + u*v/c**2)**2) )(*args)'
       }
@@ -1534,28 +1534,28 @@ constraints = [
       {
         'name': 'm1',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'r1/(m1 + m2) - (m1*r1 + m2*r2)/(m1 + m2)**2',
         'derivative_lambda': 'lambda args : (lambda m1,m2,r1,r2: r1/(m1 + m2) - (m1*r1 + m2*r2)/(m1 + m2)**2 )(*args)'
       },
       {
         'name': 'm1',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '2*(-r1 + (m1*r1 + m2*r2)/(m1 + m2))/(m1 + m2)**2',
         'derivative_lambda': 'lambda args : (lambda m1,m2,r1,r2: 2*(-r1 + (m1*r1 + m2*r2)/(m1 + m2))/(m1 + m2)**2 )(*args)'
       },
       {
         'name': 'm2',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'r2/(m1 + m2) - (m1*r1 + m2*r2)/(m1 + m2)**2',
         'derivative_lambda': 'lambda args : (lambda m1,m2,r1,r2: r2/(m1 + m2) - (m1*r1 + m2*r2)/(m1 + m2)**2 )(*args)'
       },
       {
         'name': 'm2',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '2*(-r2 + (m1*r1 + m2*r2)/(m1 + m2))/(m1 + m2)**2',
         'derivative_lambda': 'lambda args : (lambda m1,m2,r1,r2: 2*(-r2 + (m1*r1 + m2*r2)/(m1 + m2))/(m1 + m2)**2 )(*args)'
       },
@@ -1618,7 +1618,7 @@ constraints = [
       {
         'name': 'r',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'F*sin(theta)',
         'derivative_lambda': 'lambda args : (lambda r,F,theta: F*np.sin(theta) )(*args)'
       },
@@ -1632,7 +1632,7 @@ constraints = [
       {
         'name': 'F',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'r*sin(theta)',
         'derivative_lambda': 'lambda args : (lambda r,F,theta: r*np.sin(theta) )(*args)'
       },
@@ -1646,14 +1646,14 @@ constraints = [
       {
         'name': 'theta',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'F*r*cos(theta)',
         'derivative_lambda': 'lambda args : (lambda r,F,theta: F*r*np.cos(theta) )(*args)'
       },
       {
         'name': 'theta',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-F*r*sin(theta)',
         'derivative_lambda': 'lambda args : (lambda r,F,theta: -F*r*np.sin(theta) )(*args)'
       }
@@ -1683,7 +1683,7 @@ constraints = [
       {
         'name': 'm',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'r*v*sin(theta)',
         'derivative_lambda': 'lambda args : (lambda m,r,v,theta: r*v*np.sin(theta) )(*args)'
       },
@@ -1697,7 +1697,7 @@ constraints = [
       {
         'name': 'r',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'm*v*sin(theta)',
         'derivative_lambda': 'lambda args : (lambda m,r,v,theta: m*v*np.sin(theta) )(*args)'
       },
@@ -1711,7 +1711,7 @@ constraints = [
       {
         'name': 'v',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'm*r*sin(theta)',
         'derivative_lambda': 'lambda args : (lambda m,r,v,theta: m*r*np.sin(theta) )(*args)'
       },
@@ -1725,14 +1725,14 @@ constraints = [
       {
         'name': 'theta',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'm*r*v*cos(theta)',
         'derivative_lambda': 'lambda args : (lambda m,r,v,theta: m*r*v*np.cos(theta) )(*args)'
       },
       {
         'name': 'theta',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-m*r*v*sin(theta)',
         'derivative_lambda': 'lambda args : (lambda m,r,v,theta: -m*r*v*np.sin(theta) )(*args)'
       }
@@ -1897,28 +1897,28 @@ constraints = [
       {
         'name': 'n',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'sin(theta2)/sqrt(-n**2*sin(theta2)**2 + 1)',
         'derivative_lambda': 'lambda args : (lambda n,theta2: np.sin(theta2)/np.sqrt(-n**2*np.sin(theta2)**2 + 1) )(*args)'
       },
       {
         'name': 'n',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'n*sin(theta2)**3/(-n**2*sin(theta2)**2 + 1)**(3/2)',
         'derivative_lambda': 'lambda args : (lambda n,theta2: n*np.sin(theta2)**3/(-n**2*np.sin(theta2)**2 + 1)**(3/2) )(*args)'
       },
       {
         'name': 'theta2',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'n*cos(theta2)/sqrt(-n**2*sin(theta2)**2 + 1)',
         'derivative_lambda': 'lambda args : (lambda n,theta2: n*np.cos(theta2)/np.sqrt(-n**2*np.sin(theta2)**2 + 1) )(*args)'
       },
       {
         'name': 'theta2',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'n*(n**2*cos(theta2)**2/(-n**2*sin(theta2)**2 + 1) - 1)*sin(theta2)/sqrt(-n**2*sin(theta2)**2 + 1)',
         'derivative_lambda': 'lambda args : (lambda n,theta2: n*(n**2*np.cos(theta2)**2/(-n**2*np.sin(theta2)**2 + 1) - 1)*np.sin(theta2)/np.sqrt(-n**2*np.sin(theta2)**2 + 1) )(*args)'
       }
@@ -2054,7 +2054,7 @@ constraints = [
       {
         'name': 'x1',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '(x1 - x2*cos(theta1 - theta2))/sqrt(x1**2 - 2*x1*x2*cos(theta1 - theta2) + x2**2)',
         'derivative_lambda': 'lambda args : (lambda x1,x2,theta1,theta2: (x1 - x2*np.cos(theta1 - theta2))/np.sqrt(x1**2 - 2*x1*x2*np.cos(theta1 - theta2) + x2**2) )(*args)'
       },
@@ -2068,7 +2068,7 @@ constraints = [
       {
         'name': 'x2',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '(-x1*cos(theta1 - theta2) + x2)/sqrt(x1**2 - 2*x1*x2*cos(theta1 - theta2) + x2**2)',
         'derivative_lambda': 'lambda args : (lambda x1,x2,theta1,theta2: (-x1*np.cos(theta1 - theta2) + x2)/np.sqrt(x1**2 - 2*x1*x2*np.cos(theta1 - theta2) + x2**2) )(*args)'
       },
@@ -2082,28 +2082,28 @@ constraints = [
       {
         'name': 'theta1',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'x1*x2*sin(theta1 - theta2)/sqrt(x1**2 - 2*x1*x2*cos(theta1 - theta2) + x2**2)',
         'derivative_lambda': 'lambda args : (lambda x1,x2,theta1,theta2: x1*x2*np.sin(theta1 - theta2)/np.sqrt(x1**2 - 2*x1*x2*np.cos(theta1 - theta2) + x2**2) )(*args)'
       },
       {
         'name': 'theta1',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'x1*x2*(-x1*x2*sin(theta1 - theta2)**2/(x1**2 - 2*x1*x2*cos(theta1 - theta2) + x2**2) + cos(theta1 - theta2))/sqrt(x1**2 - 2*x1*x2*cos(theta1 - theta2) + x2**2)',
         'derivative_lambda': 'lambda args : (lambda x1,x2,theta1,theta2: x1*x2*(-x1*x2*np.sin(theta1 - theta2)**2/(x1**2 - 2*x1*x2*np.cos(theta1 - theta2) + x2**2) + np.cos(theta1 - theta2))/np.sqrt(x1**2 - 2*x1*x2*np.cos(theta1 - theta2) + x2**2) )(*args)'
       },
       {
         'name': 'theta2',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-x1*x2*sin(theta1 - theta2)/sqrt(x1**2 - 2*x1*x2*cos(theta1 - theta2) + x2**2)',
         'derivative_lambda': 'lambda args : (lambda x1,x2,theta1,theta2: -x1*x2*np.sin(theta1 - theta2)/np.sqrt(x1**2 - 2*x1*x2*np.cos(theta1 - theta2) + x2**2) )(*args)'
       },
       {
         'name': 'theta2',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'x1*x2*(-x1*x2*sin(theta1 - theta2)**2/(x1**2 - 2*x1*x2*cos(theta1 - theta2) + x2**2) + cos(theta1 - theta2))/sqrt(x1**2 - 2*x1*x2*cos(theta1 - theta2) + x2**2)',
         'derivative_lambda': 'lambda args : (lambda x1,x2,theta1,theta2: x1*x2*(-x1*x2*np.sin(theta1 - theta2)**2/(x1**2 - 2*x1*x2*np.cos(theta1 - theta2) + x2**2) + np.cos(theta1 - theta2))/np.sqrt(x1**2 - 2*x1*x2*np.cos(theta1 - theta2) + x2**2) )(*args)'
       }
@@ -2152,28 +2152,28 @@ constraints = [
       {
         'name': 'theta',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'Int_0*n*sin(n*theta/2)*cos(n*theta/2)/sin(theta/2)**2 - Int_0*sin(n*theta/2)**2*cos(theta/2)/sin(theta/2)**3',
         'derivative_lambda': 'lambda args : (lambda Int_0,theta,n: Int_0*n*np.sin(n*theta/2)*np.cos(n*theta/2)/np.sin(theta/2)**2 - Int_0*np.sin(n*theta/2)**2*np.cos(theta/2)/np.sin(theta/2)**3 )(*args)'
       },
       {
         'name': 'theta',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'Int_0*(-n**2*(sin(n*theta/2)**2 - cos(n*theta/2)**2)/2 - 2*n*sin(n*theta/2)*cos(theta/2)*cos(n*theta/2)/sin(theta/2) + (1 + 3*cos(theta/2)**2/sin(theta/2)**2)*sin(n*theta/2)**2/2)/sin(theta/2)**2',
         'derivative_lambda': 'lambda args : (lambda Int_0,theta,n: Int_0*(-n**2*(np.sin(n*theta/2)**2 - np.cos(n*theta/2)**2)/2 - 2*n*np.sin(n*theta/2)*np.cos(theta/2)*np.cos(n*theta/2)/np.sin(theta/2) + (1 + 3*np.cos(theta/2)**2/np.sin(theta/2)**2)*np.sin(n*theta/2)**2/2)/np.sin(theta/2)**2 )(*args)'
       },
       {
         'name': 'n',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'Int_0*theta*sin(n*theta/2)*cos(n*theta/2)/sin(theta/2)**2',
         'derivative_lambda': 'lambda args : (lambda Int_0,theta,n: Int_0*theta*np.sin(n*theta/2)*np.cos(n*theta/2)/np.sin(theta/2)**2 )(*args)'
       },
       {
         'name': 'n',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-Int_0*theta**2*(sin(n*theta/2)**2 - cos(n*theta/2)**2)/(2*sin(theta/2)**2)',
         'derivative_lambda': 'lambda args : (lambda Int_0,theta,n: -Int_0*theta**2*(np.sin(n*theta/2)**2 - np.cos(n*theta/2)**2)/(2*np.sin(theta/2)**2) )(*args)'
       }
@@ -2734,42 +2734,42 @@ constraints = [
       {
         'name': 'I1',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '1 + sqrt(I1*I2)*cos(delta)/I1',
         'derivative_lambda': 'lambda args : (lambda I1,I2,delta: 1 + np.sqrt(I1*I2)*np.cos(delta)/I1 )(*args)'
       },
       {
         'name': 'I1',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-sqrt(I1*I2)*cos(delta)/(2*I1**2)',
         'derivative_lambda': 'lambda args : (lambda I1,I2,delta: -np.sqrt(I1*I2)*np.cos(delta)/(2*I1**2) )(*args)'
       },
       {
         'name': 'I2',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '1 + sqrt(I1*I2)*cos(delta)/I2',
         'derivative_lambda': 'lambda args : (lambda I1,I2,delta: 1 + np.sqrt(I1*I2)*np.cos(delta)/I2 )(*args)'
       },
       {
         'name': 'I2',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-sqrt(I1*I2)*cos(delta)/(2*I2**2)',
         'derivative_lambda': 'lambda args : (lambda I1,I2,delta: -np.sqrt(I1*I2)*np.cos(delta)/(2*I2**2) )(*args)'
       },
       {
         'name': 'delta',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-2*sqrt(I1*I2)*sin(delta)',
         'derivative_lambda': 'lambda args : (lambda I1,I2,delta: -2*np.sqrt(I1*I2)*np.sin(delta) )(*args)'
       },
       {
         'name': 'delta',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-2*sqrt(I1*I2)*cos(delta)',
         'derivative_lambda': 'lambda args : (lambda I1,I2,delta: -2*np.sqrt(I1*I2)*np.cos(delta) )(*args)'
       }
@@ -3127,7 +3127,7 @@ constraints = [
       {
         'name': 'T',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-g*m*n_0*x*(2 - g*m*x/(T*kb))*exp(-g*m*x/(T*kb))/(T**3*kb)',
         'derivative_lambda': 'lambda args : (lambda n_0,m,x,T,g,kb: -g*m*n_0*x*(2 - g*m*x/(T*kb))*np.exp(-g*m*x/(T*kb))/(T**3*kb) )(*args)'
       },
@@ -3155,7 +3155,7 @@ constraints = [
       {
         'name': 'kb',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-g*m*n_0*x*(2 - g*m*x/(T*kb))*exp(-g*m*x/(T*kb))/(T*kb**3)',
         'derivative_lambda': 'lambda args : (lambda n_0,m,x,T,g,kb: -g*m*n_0*x*(2 - g*m*x/(T*kb))*np.exp(-g*m*x/(T*kb))/(T*kb**3) )(*args)'
       }
@@ -3200,14 +3200,14 @@ constraints = [
       {
         'name': 'omega',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '3*h*omega**2/(2*pi**3*c**2*(exp(h*omega/(2*pi*T*kb)) - 1)) - h**2*omega**3*exp(h*omega/(2*pi*T*kb))/(4*pi**4*T*c**2*kb*(exp(h*omega/(2*pi*T*kb)) - 1)**2)',
         'derivative_lambda': 'lambda args : (lambda omega,T,h,kb,c: 3*h*omega**2/(2*np.pi**3*c**2*(np.exp(h*omega/(2*np.pi*T*kb)) - 1)) - h**2*omega**3*np.exp(h*omega/(2*np.pi*T*kb))/(4*np.pi**4*T*c**2*kb*(np.exp(h*omega/(2*np.pi*T*kb)) - 1)**2) )(*args)'
       },
       {
         'name': 'omega',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'h*omega*(3 - 3*h*omega*exp(h*omega/(2*pi*T*kb))/(2*pi*T*kb*(exp(h*omega/(2*pi*T*kb)) - 1)) - h**2*omega**2*(exp(h*omega/(2*pi*T*kb)) - 2*exp(h*omega/(pi*T*kb))/(exp(h*omega/(2*pi*T*kb)) - 1))/(8*pi**2*T**2*kb**2*(exp(h*omega/(2*pi*T*kb)) - 1)))/(pi**3*c**2*(exp(h*omega/(2*pi*T*kb)) - 1))',
         'derivative_lambda': 'lambda args : (lambda omega,T,h,kb,c: h*omega*(3 - 3*h*omega*np.exp(h*omega/(2*np.pi*T*kb))/(2*np.pi*T*kb*(np.exp(h*omega/(2*np.pi*T*kb)) - 1)) - h**2*omega**2*(np.exp(h*omega/(2*np.pi*T*kb)) - 2*np.exp(h*omega/(np.pi*T*kb))/(np.exp(h*omega/(2*np.pi*T*kb)) - 1))/(8*np.pi**2*T**2*kb**2*(np.exp(h*omega/(2*np.pi*T*kb)) - 1)))/(np.pi**3*c**2*(np.exp(h*omega/(2*np.pi*T*kb)) - 1)) )(*args)'
       },
@@ -3536,7 +3536,7 @@ constraints = [
       {
         'name': 'n',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'T*kb*log(V2/V1)',
         'derivative_lambda': 'lambda args : (lambda n,kb,T,V1,V2: T*kb*log(V2/V1) )(*args)'
       },
@@ -3550,7 +3550,7 @@ constraints = [
       {
         'name': 'kb',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'T*n*log(V2/V1)',
         'derivative_lambda': 'lambda args : (lambda n,kb,T,V1,V2: T*n*log(V2/V1) )(*args)'
       },
@@ -3564,7 +3564,7 @@ constraints = [
       {
         'name': 'T',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'kb*n*log(V2/V1)',
         'derivative_lambda': 'lambda args : (lambda n,kb,T,V1,V2: kb*n*log(V2/V1) )(*args)'
       },
@@ -3769,7 +3769,7 @@ constraints = [
       {
         'name': 'x1',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'alpha*cos(omega*t)**2 + cos(omega*t)',
         'derivative_lambda': 'lambda args : (lambda x1,omega,t,alpha: alpha*np.cos(omega*t)**2 + np.cos(omega*t) )(*args)'
       },
@@ -3783,28 +3783,28 @@ constraints = [
       {
         'name': 'omega',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'x1*(-2*alpha*t*sin(omega*t)*cos(omega*t) - t*sin(omega*t))',
         'derivative_lambda': 'lambda args : (lambda x1,omega,t,alpha: x1*(-2*alpha*t*np.sin(omega*t)*np.cos(omega*t) - t*np.sin(omega*t)) )(*args)'
       },
       {
         'name': 'omega',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-t**2*x1*(-2*alpha*sin(omega*t)**2 + 2*alpha*cos(omega*t)**2 + cos(omega*t))',
         'derivative_lambda': 'lambda args : (lambda x1,omega,t,alpha: -t**2*x1*(-2*alpha*np.sin(omega*t)**2 + 2*alpha*np.cos(omega*t)**2 + np.cos(omega*t)) )(*args)'
       },
       {
         'name': 't',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'x1*(-2*alpha*omega*sin(omega*t)*cos(omega*t) - omega*sin(omega*t))',
         'derivative_lambda': 'lambda args : (lambda x1,omega,t,alpha: x1*(-2*alpha*omega*np.sin(omega*t)*np.cos(omega*t) - omega*np.sin(omega*t)) )(*args)'
       },
       {
         'name': 't',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-omega**2*x1*(-2*alpha*sin(omega*t)**2 + 2*alpha*cos(omega*t)**2 + cos(omega*t))',
         'derivative_lambda': 'lambda args : (lambda x1,omega,t,alpha: -omega**2*x1*(-2*alpha*np.sin(omega*t)**2 + 2*alpha*np.cos(omega*t)**2 + np.cos(omega*t)) )(*args)'
       },
@@ -3853,7 +3853,7 @@ constraints = [
       {
         'name': 'kappa',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'A*(-T1 + T2)/d',
         'derivative_lambda': 'lambda args : (lambda kappa,T1,T2,A,d: A*(-T1 + T2)/d )(*args)'
       },
@@ -3895,7 +3895,7 @@ constraints = [
       {
         'name': 'A',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'kappa*(-T1 + T2)/d',
         'derivative_lambda': 'lambda args : (lambda kappa,T1,T2,A,d: kappa*(-T1 + T2)/d )(*args)'
       },
@@ -3909,14 +3909,14 @@ constraints = [
       {
         'name': 'd',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-A*kappa*(-T1 + T2)/d**2',
         'derivative_lambda': 'lambda args : (lambda kappa,T1,T2,A,d: -A*kappa*(-T1 + T2)/d**2 )(*args)'
       },
       {
         'name': 'd',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-2*A*kappa*(T1 - T2)/d**3',
         'derivative_lambda': 'lambda args : (lambda kappa,T1,T2,A,d: -2*A*kappa*(T1 - T2)/d**3 )(*args)'
       }
@@ -4067,21 +4067,21 @@ constraints = [
       {
         'name': 'epsilon',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-p_d*cos(theta)/(4*pi*epsilon**2*r**2)',
         'derivative_lambda': 'lambda args : (lambda epsilon,p_d,theta,r: -p_d*np.cos(theta)/(4*np.pi*epsilon**2*r**2) )(*args)'
       },
       {
         'name': 'epsilon',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'p_d*cos(theta)/(2*pi*epsilon**3*r**2)',
         'derivative_lambda': 'lambda args : (lambda epsilon,p_d,theta,r: p_d*np.cos(theta)/(2*np.pi*epsilon**3*r**2) )(*args)'
       },
       {
         'name': 'p_d',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'cos(theta)/(4*pi*epsilon*r**2)',
         'derivative_lambda': 'lambda args : (lambda epsilon,p_d,theta,r: np.cos(theta)/(4*np.pi*epsilon*r**2) )(*args)'
       },
@@ -4102,21 +4102,21 @@ constraints = [
       {
         'name': 'theta',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-p_d*cos(theta)/(4*pi*epsilon*r**2)',
         'derivative_lambda': 'lambda args : (lambda epsilon,p_d,theta,r: -p_d*np.cos(theta)/(4*np.pi*epsilon*r**2) )(*args)'
       },
       {
         'name': 'r',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-p_d*cos(theta)/(2*pi*epsilon*r**3)',
         'derivative_lambda': 'lambda args : (lambda epsilon,p_d,theta,r: -p_d*np.cos(theta)/(2*np.pi*epsilon*r**3) )(*args)'
       },
       {
         'name': 'r',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '3*p_d*cos(theta)/(2*pi*epsilon*r**4)',
         'derivative_lambda': 'lambda args : (lambda epsilon,p_d,theta,r: 3*p_d*np.cos(theta)/(2*np.pi*epsilon*r**4) )(*args)'
       }
@@ -4273,21 +4273,21 @@ constraints = [
       {
         'name': 'epsilon',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-3*p_d*sin(theta)*cos(theta)/(4*pi*epsilon**2*r**3)',
         'derivative_lambda': 'lambda args : (lambda epsilon,p_d,theta,r: -3*p_d*np.sin(theta)*np.cos(theta)/(4*np.pi*epsilon**2*r**3) )(*args)'
       },
       {
         'name': 'epsilon',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '3*p_d*sin(theta)*cos(theta)/(2*pi*epsilon**3*r**3)',
         'derivative_lambda': 'lambda args : (lambda epsilon,p_d,theta,r: 3*p_d*np.sin(theta)*np.cos(theta)/(2*np.pi*epsilon**3*r**3) )(*args)'
       },
       {
         'name': 'p_d',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '3*sin(theta)*cos(theta)/(4*pi*epsilon*r**3)',
         'derivative_lambda': 'lambda args : (lambda epsilon,p_d,theta,r: 3*np.sin(theta)*np.cos(theta)/(4*np.pi*epsilon*r**3) )(*args)'
       },
@@ -4301,28 +4301,28 @@ constraints = [
       {
         'name': 'theta',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-3*p_d*sin(theta)**2/(4*pi*epsilon*r**3) + 3*p_d*cos(theta)**2/(4*pi*epsilon*r**3)',
         'derivative_lambda': 'lambda args : (lambda epsilon,p_d,theta,r: -3*p_d*np.sin(theta)**2/(4*np.pi*epsilon*r**3) + 3*p_d*np.cos(theta)**2/(4*np.pi*epsilon*r**3) )(*args)'
       },
       {
         'name': 'theta',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-3*p_d*sin(theta)*cos(theta)/(pi*epsilon*r**3)',
         'derivative_lambda': 'lambda args : (lambda epsilon,p_d,theta,r: -3*p_d*np.sin(theta)*np.cos(theta)/(np.pi*epsilon*r**3) )(*args)'
       },
       {
         'name': 'r',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-9*p_d*sin(theta)*cos(theta)/(4*pi*epsilon*r**4)',
         'derivative_lambda': 'lambda args : (lambda epsilon,p_d,theta,r: -9*p_d*np.sin(theta)*np.cos(theta)/(4*np.pi*epsilon*r**4) )(*args)'
       },
       {
         'name': 'r',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '9*p_d*sin(theta)*cos(theta)/(pi*epsilon*r**5)',
         'derivative_lambda': 'lambda args : (lambda epsilon,p_d,theta,r: 9*p_d*np.sin(theta)*np.cos(theta)/(np.pi*epsilon*r**5) )(*args)'
       }
@@ -4636,7 +4636,7 @@ constraints = [
       {
         'name': 'n_0',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'Ef*p_d*cos(theta)/(T*kb) + 1',
         'derivative_lambda': 'lambda args : (lambda n_0,kb,T,theta,p_d,Ef: Ef*p_d*np.cos(theta)/(T*kb) + 1 )(*args)'
       },
@@ -4650,28 +4650,28 @@ constraints = [
       {
         'name': 'kb',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-Ef*n_0*p_d*cos(theta)/(T*kb**2)',
         'derivative_lambda': 'lambda args : (lambda n_0,kb,T,theta,p_d,Ef: -Ef*n_0*p_d*np.cos(theta)/(T*kb**2) )(*args)'
       },
       {
         'name': 'kb',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '2*Ef*n_0*p_d*cos(theta)/(T*kb**3)',
         'derivative_lambda': 'lambda args : (lambda n_0,kb,T,theta,p_d,Ef: 2*Ef*n_0*p_d*np.cos(theta)/(T*kb**3) )(*args)'
       },
       {
         'name': 'T',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-Ef*n_0*p_d*cos(theta)/(T**2*kb)',
         'derivative_lambda': 'lambda args : (lambda n_0,kb,T,theta,p_d,Ef: -Ef*n_0*p_d*np.cos(theta)/(T**2*kb) )(*args)'
       },
       {
         'name': 'T',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '2*Ef*n_0*p_d*cos(theta)/(T**3*kb)',
         'derivative_lambda': 'lambda args : (lambda n_0,kb,T,theta,p_d,Ef: 2*Ef*n_0*p_d*np.cos(theta)/(T**3*kb) )(*args)'
       },
@@ -4685,14 +4685,14 @@ constraints = [
       {
         'name': 'theta',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-Ef*n_0*p_d*cos(theta)/(T*kb)',
         'derivative_lambda': 'lambda args : (lambda n_0,kb,T,theta,p_d,Ef: -Ef*n_0*p_d*np.cos(theta)/(T*kb) )(*args)'
       },
       {
         'name': 'p_d',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'Ef*n_0*cos(theta)/(T*kb)',
         'derivative_lambda': 'lambda args : (lambda n_0,kb,T,theta,p_d,Ef: Ef*n_0*np.cos(theta)/(T*kb) )(*args)'
       },
@@ -4706,7 +4706,7 @@ constraints = [
       {
         'name': 'Ef',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'n_0*p_d*cos(theta)/(T*kb)',
         'derivative_lambda': 'lambda args : (lambda n_0,kb,T,theta,p_d,Ef: n_0*p_d*np.cos(theta)/(T*kb) )(*args)'
       },
@@ -5121,7 +5121,7 @@ constraints = [
       {
         'name': 'mom',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-B*cos(theta)',
         'derivative_lambda': 'lambda args : (lambda mom,B,theta: -B*np.cos(theta) )(*args)'
       },
@@ -5135,7 +5135,7 @@ constraints = [
       {
         'name': 'B',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-mom*cos(theta)',
         'derivative_lambda': 'lambda args : (lambda mom,B,theta: -mom*np.cos(theta) )(*args)'
       },
@@ -5149,14 +5149,14 @@ constraints = [
       {
         'name': 'theta',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'B*mom*sin(theta)',
         'derivative_lambda': 'lambda args : (lambda mom,B,theta: B*mom*np.sin(theta) )(*args)'
       },
       {
         'name': 'theta',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'B*mom*cos(theta)',
         'derivative_lambda': 'lambda args : (lambda mom,B,theta: B*mom*np.cos(theta) )(*args)'
       }
@@ -5186,7 +5186,7 @@ constraints = [
       {
         'name': 'p_d',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-Ef*cos(theta)',
         'derivative_lambda': 'lambda args : (lambda p_d,Ef,theta: -Ef*np.cos(theta) )(*args)'
       },
@@ -5200,7 +5200,7 @@ constraints = [
       {
         'name': 'Ef',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-p_d*cos(theta)',
         'derivative_lambda': 'lambda args : (lambda p_d,Ef,theta: -p_d*np.cos(theta) )(*args)'
       },
@@ -5214,14 +5214,14 @@ constraints = [
       {
         'name': 'theta',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'Ef*p_d*sin(theta)',
         'derivative_lambda': 'lambda args : (lambda p_d,Ef,theta: Ef*p_d*np.sin(theta) )(*args)'
       },
       {
         'name': 'theta',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'Ef*p_d*cos(theta)',
         'derivative_lambda': 'lambda args : (lambda p_d,Ef,theta: Ef*p_d*np.cos(theta) )(*args)'
       }
@@ -5933,7 +5933,7 @@ constraints = [
       {
         'name': 'kb',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-B*mom*n_0*(-2*B*mom*(exp(B*mom/(T*kb)) - exp(-B*mom/(T*kb)))**2/(T*kb*(exp(B*mom/(T*kb)) + exp(-B*mom/(T*kb)))) + B*mom*exp(B*mom/(T*kb))/(T*kb) + B*mom*exp(-B*mom/(T*kb))/(T*kb) + 2*exp(B*mom/(T*kb)) - 2*exp(-B*mom/(T*kb)))/(T*kb**3*(exp(B*mom/(T*kb)) + exp(-B*mom/(T*kb)))**2)',
         'derivative_lambda': 'lambda args : (lambda n_0,kb,T,mom,B: -B*mom*n_0*(-2*B*mom*(np.exp(B*mom/(T*kb)) - np.exp(-B*mom/(T*kb)))**2/(T*kb*(np.exp(B*mom/(T*kb)) + np.exp(-B*mom/(T*kb)))) + B*mom*np.exp(B*mom/(T*kb))/(T*kb) + B*mom*np.exp(-B*mom/(T*kb))/(T*kb) + 2*np.exp(B*mom/(T*kb)) - 2*np.exp(-B*mom/(T*kb)))/(T*kb**3*(np.exp(B*mom/(T*kb)) + np.exp(-B*mom/(T*kb)))**2) )(*args)'
       },
@@ -5947,7 +5947,7 @@ constraints = [
       {
         'name': 'T',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-B*mom*n_0*(-2*B*mom*(exp(B*mom/(T*kb)) - exp(-B*mom/(T*kb)))**2/(T*kb*(exp(B*mom/(T*kb)) + exp(-B*mom/(T*kb)))) + B*mom*exp(B*mom/(T*kb))/(T*kb) + B*mom*exp(-B*mom/(T*kb))/(T*kb) + 2*exp(B*mom/(T*kb)) - 2*exp(-B*mom/(T*kb)))/(T**3*kb*(exp(B*mom/(T*kb)) + exp(-B*mom/(T*kb)))**2)',
         'derivative_lambda': 'lambda args : (lambda n_0,kb,T,mom,B: -B*mom*n_0*(-2*B*mom*(np.exp(B*mom/(T*kb)) - np.exp(-B*mom/(T*kb)))**2/(T*kb*(np.exp(B*mom/(T*kb)) + np.exp(-B*mom/(T*kb)))) + B*mom*np.exp(B*mom/(T*kb))/(T*kb) + B*mom*np.exp(-B*mom/(T*kb))/(T*kb) + 2*np.exp(B*mom/(T*kb)) - 2*np.exp(-B*mom/(T*kb)))/(T**3*kb*(np.exp(B*mom/(T*kb)) + np.exp(-B*mom/(T*kb)))**2) )(*args)'
       },
@@ -5961,7 +5961,7 @@ constraints = [
       {
         'name': 'mom',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'B**2*n_0*(2*(exp(B*mom/(T*kb)) - exp(-B*mom/(T*kb)))**2/(exp(B*mom/(T*kb)) + exp(-B*mom/(T*kb)))**2 - 1)/(T**2*kb**2*(exp(B*mom/(T*kb)) + exp(-B*mom/(T*kb))))',
         'derivative_lambda': 'lambda args : (lambda n_0,kb,T,mom,B: B**2*n_0*(2*(np.exp(B*mom/(T*kb)) - np.exp(-B*mom/(T*kb)))**2/(np.exp(B*mom/(T*kb)) + np.exp(-B*mom/(T*kb)))**2 - 1)/(T**2*kb**2*(np.exp(B*mom/(T*kb)) + np.exp(-B*mom/(T*kb)))) )(*args)'
       },
@@ -5975,7 +5975,7 @@ constraints = [
       {
         'name': 'B',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'mom**2*n_0*(2*(exp(B*mom/(T*kb)) - exp(-B*mom/(T*kb)))**2/(exp(B*mom/(T*kb)) + exp(-B*mom/(T*kb)))**2 - 1)/(T**2*kb**2*(exp(B*mom/(T*kb)) + exp(-B*mom/(T*kb))))',
         'derivative_lambda': 'lambda args : (lambda n_0,kb,T,mom,B: mom**2*n_0*(2*(np.exp(B*mom/(T*kb)) - np.exp(-B*mom/(T*kb)))**2/(np.exp(B*mom/(T*kb)) + np.exp(-B*mom/(T*kb)))**2 - 1)/(T**2*kb**2*(np.exp(B*mom/(T*kb)) + np.exp(-B*mom/(T*kb)))) )(*args)'
       }
@@ -6036,49 +6036,49 @@ constraints = [
       {
         'name': 'mom',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '2*B*n_rho*(B*mom*tanh(B*mom/(T*kb))/(T*kb) - 1)*(tanh(B*mom/(T*kb))**2 - 1)/(T*kb)',
         'derivative_lambda': 'lambda args : (lambda n_rho,mom,B,kb,T: 2*B*n_rho*(B*mom*np.tanh(B*mom/(T*kb))/(T*kb) - 1)*(np.tanh(B*mom/(T*kb))**2 - 1)/(T*kb) )(*args)'
       },
       {
         'name': 'B',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'mom**2*n_rho*(1 - tanh(B*mom/(T*kb))**2)/(T*kb)',
         'derivative_lambda': 'lambda args : (lambda n_rho,mom,B,kb,T: mom**2*n_rho*(1 - np.tanh(B*mom/(T*kb))**2)/(T*kb) )(*args)'
       },
       {
         'name': 'B',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '2*mom**3*n_rho*(tanh(B*mom/(T*kb))**2 - 1)*tanh(B*mom/(T*kb))/(T**2*kb**2)',
         'derivative_lambda': 'lambda args : (lambda n_rho,mom,B,kb,T: 2*mom**3*n_rho*(np.tanh(B*mom/(T*kb))**2 - 1)*np.tanh(B*mom/(T*kb))/(T**2*kb**2) )(*args)'
       },
       {
         'name': 'kb',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-B*mom**2*n_rho*(1 - tanh(B*mom/(T*kb))**2)/(T*kb**2)',
         'derivative_lambda': 'lambda args : (lambda n_rho,mom,B,kb,T: -B*mom**2*n_rho*(1 - np.tanh(B*mom/(T*kb))**2)/(T*kb**2) )(*args)'
       },
       {
         'name': 'kb',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '2*B*mom**2*n_rho*(B*mom*tanh(B*mom/(T*kb))/(T*kb) - 1)*(tanh(B*mom/(T*kb))**2 - 1)/(T*kb**3)',
         'derivative_lambda': 'lambda args : (lambda n_rho,mom,B,kb,T: 2*B*mom**2*n_rho*(B*mom*np.tanh(B*mom/(T*kb))/(T*kb) - 1)*(np.tanh(B*mom/(T*kb))**2 - 1)/(T*kb**3) )(*args)'
       },
       {
         'name': 'T',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-B*mom**2*n_rho*(1 - tanh(B*mom/(T*kb))**2)/(T**2*kb)',
         'derivative_lambda': 'lambda args : (lambda n_rho,mom,B,kb,T: -B*mom**2*n_rho*(1 - np.tanh(B*mom/(T*kb))**2)/(T**2*kb) )(*args)'
       },
       {
         'name': 'T',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '2*B*mom**2*n_rho*(B*mom*tanh(B*mom/(T*kb))/(T*kb) - 1)*(tanh(B*mom/(T*kb))**2 - 1)/(T**3*kb)',
         'derivative_lambda': 'lambda args : (lambda n_rho,mom,B,kb,T: 2*B*mom**2*n_rho*(B*mom*np.tanh(B*mom/(T*kb))/(T*kb) - 1)*(np.tanh(B*mom/(T*kb))**2 - 1)/(T**3*kb) )(*args)'
       }
@@ -6706,42 +6706,42 @@ constraints = [
       {
         'name': 'E_n',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '4*pi*t*sin(2*pi*E_n*t/h)*cos(2*pi*E_n*t/h)/h',
         'derivative_lambda': 'lambda args : (lambda E_n,t,h: 4*np.pi*t*np.sin(2*np.pi*E_n*t/h)*np.cos(2*np.pi*E_n*t/h)/h )(*args)'
       },
       {
         'name': 'E_n',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '8*pi**2*t**2*(-sin(2*pi*E_n*t/h)**2 + cos(2*pi*E_n*t/h)**2)/h**2',
         'derivative_lambda': 'lambda args : (lambda E_n,t,h: 8*np.pi**2*t**2*(-np.sin(2*np.pi*E_n*t/h)**2 + np.cos(2*np.pi*E_n*t/h)**2)/h**2 )(*args)'
       },
       {
         'name': 't',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '4*pi*E_n*sin(2*pi*E_n*t/h)*cos(2*pi*E_n*t/h)/h',
         'derivative_lambda': 'lambda args : (lambda E_n,t,h: 4*np.pi*E_n*np.sin(2*np.pi*E_n*t/h)*np.cos(2*np.pi*E_n*t/h)/h )(*args)'
       },
       {
         'name': 't',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '8*pi**2*E_n**2*(-sin(2*pi*E_n*t/h)**2 + cos(2*pi*E_n*t/h)**2)/h**2',
         'derivative_lambda': 'lambda args : (lambda E_n,t,h: 8*np.pi**2*E_n**2*(-np.sin(2*np.pi*E_n*t/h)**2 + np.cos(2*np.pi*E_n*t/h)**2)/h**2 )(*args)'
       },
       {
         'name': 'h',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-4*pi*E_n*t*sin(2*pi*E_n*t/h)*cos(2*pi*E_n*t/h)/h**2',
         'derivative_lambda': 'lambda args : (lambda E_n,t,h: -4*np.pi*E_n*t*np.sin(2*np.pi*E_n*t/h)*np.cos(2*np.pi*E_n*t/h)/h**2 )(*args)'
       },
       {
         'name': 'h',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '8*pi*E_n*t*(-pi*E_n*t*sin(2*pi*E_n*t/h)**2/h + pi*E_n*t*cos(2*pi*E_n*t/h)**2/h + sin(2*pi*E_n*t/h)*cos(2*pi*E_n*t/h))/h**3',
         'derivative_lambda': 'lambda args : (lambda E_n,t,h: 8*np.pi*E_n*t*(-np.pi*E_n*t*np.sin(2*np.pi*E_n*t/h)**2/h + np.pi*E_n*t*np.cos(2*np.pi*E_n*t/h)**2/h + np.sin(2*np.pi*E_n*t/h)*np.cos(2*np.pi*E_n*t/h))/h**3 )(*args)'
       }
@@ -6799,14 +6799,14 @@ constraints = [
       {
         'name': 't',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '16*pi*Ef*p_d*(omega/2 - omega_0/2)*sin(t*(omega - omega_0)/2)*cos(t*(omega - omega_0)/2)/(h*t*(omega - omega_0)**2) - 8*pi*Ef*p_d*sin(t*(omega - omega_0)/2)**2/(h*t**2*(omega - omega_0)**2)',
         'derivative_lambda': 'lambda args : (lambda p_d,Ef,t,h,omega,omega_0: 16*np.pi*Ef*p_d*(omega/2 - omega_0/2)*np.sin(t*(omega - omega_0)/2)*np.cos(t*(omega - omega_0)/2)/(h*t*(omega - omega_0)**2) - 8*np.pi*Ef*p_d*np.sin(t*(omega - omega_0)/2)**2/(h*t**2*(omega - omega_0)**2) )(*args)'
       },
       {
         'name': 't',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '4*pi*Ef*p_d*(-sin(t*(omega - omega_0)/2)**2 + cos(t*(omega - omega_0)/2)**2 - 4*sin(t*(omega - omega_0)/2)*cos(t*(omega - omega_0)/2)/(t*(omega - omega_0)) + 4*sin(t*(omega - omega_0)/2)**2/(t**2*(omega - omega_0)**2))/(h*t)',
         'derivative_lambda': 'lambda args : (lambda p_d,Ef,t,h,omega,omega_0: 4*np.pi*Ef*p_d*(-np.sin(t*(omega - omega_0)/2)**2 + np.cos(t*(omega - omega_0)/2)**2 - 4*np.sin(t*(omega - omega_0)/2)*np.cos(t*(omega - omega_0)/2)/(t*(omega - omega_0)) + 4*np.sin(t*(omega - omega_0)/2)**2/(t**2*(omega - omega_0)**2))/(h*t) )(*args)'
       },
@@ -6827,28 +6827,28 @@ constraints = [
       {
         'name': 'omega',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '8*pi*Ef*p_d*sin(t*(omega - omega_0)/2)*cos(t*(omega - omega_0)/2)/(h*(omega - omega_0)**2) - 16*pi*Ef*p_d*sin(t*(omega - omega_0)/2)**2/(h*t*(omega - omega_0)**3)',
         'derivative_lambda': 'lambda args : (lambda p_d,Ef,t,h,omega,omega_0: 8*np.pi*Ef*p_d*np.sin(t*(omega - omega_0)/2)*np.cos(t*(omega - omega_0)/2)/(h*(omega - omega_0)**2) - 16*np.pi*Ef*p_d*np.sin(t*(omega - omega_0)/2)**2/(h*t*(omega - omega_0)**3) )(*args)'
       },
       {
         'name': 'omega',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '4*pi*Ef*p_d*(-t*(sin(t*(omega - omega_0)/2)**2 - cos(t*(omega - omega_0)/2)**2) - 8*sin(t*(omega - omega_0)/2)*cos(t*(omega - omega_0)/2)/(omega - omega_0) + 12*sin(t*(omega - omega_0)/2)**2/(t*(omega - omega_0)**2))/(h*(omega - omega_0)**2)',
         'derivative_lambda': 'lambda args : (lambda p_d,Ef,t,h,omega,omega_0: 4*np.pi*Ef*p_d*(-t*(np.sin(t*(omega - omega_0)/2)**2 - np.cos(t*(omega - omega_0)/2)**2) - 8*np.sin(t*(omega - omega_0)/2)*np.cos(t*(omega - omega_0)/2)/(omega - omega_0) + 12*np.sin(t*(omega - omega_0)/2)**2/(t*(omega - omega_0)**2))/(h*(omega - omega_0)**2) )(*args)'
       },
       {
         'name': 'omega_0',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-8*pi*Ef*p_d*sin(t*(omega - omega_0)/2)*cos(t*(omega - omega_0)/2)/(h*(omega - omega_0)**2) + 16*pi*Ef*p_d*sin(t*(omega - omega_0)/2)**2/(h*t*(omega - omega_0)**3)',
         'derivative_lambda': 'lambda args : (lambda p_d,Ef,t,h,omega,omega_0: -8*np.pi*Ef*p_d*np.sin(t*(omega - omega_0)/2)*np.cos(t*(omega - omega_0)/2)/(h*(omega - omega_0)**2) + 16*np.pi*Ef*p_d*np.sin(t*(omega - omega_0)/2)**2/(h*t*(omega - omega_0)**3) )(*args)'
       },
       {
         'name': 'omega_0',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '4*pi*Ef*p_d*(-t*(sin(t*(omega - omega_0)/2)**2 - cos(t*(omega - omega_0)/2)**2) - 8*sin(t*(omega - omega_0)/2)*cos(t*(omega - omega_0)/2)/(omega - omega_0) + 12*sin(t*(omega - omega_0)/2)**2/(t*(omega - omega_0)**2))/(h*(omega - omega_0)**2)',
         'derivative_lambda': 'lambda args : (lambda p_d,Ef,t,h,omega,omega_0: 4*np.pi*Ef*p_d*(-t*(np.sin(t*(omega - omega_0)/2)**2 - np.cos(t*(omega - omega_0)/2)**2) - 8*np.sin(t*(omega - omega_0)/2)*np.cos(t*(omega - omega_0)/2)/(omega - omega_0) + 12*np.sin(t*(omega - omega_0)/2)**2/(t*(omega - omega_0)**2))/(h*(omega - omega_0)**2) )(*args)'
       }
@@ -7224,28 +7224,28 @@ constraints = [
       {
         'name': 'k',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '2*U*d*sin(d*k)',
         'derivative_lambda': 'lambda args : (lambda U,k,d: 2*U*d*np.sin(d*k) )(*args)'
       },
       {
         'name': 'k',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '2*U*d**2*cos(d*k)',
         'derivative_lambda': 'lambda args : (lambda U,k,d: 2*U*d**2*np.cos(d*k) )(*args)'
       },
       {
         'name': 'd',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '2*U*k*sin(d*k)',
         'derivative_lambda': 'lambda args : (lambda U,k,d: 2*U*k*np.sin(d*k) )(*args)'
       },
       {
         'name': 'd',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '2*U*k**2*cos(d*k)',
         'derivative_lambda': 'lambda args : (lambda U,k,d: 2*U*k**2*np.cos(d*k) )(*args)'
       }
@@ -7419,7 +7419,7 @@ constraints = [
       {
         'name': 'alpha',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'beta*cos(theta)',
         'derivative_lambda': 'lambda args : (lambda beta,alpha,theta: beta*np.cos(theta) )(*args)'
       },
@@ -7433,14 +7433,14 @@ constraints = [
       {
         'name': 'theta',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-alpha*beta*sin(theta)',
         'derivative_lambda': 'lambda args : (lambda beta,alpha,theta: -alpha*beta*np.sin(theta) )(*args)'
       },
       {
         'name': 'theta',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-alpha*beta*cos(theta)',
         'derivative_lambda': 'lambda args : (lambda beta,alpha,theta: -alpha*beta*np.cos(theta) )(*args)'
       }
@@ -7798,14 +7798,14 @@ constraints = [
       {
         'name': 'm',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-E_n*cos(theta1 - theta2)/(k_G*m*sqrt(2*E_n*L**2/(k_G**2*m) + 1)) + k_G*(sqrt(2*E_n*L**2/(k_G**2*m) + 1)*cos(theta1 - theta2) + 1)/L**2',
         'derivative_lambda': 'lambda args : (lambda m,k_G,L,E_n,theta1,theta2: -E_n*np.cos(theta1 - theta2)/(k_G*m*np.sqrt(2*E_n*L**2/(k_G**2*m) + 1)) + k_G*(np.sqrt(2*E_n*L**2/(k_G**2*m) + 1)*np.cos(theta1 - theta2) + 1)/L**2 )(*args)'
       },
       {
         'name': 'm',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-E_n**2*L**2*cos(theta1 - theta2)/(k_G**3*m**3*(2*E_n*L**2/(k_G**2*m) + 1)**(3/2))',
         'derivative_lambda': 'lambda args : (lambda m,k_G,L,E_n,theta1,theta2: -E_n**2*L**2*np.cos(theta1 - theta2)/(k_G**3*m**3*(2*E_n*L**2/(k_G**2*m) + 1)**(3/2)) )(*args)'
       },
@@ -7819,63 +7819,63 @@ constraints = [
       {
         'name': 'k_G',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-2*E_n*(2*E_n*L**2/(k_G**2*m*(2*E_n*L**2/(k_G**2*m) + 1)) - 1)*cos(theta1 - theta2)/(k_G**3*sqrt(2*E_n*L**2/(k_G**2*m) + 1))',
         'derivative_lambda': 'lambda args : (lambda m,k_G,L,E_n,theta1,theta2: -2*E_n*(2*E_n*L**2/(k_G**2*m*(2*E_n*L**2/(k_G**2*m) + 1)) - 1)*np.cos(theta1 - theta2)/(k_G**3*np.sqrt(2*E_n*L**2/(k_G**2*m) + 1)) )(*args)'
       },
       {
         'name': 'L',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '2*E_n*cos(theta1 - theta2)/(L*k_G*sqrt(2*E_n*L**2/(k_G**2*m) + 1)) - 2*k_G*m*(sqrt(2*E_n*L**2/(k_G**2*m) + 1)*cos(theta1 - theta2) + 1)/L**3',
         'derivative_lambda': 'lambda args : (lambda m,k_G,L,E_n,theta1,theta2: 2*E_n*np.cos(theta1 - theta2)/(L*k_G*np.sqrt(2*E_n*L**2/(k_G**2*m) + 1)) - 2*k_G*m*(np.sqrt(2*E_n*L**2/(k_G**2*m) + 1)*np.cos(theta1 - theta2) + 1)/L**3 )(*args)'
       },
       {
         'name': 'L',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '2*(-E_n*(2*E_n*L**2/(k_G**2*m*(2*E_n*L**2/(k_G**2*m) + 1)) - 1)*cos(theta1 - theta2)/(k_G*sqrt(2*E_n*L**2/(k_G**2*m) + 1)) - 4*E_n*cos(theta1 - theta2)/(k_G*sqrt(2*E_n*L**2/(k_G**2*m) + 1)) + 3*k_G*m*(sqrt(2*E_n*L**2/(k_G**2*m) + 1)*cos(theta1 - theta2) + 1)/L**2)/L**2',
         'derivative_lambda': 'lambda args : (lambda m,k_G,L,E_n,theta1,theta2: 2*(-E_n*(2*E_n*L**2/(k_G**2*m*(2*E_n*L**2/(k_G**2*m) + 1)) - 1)*np.cos(theta1 - theta2)/(k_G*np.sqrt(2*E_n*L**2/(k_G**2*m) + 1)) - 4*E_n*np.cos(theta1 - theta2)/(k_G*np.sqrt(2*E_n*L**2/(k_G**2*m) + 1)) + 3*k_G*m*(np.sqrt(2*E_n*L**2/(k_G**2*m) + 1)*np.cos(theta1 - theta2) + 1)/L**2)/L**2 )(*args)'
       },
       {
         'name': 'E_n',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'cos(theta1 - theta2)/(k_G*sqrt(2*E_n*L**2/(k_G**2*m) + 1))',
         'derivative_lambda': 'lambda args : (lambda m,k_G,L,E_n,theta1,theta2: np.cos(theta1 - theta2)/(k_G*np.sqrt(2*E_n*L**2/(k_G**2*m) + 1)) )(*args)'
       },
       {
         'name': 'E_n',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-L**2*cos(theta1 - theta2)/(k_G**3*m*(2*E_n*L**2/(k_G**2*m) + 1)**(3/2))',
         'derivative_lambda': 'lambda args : (lambda m,k_G,L,E_n,theta1,theta2: -L**2*np.cos(theta1 - theta2)/(k_G**3*m*(2*E_n*L**2/(k_G**2*m) + 1)**(3/2)) )(*args)'
       },
       {
         'name': 'theta1',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-k_G*m*sqrt(2*E_n*L**2/(k_G**2*m) + 1)*sin(theta1 - theta2)/L**2',
         'derivative_lambda': 'lambda args : (lambda m,k_G,L,E_n,theta1,theta2: -k_G*m*np.sqrt(2*E_n*L**2/(k_G**2*m) + 1)*np.sin(theta1 - theta2)/L**2 )(*args)'
       },
       {
         'name': 'theta1',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-k_G*m*sqrt(2*E_n*L**2/(k_G**2*m) + 1)*cos(theta1 - theta2)/L**2',
         'derivative_lambda': 'lambda args : (lambda m,k_G,L,E_n,theta1,theta2: -k_G*m*np.sqrt(2*E_n*L**2/(k_G**2*m) + 1)*np.cos(theta1 - theta2)/L**2 )(*args)'
       },
       {
         'name': 'theta2',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'k_G*m*sqrt(2*E_n*L**2/(k_G**2*m) + 1)*sin(theta1 - theta2)/L**2',
         'derivative_lambda': 'lambda args : (lambda m,k_G,L,E_n,theta1,theta2: k_G*m*np.sqrt(2*E_n*L**2/(k_G**2*m) + 1)*np.sin(theta1 - theta2)/L**2 )(*args)'
       },
       {
         'name': 'theta2',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-k_G*m*sqrt(2*E_n*L**2/(k_G**2*m) + 1)*cos(theta1 - theta2)/L**2',
         'derivative_lambda': 'lambda args : (lambda m,k_G,L,E_n,theta1,theta2: -k_G*m*np.sqrt(2*E_n*L**2/(k_G**2*m) + 1)*np.cos(theta1 - theta2)/L**2 )(*args)'
       }
@@ -7948,7 +7948,7 @@ constraints = [
       {
         'name': 'theta1',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'alpha*d*(1 - alpha**2)*sin(theta1 - theta2)/(alpha*cos(theta1 - theta2) + 1)**2',
         'derivative_lambda': 'lambda args : (lambda d,alpha,theta1,theta2: alpha*d*(1 - alpha**2)*np.sin(theta1 - theta2)/(alpha*np.cos(theta1 - theta2) + 1)**2 )(*args)'
       },
@@ -7962,7 +7962,7 @@ constraints = [
       {
         'name': 'theta2',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-alpha*d*(1 - alpha**2)*sin(theta1 - theta2)/(alpha*cos(theta1 - theta2) + 1)**2',
         'derivative_lambda': 'lambda args : (lambda d,alpha,theta1,theta2: -alpha*d*(1 - alpha**2)*np.sin(theta1 - theta2)/(alpha*np.cos(theta1 - theta2) + 1)**2 )(*args)'
       },
@@ -8004,14 +8004,14 @@ constraints = [
       {
         'name': 'm',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'sqrt(2)*m*sqrt((E_n - L**2/(2*m*r**2) - U)/m)*(L**2/(4*m**3*r**2) - (E_n - L**2/(2*m*r**2) - U)/(2*m**2))/(E_n - L**2/(2*m*r**2) - U)',
         'derivative_lambda': 'lambda args : (lambda m,E_n,U,L,r: np.sqrt(2)*m*np.sqrt((E_n - L**2/(2*m*r**2) - U)/m)*(L**2/(4*m**3*r**2) - (E_n - L**2/(2*m*r**2) - U)/(2*m**2))/(E_n - L**2/(2*m*r**2) - U) )(*args)'
       },
       {
         'name': 'm',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'sqrt(2)*sqrt(-(-E_n + L**2/(2*m*r**2) + U)/m)*(-E_n + 2*L**2/(m*r**2) - L**2*(-E_n + L**2/(m*r**2) + U)/(m*r**2*(-2*E_n + L**2/(m*r**2) + 2*U)) + U + (-E_n + L**2/(m*r**2) + U)**2/(-2*E_n + L**2/(m*r**2) + 2*U))/(m**2*(-2*E_n + L**2/(m*r**2) + 2*U))',
         'derivative_lambda': 'lambda args : (lambda m,E_n,U,L,r: np.sqrt(2)*np.sqrt(-(-E_n + L**2/(2*m*r**2) + U)/m)*(-E_n + 2*L**2/(m*r**2) - L**2*(-E_n + L**2/(m*r**2) + U)/(m*r**2*(-2*E_n + L**2/(m*r**2) + 2*U)) + U + (-E_n + L**2/(m*r**2) + U)**2/(-2*E_n + L**2/(m*r**2) + 2*U))/(m**2*(-2*E_n + L**2/(m*r**2) + 2*U)) )(*args)'
       },
@@ -8470,7 +8470,7 @@ constraints = [
       {
         'name': 'c',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-2*E_n**2*(4*E_n*(cos(theta) - 1)/(c**2*m*(E_n*(cos(theta) - 1)/(c**2*m) - 1)) - 3)*(cos(theta) - 1)/(c**4*m*(E_n*(cos(theta) - 1)/(c**2*m) - 1)**2)',
         'derivative_lambda': 'lambda args : (lambda E_n,m,c,theta: -2*E_n**2*(4*E_n*(np.cos(theta) - 1)/(c**2*m*(E_n*(np.cos(theta) - 1)/(c**2*m) - 1)) - 3)*(np.cos(theta) - 1)/(c**4*m*(E_n*(np.cos(theta) - 1)/(c**2*m) - 1)**2) )(*args)'
       },
@@ -8484,7 +8484,7 @@ constraints = [
       {
         'name': 'theta',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-E_n**2*(2*E_n*sin(theta)**2/(c**2*m*(E_n*(cos(theta) - 1)/(c**2*m) - 1)) + cos(theta))/(c**2*m*(E_n*(cos(theta) - 1)/(c**2*m) - 1)**2)',
         'derivative_lambda': 'lambda args : (lambda E_n,m,c,theta: -E_n**2*(2*E_n*np.sin(theta)**2/(c**2*m*(E_n*(np.cos(theta) - 1)/(c**2*m) - 1)) + np.cos(theta))/(c**2*m*(E_n*(np.cos(theta) - 1)/(c**2*m) - 1)**2) )(*args)'
       }
@@ -8643,7 +8643,7 @@ constraints = [
       {
         'name': 'v',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '(1 - (cos(theta2) - v/c)*cos(theta2)/(1 - v*cos(theta2)/c))*(2*cos(theta2) - (1 - (cos(theta2) - v/c)*cos(theta2)/(1 - v*cos(theta2)/c))*(cos(theta2) - v/c)/((1 - (cos(theta2) - v/c)**2/(1 - v*cos(theta2)/c)**2)*(1 - v*cos(theta2)/c)))/(c**2*sqrt(1 - (cos(theta2) - v/c)**2/(1 - v*cos(theta2)/c)**2)*(1 - v*cos(theta2)/c)**2)',
         'derivative_lambda': 'lambda args : (lambda c,v,theta2: (1 - (np.cos(theta2) - v/c)*np.cos(theta2)/(1 - v*np.cos(theta2)/c))*(2*np.cos(theta2) - (1 - (np.cos(theta2) - v/c)*np.cos(theta2)/(1 - v*np.cos(theta2)/c))*(np.cos(theta2) - v/c)/((1 - (np.cos(theta2) - v/c)**2/(1 - v*np.cos(theta2)/c)**2)*(1 - v*np.cos(theta2)/c)))/(c**2*np.sqrt(1 - (np.cos(theta2) - v/c)**2/(1 - v*np.cos(theta2)/c)**2)*(1 - v*np.cos(theta2)/c)**2) )(*args)'
       },
@@ -8708,7 +8708,7 @@ constraints = [
       {
         'name': 'alpha',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '2*I_0*(-sin(alpha/2)**2 + cos(alpha/2)**2 - 8*sin(alpha/2)*cos(alpha/2)/alpha + 12*sin(alpha/2)**2/alpha**2)*sin(delta*n/2)**2/(alpha**2*sin(delta/2)**2)',
         'derivative_lambda': 'lambda args : (lambda I_0,alpha,delta,n: 2*I_0*(-np.sin(alpha/2)**2 + np.cos(alpha/2)**2 - 8*np.sin(alpha/2)*np.cos(alpha/2)/alpha + 12*np.sin(alpha/2)**2/alpha**2)*np.sin(delta*n/2)**2/(alpha**2*np.sin(delta/2)**2) )(*args)'
       },
@@ -8722,21 +8722,21 @@ constraints = [
       {
         'name': 'delta',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '2*I_0*(-n**2*(sin(delta*n/2)**2 - cos(delta*n/2)**2) - 4*n*sin(delta*n/2)*cos(delta/2)*cos(delta*n/2)/sin(delta/2) + (1 + 3*cos(delta/2)**2/sin(delta/2)**2)*sin(delta*n/2)**2)*sin(alpha/2)**2/(alpha**2*sin(delta/2)**2)',
         'derivative_lambda': 'lambda args : (lambda I_0,alpha,delta,n: 2*I_0*(-n**2*(np.sin(delta*n/2)**2 - np.cos(delta*n/2)**2) - 4*n*np.sin(delta*n/2)*np.cos(delta/2)*np.cos(delta*n/2)/np.sin(delta/2) + (1 + 3*np.cos(delta/2)**2/np.sin(delta/2)**2)*np.sin(delta*n/2)**2)*np.sin(alpha/2)**2/(alpha**2*np.sin(delta/2)**2) )(*args)'
       },
       {
         'name': 'n',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '4*I_0*delta*sin(alpha/2)**2*sin(delta*n/2)*cos(delta*n/2)/(alpha**2*sin(delta/2)**2)',
         'derivative_lambda': 'lambda args : (lambda I_0,alpha,delta,n: 4*I_0*delta*np.sin(alpha/2)**2*np.sin(delta*n/2)*np.cos(delta*n/2)/(alpha**2*np.sin(delta/2)**2) )(*args)'
       },
       {
         'name': 'n',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-2*I_0*delta**2*(sin(delta*n/2)**2 - cos(delta*n/2)**2)*sin(alpha/2)**2/(alpha**2*sin(delta/2)**2)',
         'derivative_lambda': 'lambda args : (lambda I_0,alpha,delta,n: -2*I_0*delta**2*(np.sin(delta*n/2)**2 - np.cos(delta*n/2)**2)*np.sin(alpha/2)**2/(alpha**2*np.sin(delta/2)**2) )(*args)'
       }
@@ -8888,14 +8888,14 @@ constraints = [
       {
         'name': 'r',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'q*(d*cos(alpha) - r)/(4*pi*epsilon*(d**2 - 2*d*r*cos(alpha) + r**2)**(3/2))',
         'derivative_lambda': 'lambda args : (lambda q,r,d,alpha,epsilon: q*(d*np.cos(alpha) - r)/(4*np.pi*epsilon*(d**2 - 2*d*r*np.cos(alpha) + r**2)**(3/2)) )(*args)'
       },
       {
         'name': 'r',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'q*(3*(d*cos(alpha) - r)**2/(d**2 - 2*d*r*cos(alpha) + r**2) - 1)/(4*pi*epsilon*(d**2 - 2*d*r*cos(alpha) + r**2)**(3/2))',
         'derivative_lambda': 'lambda args : (lambda q,r,d,alpha,epsilon: q*(3*(d*np.cos(alpha) - r)**2/(d**2 - 2*d*r*np.cos(alpha) + r**2) - 1)/(4*np.pi*epsilon*(d**2 - 2*d*r*np.cos(alpha) + r**2)**(3/2)) )(*args)'
       },
@@ -8916,14 +8916,14 @@ constraints = [
       {
         'name': 'alpha',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-d*q*r*sin(alpha)/(4*pi*epsilon*(d**2 - 2*d*r*cos(alpha) + r**2)**(3/2))',
         'derivative_lambda': 'lambda args : (lambda q,r,d,alpha,epsilon: -d*q*r*np.sin(alpha)/(4*np.pi*epsilon*(d**2 - 2*d*r*np.cos(alpha) + r**2)**(3/2)) )(*args)'
       },
       {
         'name': 'alpha',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'd*q*r*(3*d*r*sin(alpha)**2/(d**2 - 2*d*r*cos(alpha) + r**2) - cos(alpha))/(4*pi*epsilon*(d**2 - 2*d*r*cos(alpha) + r**2)**(3/2))',
         'derivative_lambda': 'lambda args : (lambda q,r,d,alpha,epsilon: d*q*r*(3*d*r*np.sin(alpha)**2/(d**2 - 2*d*r*np.cos(alpha) + r**2) - np.cos(alpha))/(4*np.pi*epsilon*(d**2 - 2*d*r*np.cos(alpha) + r**2)**(3/2)) )(*args)'
       },
@@ -8977,7 +8977,7 @@ constraints = [
       {
         'name': 'Ef',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '(d**3*(alpha - 1)/(r**2*(alpha + 2)) - r)*cos(theta)',
         'derivative_lambda': 'lambda args : (lambda Ef,theta,r,d,alpha: (d**3*(alpha - 1)/(r**2*(alpha + 2)) - r)*np.cos(theta) )(*args)'
       },
@@ -8991,56 +8991,56 @@ constraints = [
       {
         'name': 'theta',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '-Ef*(d**3*(alpha - 1)/(r**2*(alpha + 2)) - r)*sin(theta)',
         'derivative_lambda': 'lambda args : (lambda Ef,theta,r,d,alpha: -Ef*(d**3*(alpha - 1)/(r**2*(alpha + 2)) - r)*np.sin(theta) )(*args)'
       },
       {
         'name': 'theta',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-Ef*(d**3*(alpha - 1)/(r**2*(alpha + 2)) - r)*cos(theta)',
         'derivative_lambda': 'lambda args : (lambda Ef,theta,r,d,alpha: -Ef*(d**3*(alpha - 1)/(r**2*(alpha + 2)) - r)*np.cos(theta) )(*args)'
       },
       {
         'name': 'r',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'Ef*(-2*d**3*(alpha - 1)/(r**3*(alpha + 2)) - 1)*cos(theta)',
         'derivative_lambda': 'lambda args : (lambda Ef,theta,r,d,alpha: Ef*(-2*d**3*(alpha - 1)/(r**3*(alpha + 2)) - 1)*np.cos(theta) )(*args)'
       },
       {
         'name': 'r',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '6*Ef*d**3*(alpha - 1)*cos(theta)/(r**4*(alpha + 2))',
         'derivative_lambda': 'lambda args : (lambda Ef,theta,r,d,alpha: 6*Ef*d**3*(alpha - 1)*np.cos(theta)/(r**4*(alpha + 2)) )(*args)'
       },
       {
         'name': 'd',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '3*Ef*d**2*(alpha - 1)*cos(theta)/(r**2*(alpha + 2))',
         'derivative_lambda': 'lambda args : (lambda Ef,theta,r,d,alpha: 3*Ef*d**2*(alpha - 1)*np.cos(theta)/(r**2*(alpha + 2)) )(*args)'
       },
       {
         'name': 'd',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '6*Ef*d*(alpha - 1)*cos(theta)/(r**2*(alpha + 2))',
         'derivative_lambda': 'lambda args : (lambda Ef,theta,r,d,alpha: 6*Ef*d*(alpha - 1)*np.cos(theta)/(r**2*(alpha + 2)) )(*args)'
       },
       {
         'name': 'alpha',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'Ef*(-d**3*(alpha - 1)/(r**2*(alpha + 2)**2) + d**3/(r**2*(alpha + 2)))*cos(theta)',
         'derivative_lambda': 'lambda args : (lambda Ef,theta,r,d,alpha: Ef*(-d**3*(alpha - 1)/(r**2*(alpha + 2)**2) + d**3/(r**2*(alpha + 2)))*np.cos(theta) )(*args)'
       },
       {
         'name': 'alpha',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '2*Ef*d**3*((alpha - 1)/(alpha + 2) - 1)*cos(theta)/(r**2*(alpha + 2)**2)',
         'derivative_lambda': 'lambda args : (lambda Ef,theta,r,d,alpha: 2*Ef*d**3*((alpha - 1)/(alpha + 2) - 1)*np.cos(theta)/(r**2*(alpha + 2)**2) )(*args)'
       }
@@ -9080,28 +9080,28 @@ constraints = [
       {
         'name': 'c',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'omega*v*sqrt(1 - v**2/c**2)*cos(theta)/(c**2*(1 + v*cos(theta)/c)**2) + omega*v**2/(c**3*sqrt(1 - v**2/c**2)*(1 + v*cos(theta)/c))',
         'derivative_lambda': 'lambda args : (lambda c,v,omega,theta: omega*v*np.sqrt(1 - v**2/c**2)*np.cos(theta)/(c**2*(1 + v*np.cos(theta)/c)**2) + omega*v**2/(c**3*np.sqrt(1 - v**2/c**2)*(1 + v*np.cos(theta)/c)) )(*args)'
       },
       {
         'name': 'c',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'omega*v*(-2*sqrt(1 - v**2/c**2)*(1 - v*cos(theta)/(c*(1 + v*cos(theta)/c)))*cos(theta)/(1 + v*cos(theta)/c) - v*(3 + v**2/(c**2*(1 - v**2/c**2)))/(c*sqrt(1 - v**2/c**2)) + 2*v**2*cos(theta)/(c**2*sqrt(1 - v**2/c**2)*(1 + v*cos(theta)/c)))/(c**3*(1 + v*cos(theta)/c))',
         'derivative_lambda': 'lambda args : (lambda c,v,omega,theta: omega*v*(-2*np.sqrt(1 - v**2/c**2)*(1 - v*np.cos(theta)/(c*(1 + v*np.cos(theta)/c)))*np.cos(theta)/(1 + v*np.cos(theta)/c) - v*(3 + v**2/(c**2*(1 - v**2/c**2)))/(c*np.sqrt(1 - v**2/c**2)) + 2*v**2*np.cos(theta)/(c**2*np.sqrt(1 - v**2/c**2)*(1 + v*np.cos(theta)/c)))/(c**3*(1 + v*np.cos(theta)/c)) )(*args)'
       },
       {
         'name': 'v',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-omega*sqrt(1 - v**2/c**2)*cos(theta)/(c*(1 + v*cos(theta)/c)**2) - omega*v/(c**2*sqrt(1 - v**2/c**2)*(1 + v*cos(theta)/c))',
         'derivative_lambda': 'lambda args : (lambda c,v,omega,theta: -omega*np.sqrt(1 - v**2/c**2)*np.cos(theta)/(c*(1 + v*np.cos(theta)/c)**2) - omega*v/(c**2*np.sqrt(1 - v**2/c**2)*(1 + v*np.cos(theta)/c)) )(*args)'
       },
       {
         'name': 'v',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'omega*(2*sqrt(1 - v**2/c**2)*cos(theta)**2/(1 + v*cos(theta)/c)**2 - (1 + v**2/(c**2*(1 - v**2/c**2)))/sqrt(1 - v**2/c**2) + 2*v*cos(theta)/(c*sqrt(1 - v**2/c**2)*(1 + v*cos(theta)/c)))/(c**2*(1 + v*cos(theta)/c))',
         'derivative_lambda': 'lambda args : (lambda c,v,omega,theta: omega*(2*np.sqrt(1 - v**2/c**2)*np.cos(theta)**2/(1 + v*np.cos(theta)/c)**2 - (1 + v**2/(c**2*(1 - v**2/c**2)))/np.sqrt(1 - v**2/c**2) + 2*v*np.cos(theta)/(c*np.sqrt(1 - v**2/c**2)*(1 + v*np.cos(theta)/c)))/(c**2*(1 + v*np.cos(theta)/c)) )(*args)'
       },
@@ -9122,14 +9122,14 @@ constraints = [
       {
         'name': 'theta',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'omega*v*sqrt(1 - v**2/c**2)*sin(theta)/(c*(1 + v*cos(theta)/c)**2)',
         'derivative_lambda': 'lambda args : (lambda c,v,omega,theta: omega*v*np.sqrt(1 - v**2/c**2)*np.sin(theta)/(c*(1 + v*np.cos(theta)/c)**2) )(*args)'
       },
       {
         'name': 'theta',
         'order_derivative': 2,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'omega*v*sqrt(1 - v**2/c**2)*(cos(theta) + 2*v*sin(theta)**2/(c*(1 + v*cos(theta)/c)))/(c*(1 + v*cos(theta)/c)**2)',
         'derivative_lambda': 'lambda args : (lambda c,v,omega,theta: omega*v*np.sqrt(1 - v**2/c**2)*(np.cos(theta) + 2*v*np.sin(theta)**2/(c*(1 + v*np.cos(theta)/c)))/(c*(1 + v*np.cos(theta)/c)**2) )(*args)'
       }
@@ -9192,7 +9192,7 @@ constraints = [
       {
         'name': 'p',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': 'c**2*(-2*A_vec*q + 2*p)/(2*sqrt(c**4*m**2 + c**2*(-A_vec*q + p)**2))',
         'derivative_lambda': 'lambda args : (lambda m,c,p,q,A_vec,Volt: c**2*(-2*A_vec*q + 2*p)/(2*np.sqrt(c**4*m**2 + c**2*(-A_vec*q + p)**2)) )(*args)'
       },
@@ -9206,7 +9206,7 @@ constraints = [
       {
         'name': 'q',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-A_vec*c**2*(-A_vec*q + p)/sqrt(c**4*m**2 + c**2*(-A_vec*q + p)**2) + Volt',
         'derivative_lambda': 'lambda args : (lambda m,c,p,q,A_vec,Volt: -A_vec*c**2*(-A_vec*q + p)/np.sqrt(c**4*m**2 + c**2*(-A_vec*q + p)**2) + Volt )(*args)'
       },
@@ -9220,7 +9220,7 @@ constraints = [
       {
         'name': 'A_vec',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-c**2*q*(-A_vec*q + p)/sqrt(c**4*m**2 + c**2*(-A_vec*q + p)**2)',
         'derivative_lambda': 'lambda args : (lambda m,c,p,q,A_vec,Volt: -c**2*q*(-A_vec*q + p)/np.sqrt(c**4*m**2 + c**2*(-A_vec*q + p)**2) )(*args)'
       },
@@ -9286,7 +9286,7 @@ constraints = [
       {
         'name': 'm',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'omega**2*x**2*(alpha*x/y + 1) - (m**2*omega**2*x**2*(alpha*x/y + 1) + p**2)/(2*m**2)',
         'derivative_lambda': 'lambda args : (lambda m,omega,p,y,x,alpha: omega**2*x**2*(alpha*x/y + 1) - (m**2*omega**2*x**2*(alpha*x/y + 1) + p**2)/(2*m**2) )(*args)'
       },
@@ -9511,14 +9511,14 @@ constraints = [
       {
         'name': 'G',
         'order_derivative': 1,
-        'monotonicity': 'decreasing',
+        'monotonicity': 'None',
         'derivative': '(H_G**2*c**2*(1 - 2*alpha) + c**4*k_f/r**2)/(8*pi*G**2)',
         'derivative_lambda': 'lambda args : (lambda G,k_f,r,H_G,alpha,c: (H_G**2*c**2*(1 - 2*alpha) + c**4*k_f/r**2)/(8*np.pi*G**2) )(*args)'
       },
       {
         'name': 'G',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'c**2*(H_G**2*(2*alpha - 1) - c**2*k_f/r**2)/(4*pi*G**3)',
         'derivative_lambda': 'lambda args : (lambda G,k_f,r,H_G,alpha,c: c**2*(H_G**2*(2*alpha - 1) - c**2*k_f/r**2)/(4*np.pi*G**3) )(*args)'
       },
@@ -9581,14 +9581,14 @@ constraints = [
       {
         'name': 'c',
         'order_derivative': 1,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '-(2*H_G**2*c*(1 - 2*alpha) + 4*c**3*k_f/r**2)/(8*pi*G)',
         'derivative_lambda': 'lambda args : (lambda G,k_f,r,H_G,alpha,c: -(2*H_G**2*c*(1 - 2*alpha) + 4*c**3*k_f/r**2)/(8*np.pi*G) )(*args)'
       },
       {
         'name': 'c',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': '(H_G**2*(2*alpha - 1) - 6*c**2*k_f/r**2)/(4*pi*G)',
         'derivative_lambda': 'lambda args : (lambda G,k_f,r,H_G,alpha,c: (H_G**2*(2*alpha - 1) - 6*c**2*k_f/r**2)/(4*np.pi*G) )(*args)'
       }
@@ -9654,7 +9654,7 @@ constraints = [
       {
         'name': 'omega_0',
         'order_derivative': 2,
-        'monotonicity': 'increasing',
+        'monotonicity': 'None',
         'derivative': 'alpha**2*h**2*(1/(2*omega_0) - omega_0*(omega/omega_0**2 - 1/omega)/omega + (omega/omega_0 - sin(beta)**2 + omega_0/omega)/(2*omega))/(pi*c**2*m**2*omega)',
         'derivative_lambda': 'lambda args : (lambda omega,omega_0,alpha,h,m,c,beta: alpha**2*h**2*(1/(2*omega_0) - omega_0*(omega/omega_0**2 - 1/omega)/omega + (omega/omega_0 - np.sin(beta)**2 + omega_0/omega)/(2*omega))/(np.pi*c**2*m**2*omega) )(*args)'
       },
@@ -9766,5 +9766,5 @@ constraints = [
         'high': 6.0
       }
     ]
-  },
+  }
 ]
