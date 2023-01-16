@@ -26,12 +26,14 @@ with open("Feynman/Constraints.py", "a") as text_file:
   for functionDictionary in ff.FunctionsJson:
     fObj = dict2obj(functionDictionary)
 
+    if(fObj.EquationName == "Feynman66"):
+      continue
     dim = len(fObj.Variables)
 
     #generate uniform input space for range as specified in Feynman equations
     xs = np.random.uniform([v.low for v in fObj.Variables],
                             [v.high for v in fObj.Variables],
-                            (100000, dim)
+                            (1000000, dim)
                         ).astype(float)
     print(f"{i} - Equation {fObj.EquationName} - {fObj.DescriptiveName}")
     i=i+1
@@ -82,25 +84,32 @@ with open("Feynman/Constraints.py", "a") as text_file:
         #calculate gradient per data point
         gradients = np.array([ diff_eq(row) for row in xs ])
 
+        unique_gradient_signs = set(np.unique(np.sign(gradients)))
         #sign of the first to determien descriptor
         sign_of_first = np.sign(gradients[0])
 
-        if sign_of_first ==  -1:
-            descriptor = "decreasing"
-        if sign_of_first ==  0:
+        if(unique_gradient_signs ==  set([-1])):
+          descriptor = "strong monotonic decreasing"
+        elif (unique_gradient_signs ==  set([0])):
             descriptor = "constant"
-        if sign_of_first ==  1:
-            descriptor = "increasing"
+        elif (unique_gradient_signs ==  set([1])):
+            descriptor = "strong monotonic increasing"
+        elif(unique_gradient_signs ==  set([-1, 0])):
+          descriptor = "monotonic decreasing"
+        elif (unique_gradient_signs ==  set([0, 1])):
+            descriptor = "monotonic increasing"
+        elif (unique_gradient_signs ==  set([-1, 1])):
+            descriptor = "None"
+        elif (unique_gradient_signs ==  set([-1, 0, 1])):
+            descriptor = "None"
+        else:
+          raise "Unforseen sign values!"
 
-        #do all gradients have the same sign
-        if( len(np.unique(np.sign(gradients))) == 1 ):
-          print(f">> monotonic {descriptor}")
-        else: 
-          descriptor = 'None'
+        print(f">> constraint: {descriptor}")
 
         constraints.append({'name':var,
               'order_derivative':order,
-              'monotonicity':descriptor,
+              'descriptor': descriptor,
               'derivative': str(symb_deriv),
               'derivative_lambda': diff_eq_lambda_str})
 
