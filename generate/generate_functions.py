@@ -61,7 +61,7 @@ for index, row in equations.iterrows():
   formula_formatted = formula_formatted.replace('sin',f'{numpyShort}.sin')
   formula_formatted = formula_formatted.replace('cos',f'{numpyShort}.cos')
   formula_formatted = formula_formatted.replace('tanh',f'{numpyShort}.tanh')
-  formula_formatted = formula_formatted.replace('ln',f'{numpyShort}.ln')
+  formula_formatted = formula_formatted.replace('ln',f'{numpyShort}.log') #log in numpy is ln
 
   formula_formatted = formula_formatted.replace('placeholder1',f'{numpyShort}.arcsin')
   formula_formatted = formula_formatted.replace('placeholder2',f'{numpyShort}.arccos')

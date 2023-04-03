@@ -3756,7 +3756,7 @@ class Feynman47:
   
 
 class Feynman48:
-  equation_lambda = lambda args : (lambda n,kb,T,V1,V2: n*kb*T*np.ln(V2/V1) )(*args)
+  equation_lambda = lambda args : (lambda n,kb,T,V1,V2: n*kb*T*np.log(V2/V1) )(*args)
 
   @staticmethod
   def generate_df(size = 10000, noise_level = 0, include_original_target = False):
@@ -3839,7 +3839,7 @@ class Feynman48:
       Returns:
           f: n*kb*T*ln(V2/V1)
       """
-      return n*kb*T*np.ln(V2/V1)
+      return n*kb*T*np.log(V2/V1)
   
 
 class Feynman49:
@@ -9838,7 +9838,7 @@ FunctionsJson = [
 {'EquationName': 'Feynman45', 'DescriptiveName': 'Feynman45, Lecture I.43.16', 'Formula_Str': 'mu_drift*q*Volt/d', 'Formula': 'mu_drift*q*Volt/d', 'Formula_Lambda': 'lambda args : (lambda mu_drift,q,Volt,d: mu_drift*q*Volt/d )(*args)', 'Formula_Lambda_Stump': 'lambda args : (lambda mu_drift,q,Volt,d: {0} )(*args)', 'Variables': [{'name': 'mu_drift', 'low': 1.0, 'high': 5.0}, {'name': 'q', 'low': 1.0, 'high': 5.0}, {'name': 'Volt', 'low': 1.0, 'high': 5.0}, {'name': 'd', 'low': 1.0, 'high': 5.0}]},
 {'EquationName': 'Feynman46', 'DescriptiveName': 'Feynman46, Lecture I.43.31', 'Formula_Str': 'mob*kb*T', 'Formula': 'mob*kb*T', 'Formula_Lambda': 'lambda args : (lambda mob,T,kb: mob*kb*T )(*args)', 'Formula_Lambda_Stump': 'lambda args : (lambda mob,T,kb: {0} )(*args)', 'Variables': [{'name': 'mob', 'low': 1.0, 'high': 5.0}, {'name': 'T', 'low': 1.0, 'high': 5.0}, {'name': 'kb', 'low': 1.0, 'high': 5.0}]},
 {'EquationName': 'Feynman47', 'DescriptiveName': 'Feynman47, Lecture I.43.43', 'Formula_Str': '1/(gamma-1)*kb*v/A', 'Formula': '1/(gamma-1)*kb*v/A', 'Formula_Lambda': 'lambda args : (lambda gamma,kb,A,v: 1/(gamma-1)*kb*v/A )(*args)', 'Formula_Lambda_Stump': 'lambda args : (lambda gamma,kb,A,v: {0} )(*args)', 'Variables': [{'name': 'gamma', 'low': 2.0, 'high': 5.0}, {'name': 'kb', 'low': 1.0, 'high': 5.0}, {'name': 'A', 'low': 1.0, 'high': 5.0}, {'name': 'v', 'low': 1.0, 'high': 5.0}]},
-{'EquationName': 'Feynman48', 'DescriptiveName': 'Feynman48, Lecture I.44.4', 'Formula_Str': 'n*kb*T*ln(V2/V1)', 'Formula': 'n*kb*T*np.ln(V2/V1)', 'Formula_Lambda': 'lambda args : (lambda n,kb,T,V1,V2: n*kb*T*np.ln(V2/V1) )(*args)', 'Formula_Lambda_Stump': 'lambda args : (lambda n,kb,T,V1,V2: {0} )(*args)', 'Variables': [{'name': 'n', 'low': 1.0, 'high': 5.0}, {'name': 'kb', 'low': 1.0, 'high': 5.0}, {'name': 'T', 'low': 1.0, 'high': 5.0}, {'name': 'V1', 'low': 1.0, 'high': 5.0}, {'name': 'V2', 'low': 1.0, 'high': 5.0}]},
+{'EquationName': 'Feynman48', 'DescriptiveName': 'Feynman48, Lecture I.44.4', 'Formula_Str': 'n*kb*T*ln(V2/V1)', 'Formula': 'n*kb*T*np.log(V2/V1)', 'Formula_Lambda': 'lambda args : (lambda n,kb,T,V1,V2: n*kb*T*np.log(V2/V1) )(*args)', 'Formula_Lambda_Stump': 'lambda args : (lambda n,kb,T,V1,V2: {0} )(*args)', 'Variables': [{'name': 'n', 'low': 1.0, 'high': 5.0}, {'name': 'kb', 'low': 1.0, 'high': 5.0}, {'name': 'T', 'low': 1.0, 'high': 5.0}, {'name': 'V1', 'low': 1.0, 'high': 5.0}, {'name': 'V2', 'low': 1.0, 'high': 5.0}]},
 {'EquationName': 'Feynman49', 'DescriptiveName': 'Feynman49, Lecture I.47.23', 'Formula_Str': 'sqrt(gamma*pr/rho)', 'Formula': 'np.sqrt(gamma*pr/rho)', 'Formula_Lambda': 'lambda args : (lambda gamma,pr,rho: np.sqrt(gamma*pr/rho) )(*args)', 'Formula_Lambda_Stump': 'lambda args : (lambda gamma,pr,rho: {0} )(*args)', 'Variables': [{'name': 'gamma', 'low': 1.0, 'high': 5.0}, {'name': 'pr', 'low': 1.0, 'high': 5.0}, {'name': 'rho', 'low': 1.0, 'high': 5.0}]},
 {'EquationName': 'Feynman50', 'DescriptiveName': 'Feynman50, Lecture I.48.2', 'Formula_Str': 'm*c**2/sqrt(1-v**2/c**2)', 'Formula': 'm*c**2/np.sqrt(1-v**2/c**2)', 'Formula_Lambda': 'lambda args : (lambda m,v,c: m*c**2/np.sqrt(1-v**2/c**2) )(*args)', 'Formula_Lambda_Stump': 'lambda args : (lambda m,v,c: {0} )(*args)', 'Variables': [{'name': 'm', 'low': 1.0, 'high': 5.0}, {'name': 'v', 'low': 1.0, 'high': 2.0}, {'name': 'c', 'low': 3.0, 'high': 10.0}]},
 {'EquationName': 'Feynman51', 'DescriptiveName': 'Feynman51, Lecture I.50.26', 'Formula_Str': 'x1*(cos(omega*t)+alpha*cos(omega*t)**2)', 'Formula': 'x1*(np.cos(omega*t)+alpha*np.cos(omega*t)**2)', 'Formula_Lambda': 'lambda args : (lambda x1,omega,t,alpha: x1*(np.cos(omega*t)+alpha*np.cos(omega*t)**2) )(*args)', 'Formula_Lambda_Stump': 'lambda args : (lambda x1,omega,t,alpha: {0} )(*args)', 'Variables': [{'name': 'x1', 'low': 1.0, 'high': 3.0}, {'name': 'omega', 'low': 1.0, 'high': 3.0}, {'name': 't', 'low': 1.0, 'high': 3.0}, {'name': 'alpha', 'low': 1.0, 'high': 3.0}]},
