@@ -114,13 +114,13 @@ for index, row in equations.iterrows():
 
   formula_lambda_stump = f"lambda args : (lambda {variable_names_commaSeparated}: {{0}} )(*args)"
   formula_lambda = formula_lambda_stump.format(formula_formatted)
-  asDictionary = {'EquationName':equationName,
-                  'DescriptiveName':descriptiveName,
-                  'Formula_Str':formula,
-                  'Formula':formula_formatted,
-                  'Formula_Lambda': formula_lambda,
-                  'Formula_Lambda_Stump': formula_lambda_stump,
-                  'Variables':variables_and_ranges}
+  asDictionary = { equationName: {"EquationName" :equationName,
+                  "DescriptiveName":descriptiveName,
+                  "Formula_Str":formula,
+                  "Formula":formula_formatted,
+                  "Formula_Lambda": formula_lambda,
+                  "Formula_Lambda_Stump": formula_lambda_stump,
+                  "Variables":variables_and_ranges}}
   dict.append( str(asDictionary))
   # multiline code-template used to generate the actual python code
   # first function only includes the formula itself and is resused by the 
